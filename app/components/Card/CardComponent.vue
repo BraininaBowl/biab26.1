@@ -1,6 +1,6 @@
 <template>
   <NuxtLink
-    :to="`/${item.id}-${returnUri(item.title)}`"
+    :to="`${item.id}-${returnUri(item.title)}`"
     class="card"
     :title="item.description"
   >

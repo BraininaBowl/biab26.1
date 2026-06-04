@@ -25,10 +25,20 @@ export const useItems = () => {
           status.value = response.status;
         }
     }
+
+    async function writeItem(dataObject) {
+      const response = await $fetch("/api/items/write", {
+        method: "POST",
+        body: dataObject,
+      });
+    }
   
     return {
       fetchItems,
       fetchItem,
+      writeItem,
+      items,
+      item,
       status,
     };
   };
