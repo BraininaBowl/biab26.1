@@ -1,5 +1,5 @@
 <template>
-  <article>
+  <article :id="`card_${item.id}`">
     <div class="tag" v-if="item.type">{{ item.type }}</div>
     <div class="card">
       <img
@@ -31,6 +31,11 @@ defineProps({
     required: true,
   },
 });
+
+onMounted(() => {
+    let domItem = document.querySelector(`card_${item.id}`);
+    domItem.style.gridRow = "span " + domItem.offsetHeight;
+});
 </script>
 
 <style lang="css" scoped>
@@ -57,8 +62,8 @@ article {
   border: 1px solid var(--col-border);
   /* border-radius: 0.5rem; */
   width: 100%;
-  height: 100%;
-  max-width: 320px;
+  height: auto;
+  max-width: 400px;
   background-color: var(--col-bg-light);
   align-items: flex-start;
 }
