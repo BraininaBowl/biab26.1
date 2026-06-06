@@ -1,7 +1,7 @@
 <template>
   <div id="notifications" role="alert"></div>
   <main>
-    <OverviewComponent />
+    <OverviewEditComponent />
   </main>
 </template>
 

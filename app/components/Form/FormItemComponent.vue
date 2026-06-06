@@ -9,13 +9,35 @@
 
   <form @submit.prevent="handleSubmit">
     <FormInputComponent
+      v-model="formData.type"
+      :formfieldData="{
+        typeField: 'text',
+        label: 'Type',
+        requiredField: true,
+        id: useId(),
+        placeholder: '',
+        disabledField: formData.trashed,
+      }"
+    />
+    <FormInputComponent
+    v-model="formData.image"
+    :formfieldData="{
+      typeField: 'text',
+      label: 'Image URL',
+      requiredField: false,
+      id: useId(),
+      placeholder: '',
+      disabledField: formData.trashed,
+    }"
+  />
+  <FormInputComponent
       v-model="formData.title"
       :formfieldData="{
         typeField: 'text',
         label: 'Title',
-        placeholder: formTitlePlaceholder,
         requiredField: true,
         id: useId(),
+        placeholder: '',
         disabledField: formData.trashed,
       }"
     />
@@ -23,9 +45,9 @@
       v-model="formData.description"
       :formfieldData="{
         label: 'Description',
-        placeholder: formDescriptionPlaceholder,
         requiredField: false,
         id: useId(),
+        placeholder: '',
         disabledField: formData.trashed,
       }"
     />
@@ -40,20 +62,10 @@
       }"
     />
     <FormInputComponent
-      v-model="formData.added"
+      v-model="formData.date"
       :formfieldData="{
-        typeField: 'hidden',
-        label: 'added',
-        placeholder: '',
-        requiredField: true,
-        id: useId(),
-      }"
-    />
-    <FormInputComponent
-      v-model="formData.edited"
-      :formfieldData="{
-        typeField: 'hidden',
-        label: 'edited',
+        typeField: 'datetime-local',
+        label: 'Date',
         placeholder: '',
         requiredField: true,
         id: useId(),
@@ -116,8 +128,7 @@ const restoreItem = async function () {
 
 const formData = ref({
   id: item.id ? item.id : null,
-  added: item.added ? item.added : new Date(),
-  edited: new Date(),
+  date: item.date ? item.date : new Date(),
   title: item.title ? item.title : "",
   description: item.description ? item.description : "",
   trashed: item.trashed,
@@ -126,4 +137,20 @@ const formData = ref({
 onMounted(() => {});
 </script>
 
-<style lang="css" scoped></style>
+<style lang="css" scoped>
+.formfield.hidden {
+  display: none;
+}
+
+.formfield {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  max-width: 80ch;
+}
+
+textarea {
+  min-height: 10ch;
+  height: 100%;
+}
+</style>

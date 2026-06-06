@@ -1,6 +1,6 @@
 <template>
   <div id="notifications" role="alert"></div>
-  <main>
+  <main v-if="item">
     <h2 v-if="itemId">Edit Item</h2>
     <h2 v-else>Add Item</h2>
     <FormItemComponent :item="item" />
@@ -10,12 +10,11 @@
 <script setup>
 const route = useRoute();
 const itemId = route.params.id;
-console.log("itemId:", itemId);
-const { fetchItem, writeItem } = useItems();
-if (itemId) {
-  let item = await fetchItem(itemId);
-  console.log("Fetched item:", item);
-}
+const { item, fetchItem, writeItem } = useItems();
+fetchItem(itemId);
+
+
+
 
 
 onMounted(() => {});

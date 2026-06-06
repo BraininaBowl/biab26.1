@@ -3,18 +3,32 @@ export const useItems = () => {
     const item = useState("item", () => null);
     const status = useState("status", () => null);
   
-    async function fetchItems() {
+    async function fetchAllItems() {
         let response = [];
         try {
           response = await $fetch(`/api/items/all`);
         } catch (error) {
           items.value = [];
         } finally {
+          response.data.items.sort((a, b) => new Date(a.date) - new Date(b.date));
           items.value = response.data.items;
           status.value = response.status;
         }
     }
   
+    async function fetchActiveItems() {
+      let response = [];
+      try {
+        response = await $fetch(`/api/items/active`);
+      } catch (error) {
+        items.value = [];
+      } finally {
+        response.data.items.sort((a, b) => new Date(a.date) - new Date(b.date));
+        items.value = response.data.items;
+        status.value = response.status;
+      }
+  }
+
     async function fetchItem(id) {
         let response = [];
         try {
@@ -34,7 +48,8 @@ export const useItems = () => {
     }
   
     return {
-      fetchItems,
+      fetchAllItems,
+      fetchActiveItems,
       fetchItem,
       writeItem,
       items,

@@ -2,7 +2,7 @@
   <div class="loader" v-if="status == null">Loading...</div>
   <div class="overview" v-else>
     <section class="card_container">
-      <CardEditComponent
+      <CardComponent
         v-for="item in items"
         :key="item.id"
         :item="item"
@@ -12,10 +12,10 @@
 </template>
 
 <script setup>
-const { item, items, fetchItem, fetchItems, status } = useItems();
+const { item, items, fetchItem, fetchAllItems, status } = useItems();
 
 onMounted(async () => {
-    fetchItems();
+    fetchAllItems();
 });
 onUnmounted(() => {});
 </script>

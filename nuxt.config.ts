@@ -13,7 +13,7 @@ export default defineNuxtConfig({
     storage: {
       itemStore: {
         driver: "fs",
-        base: "data/items",
+        base: "server/data/items",
         ignore: ".*"
       },
     },
