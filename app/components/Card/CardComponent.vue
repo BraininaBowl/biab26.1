@@ -33,7 +33,7 @@ defineProps({
 });
 
 onMounted(() => {
-    let domItem = document.querySelector(`card_${item.id}`);
+    let domItem = document.querySelector("card_" + item.id);
     domItem.style.gridRow = "span " + domItem.offsetHeight;
 });
 </script>
