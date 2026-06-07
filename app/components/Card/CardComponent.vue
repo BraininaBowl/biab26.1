@@ -1,5 +1,5 @@
 <template>
-  <article :id="`card_${item.id}`">
+  <article :id="`card_${item.id}`" class="card_wrapper">
     <div class="tag" v-if="item.type">{{ item.type }}</div>
     <div class="card">
       <img
@@ -32,10 +32,7 @@ defineProps({
   },
 });
 
-onMounted(() => {
-    let domItem = document.querySelector("card_" + item.id);
-    domItem.style.gridRow = "span " + domItem.offsetHeight;
-});
+onMounted(() => {});
 </script>
 
 <style lang="css" scoped>

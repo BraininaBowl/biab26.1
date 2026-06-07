@@ -12,7 +12,11 @@ const { item, items, fetchItem, fetchActiveItems, status } = useItems();
 fetchActiveItems();
 
 
-onMounted(async () => {});
+onMounted(async () => {
+  document.querySelectorAll(".card_wrapper").forEach((domItem) => {
+    domItem.style.gridRow = "span " + domItem.offsetHeight;
+  });
+});
 onUnmounted(() => {});
 </script>
 
