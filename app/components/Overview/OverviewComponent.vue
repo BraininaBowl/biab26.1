@@ -14,7 +14,10 @@ fetchActiveItems();
 
 onMounted(async () => {
   document.querySelectorAll(".card_wrapper").forEach((domItem) => {
-    domItem.style.gridRow = "span " + domItem.offsetHeight;
+    console.log("domItem", domItem);
+    let inner = domItem.querySelector(".card");
+    let height = inner.offsetHeight + 48;
+    domItem.style.gridRow = 'auto / span ' + height;
   });
 });
 onUnmounted(() => {});
@@ -23,8 +26,8 @@ onUnmounted(() => {});
 <style lang="css" scoped>
 .card_container {
   display: grid;
-  grid-auto-rows: 10px;
+  grid-auto-rows: 1px;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.5rem 2rem;
+  gap: 0rem 2rem;
 }
 </style>
