@@ -8,14 +8,11 @@
 </template>
 
 <script setup>
+
 const route = useRoute();
 const itemId = route.params.id;
 const { item, fetchItem, writeItem } = useItems();
 fetchItem(itemId);
-
-
-
-
 
 onMounted(() => {});
 </script>
@@ -25,5 +22,4 @@ main {
   padding: var(--padding);
   flex-grow: 100;
 }
-
 </style>

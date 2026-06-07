@@ -16,7 +16,7 @@
         <h3>
           {{ item.title }}
         </h3>
-        <p v-if="item.description">{{ item.description }}</p>
+        <div v-if="item.description" v-html="item.description"></div>
         <NuxtLink
           :to="`${item.id}-${returnUri(item.title)}`"
           :title="item.description"
@@ -34,8 +34,6 @@ defineProps({
     required: true,
   },
 });
-
-onMounted(() => {});
 </script>
 
 <style lang="css" scoped>

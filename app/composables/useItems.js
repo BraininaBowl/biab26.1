@@ -12,6 +12,9 @@ export const useItems = () => {
         } finally {
           response.data.items.sort((a, b) => new Date(a.date) - new Date(b.date));
           items.value = response.data.items;
+          items.value.forEach((item) => {
+             item.description = toHtml(item.description);
+          });
           status.value = response.status;
         }
     }
@@ -25,7 +28,10 @@ export const useItems = () => {
       } finally {
         response.data.items.sort((a, b) => new Date(a.date) - new Date(b.date));
         items.value = response.data.items;
-        status.value = response.status;
+        items.value.forEach((item) => {
+          item.description = toHtml(item.description);
+       });
+     status.value = response.status;
       }
   }
 
@@ -36,6 +42,7 @@ export const useItems = () => {
         } catch (error) {
         } finally {
           item.value = response.data.item;
+          item.value.description = toHtml(item.value.description);
           status.value = response.status;
         }
     }
