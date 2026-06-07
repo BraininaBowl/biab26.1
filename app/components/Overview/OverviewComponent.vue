@@ -22,11 +22,7 @@ function resizeItems() {
   }
 }
 
-
-
-
 onMounted(() => {
-  
   window.addEventListener("resize", resizeItems());
   resizeItems();
 });

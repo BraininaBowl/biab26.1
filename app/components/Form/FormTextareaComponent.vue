@@ -27,6 +27,7 @@
       required: true,
     },
   });
+  onMounted(() => {  });
   </script>
   
   <style lang="css" scoped>

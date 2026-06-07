@@ -124,11 +124,9 @@ function writeSubmit() {
 
 const handleSubmit = function () {
   if (formData.value.image) {
-    console.log("Loading image to get aspect ratio...");
     var imageHolder = document.createElement("img");
     imageHolder.src = formData.value.image;
     imageHolder.onload = function () {
-      console.log("Image loaded, calculating aspect ratio...");
       imageHolder.style.visibility = "hidden";
       document.body.appendChild(imageHolder);
       formData.value.imageAspectRatio =
@@ -137,7 +135,6 @@ const handleSubmit = function () {
       writeSubmit();
     };
     imageHolder.onerror = function () {
-      console.error("Error loading image, cannot calculate aspect ratio.");
       addNotification(
         "Error loading image, please check the URL and try again.",
         "error",
@@ -187,7 +184,9 @@ const formData = ref({
   color: item.color ? item.color : null,
 });
 
-onMounted(() => {});
+onMounted(() => {
+  var simplemde = new SimpleMDE();
+});
 </script>
 
 <style lang="css" scoped>
