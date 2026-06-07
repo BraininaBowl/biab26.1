@@ -11,14 +11,24 @@
 const { item, items, fetchItem, fetchActiveItems, status } = useItems();
 fetchActiveItems();
 
+console.log(items.value);
+function resizeItems() {
+  for (const item of items.value) {
+    const domItem = document.getElementById(`card_${item.id}`);
+    if (domItem) {
+      let height = domItem.querySelector(".card").clientHeight + 64;
+      domItem.style.gridRow = "auto / span " + height;
+    }
+  }
+}
 
-onMounted(async () => {
-  document.querySelectorAll(".card_wrapper").forEach((domItem) => {
-    console.log("domItem", domItem);
-    let inner = domItem.querySelector(".card");
-    let height = inner.offsetHeight + 48;
-    domItem.style.gridRow = 'auto / span ' + height;
-  });
+
+
+
+onMounted(() => {
+  
+  window.addEventListener("resize", resizeItems());
+  resizeItems();
 });
 onUnmounted(() => {});
 </script>

@@ -20,17 +20,27 @@
       }"
     />
     <FormInputComponent
-    v-model="formData.image"
-    :formfieldData="{
-      typeField: 'text',
-      label: 'Image URL',
-      requiredField: false,
-      id: useId(),
-      placeholder: '',
-      disabledField: formData.trashed,
-    }"
-  />
-  <FormInputComponent
+      v-model="formData.image"
+      :formfieldData="{
+        typeField: 'text',
+        label: 'Image URL',
+        requiredField: false,
+        id: useId(),
+        placeholder: '',
+        disabledField: formData.trashed,
+      }"
+    />
+    <FormInputComponent
+      v-model="formData.imageAspectRatio"
+      :formfieldData="{
+        typeField: 'hidden',
+        label: 'Image Aspect Ratio',
+        placeholder: '',
+        requiredField: false,
+        id: useId(),
+      }"
+    />
+    <FormInputComponent
       v-model="formData.title"
       :formfieldData="{
         typeField: 'text',
@@ -45,6 +55,17 @@
       v-model="formData.description"
       :formfieldData="{
         label: 'Description',
+        requiredField: false,
+        id: useId(),
+        placeholder: '',
+        disabledField: formData.trashed,
+      }"
+    />
+    <FormInputComponent
+      v-model="formData.color"
+      :formfieldData="{
+        typeField: 'color',
+        label: 'Color',
         requiredField: false,
         id: useId(),
         placeholder: '',
@@ -86,11 +107,12 @@ const props = defineProps({
     required: false,
   },
 });
+
 const item = props.item || {};
 
 const { writeItem } = useItems();
 
-const handleSubmit = function () {
+function writeSubmit() {
   const status = writeItem(formData.value);
   status.catch((error) => {
     addNotification("Error saving item, please try again later.", "error");
@@ -98,6 +120,33 @@ const handleSubmit = function () {
   status.finally(() => {
     addNotification("Item saved successfully.", "success");
   });
+}
+
+const handleSubmit = function () {
+  if (formData.value.image) {
+    console.log("Loading image to get aspect ratio...");
+    var imageHolder = document.createElement("img");
+    imageHolder.src = formData.value.image;
+    imageHolder.onload = function () {
+      console.log("Image loaded, calculating aspect ratio...");
+      imageHolder.style.visibility = "hidden";
+      document.body.appendChild(imageHolder);
+      formData.value.imageAspectRatio =
+        imageHolder.naturalWidth / imageHolder.naturalHeight;
+      document.body.removeChild(imageHolder);
+      writeSubmit();
+    };
+    imageHolder.onerror = function () {
+      console.error("Error loading image, cannot calculate aspect ratio.");
+      addNotification(
+        "Error loading image, please check the URL and try again.",
+        "error",
+      );
+    };
+  } else {
+    formData.value.imageAspectRatio = null;
+    writeSubmit();
+  }
 };
 
 const trashItem = async function () {
@@ -132,6 +181,10 @@ const formData = ref({
   title: item.title ? item.title : "",
   description: item.description ? item.description : "",
   trashed: item.trashed,
+  imageAspectRatio: item.imageAspectRatio ? item.imageAspectRatio : null,
+  image: item.image ? item.image : null,
+  type: item.type ? item.type : "",
+  color: item.color ? item.color : null,
 });
 
 onMounted(() => {});

@@ -1,12 +1,15 @@
 <template>
   <article :id="`card_${item.id}`" class="card_wrapper">
     <div class="tag" v-if="item.type">{{ item.type }}</div>
-    <div class="card">
+    <div class="card" :style="{ backgroundColor: item.color ? item.color : 'var(--col-bg-light)' }">
       <img
         v-if="item.image"
         :src="item.image"
         :alt="item.title"
         class="card-image pixel"
+        :style="{
+          aspectRatio: item.imageAspectRatio ? item.imageAspectRatio : 'auto',
+        }"
       />
       <div class="card-content">
         <p v-if="item.trashed">[Trashed]</p>
@@ -57,7 +60,6 @@ article {
   display: flex;
   flex-direction: column;
   border: 1px solid var(--col-border);
-  /* border-radius: 0.5rem; */
   width: 100%;
   height: auto;
   max-width: 400px;
@@ -70,15 +72,13 @@ article {
   flex-direction: column;
   gap: 0.5rem;
   padding: 1rem;
-  /* border-radius: 0.5rem; */
   width: 100%;
   height: 100%;
   align-items: flex-start;
 }
 
 .card-image {
-  max-width: 100%;
+  width: 100%;
   height: auto;
-  /* border-radius: 0.25rem; */
 }
 </style>
