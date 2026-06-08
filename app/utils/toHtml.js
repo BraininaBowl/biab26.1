@@ -1,3 +1,5 @@
+import { cloneVNode } from "vue";
+
 export default function (string) {
   let boldOn = false;
   let italicOn = false;
@@ -9,10 +11,55 @@ export default function (string) {
   let header6On = false;
   let paragOn = false;
 
+  function closePrevious() {
+    let toReturn = " ";
+    if (boldOn) {
+      toReturn += "</b> ";
+      boldOn = false;
+    }
+    if (italicOn) {
+      toReturn += "</i> ";
+      italicOn = false;
+    }
+    if (header1On) {
+      toReturn += "</h1> ";
+      header1On = false;
+    }
+    if (header2On) {
+      toReturn += "</h2> ";
+      header2On = false;
+    }
+    if (header3On) {
+      toReturn += "</h3> ";
+      header3On = false;
+    }
+    if (header4On) {
+      toReturn += "</h4> ";
+      header4On = false;
+    }
+    if (header5On) {
+      toReturn += "</h5> ";
+      header5On = false;
+    }
+    if (header6On) {
+      toReturn += "</h6> ";
+      header6On = false;
+    }
+    if (paragOn) {
+      toReturn += "</p> ";
+      paragOn = false;
+    }
+    return toReturn;
+  }
 
   const sections = string.split(/\s+/);
+  if (
+    ["#", "##", "###", "####", "#####", "######", "#p"].includes(sections[0]) ==
+    false
+  ) {
+    sections.unshift("#p");
+  }
   sections.forEach((section, index) => {
-    console.log(section);
     if (section.startsWith("http://") || section.startsWith("https://")) {
       sections[index] =
         `<a href="${section}" target="_blank" rel="noopener noreferrer">${section}</a>`;
@@ -21,7 +68,6 @@ export default function (string) {
     if (section == "/n") {
       sections[index] = "<br>";
     }
-
 
     if (section == "*") {
       if (italicOn) {
@@ -39,74 +85,38 @@ export default function (string) {
       } else {
         sections[index] = "<b>";
         boldOn = true;
-      } 
+      }
     }
 
     if (section == "#") {
-      if (header1On) {
-        sections[index] = "</h1>";
-        header1On = false;
-      } else {
-        sections[index] = "<h1>";
+        sections[index] = closePrevious() + "<h1>";
         header1On = true;
-      }
     }
     if (section == "##") {
-      if (header2On) {
-        sections[index] = "</h2>";
-        header2On = false;
-      } else {
-        sections[index] = "<h2>";
+        sections[index] = closePrevious() + "<h2>";
         header2On = true;
-      }
     }
     if (section == "###") {
-      if (header3On) {
-        sections[index] = "</h3>";
-        header3On = false;
-      } else {
-        sections[index] = "<h3>";
+        sections[index] = closePrevious() + "<h3>";
         header3On = true;
-      }
     }
     if (section == "####") {
-      if (header4On) {
-        sections[index] = "</h4>";
-        header4On = false;
-      } else {
-        sections[index] = "<h4>";
+        sections[index] = closePrevious() + "<h4>";
         header4On = true;
-      }
     }
     if (section == "#####") {
-      if (header5On) {
-        sections[index] = "</h5>";
-        header5On = false;
-      } else {
-        sections[index] = "<h5>";
+        sections[index] = closePrevious() + "<h5>";
         header5On = true;
-      }
     }
     if (section == "######") {
-      if (header6On) {
-        sections[index] = "</h6>";
-        header6On = false;
-      } else {
-        sections[index] = "<h6>";
+        sections[index] = closePrevious() + "<h6>";
         header6On = true;
-      }
     }
-
-    if (section == "#P#") {
-        if (paragOn) {
-          sections[index] = "</p>";
-          paragOn = false;
-        } else {
-          sections[index] = "<p>";
-          paragOn = true;
-        }
-      }
-  
-});
+    if (section == "#p") {
+        sections[index] = closePrevious() + "<p>";
+        paragOn = true;
+    }
+  });
+  sections.push("" + closePrevious());
   return sections.join(" ");
 }

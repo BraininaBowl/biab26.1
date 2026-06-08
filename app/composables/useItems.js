@@ -35,6 +35,18 @@ export const useItems = () => {
       }
   }
 
+    async function fetchRawItem(id) {
+        let response = [];
+        try {
+          response = await $fetch(`/api/items/${id}`);
+        } catch (error) {
+        } finally {
+          item.value = response.data.item;
+          status.value = response.status;
+        }
+    }
+
+
     async function fetchItem(id) {
         let response = [];
         try {
@@ -58,6 +70,7 @@ export const useItems = () => {
       fetchAllItems,
       fetchActiveItems,
       fetchItem,
+      fetchRawItem,
       writeItem,
       items,
       item,

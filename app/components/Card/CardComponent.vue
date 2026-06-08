@@ -45,6 +45,11 @@ article {
   align-items: flex-start;
 }
 
+.card_wrapper {
+  opacity: 0;
+  transition: opacity 400ms ease-out;
+}
+
 .tag {
   background-color: var(--col-fg);
   color: var(--col-bg);

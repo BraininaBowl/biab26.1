@@ -1,4 +1,6 @@
+pages/edit/
 pages/edit/*
+pages/new/
 pages/new/*
 components/Form/*
 components/Overview/OverviewEditComponent.vue

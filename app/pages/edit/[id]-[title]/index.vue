@@ -11,8 +11,8 @@
 
 const route = useRoute();
 const itemId = route.params.id;
-const { item, fetchItem, writeItem } = useItems();
-fetchItem(itemId);
+const { item, fetchRawItem, writeItem } = useItems();
+fetchRawItem(itemId);
 
 onMounted(() => {});
 </script>
