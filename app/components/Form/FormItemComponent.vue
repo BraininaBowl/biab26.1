@@ -4,7 +4,6 @@
       <a @click="restoreItem()" v-if="item.trashed">Restore item</a>
       <a @click="trashItem()" v-else>Trash item</a>
     </div>
-    <NavigationOptionsRightComponent />
   </div>
 
   <form @submit.prevent="handleSubmit">
@@ -56,7 +55,7 @@
       :formfieldData="{
         label: 'Description',
         requiredField: false,
-        id: useId(),
+        id: 'markdown-editor',
         placeholder: '',
         disabledField: formData.trashed,
       }"
@@ -181,12 +180,10 @@ const formData = ref({
   imageAspectRatio: item.imageAspectRatio ? item.imageAspectRatio : null,
   image: item.image ? item.image : null,
   type: item.type ? item.type : "",
-  color: item.color ? item.color : null,
+  color: item.color ? item.color : "#fffdec",
 });
 
-onMounted(() => {
-  var simplemde = new SimpleMDE();
-});
+onMounted(() => {});
 </script>
 
 <style lang="css" scoped>

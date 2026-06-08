@@ -12,6 +12,9 @@ export const useItems = () => {
         } finally {
           response.data.items.sort((a, b) => new Date(a.date) - new Date(b.date));
           items.value = response.data.items;
+          items.value.forEach((item) => {
+             item.description = toHtml(item.description);
+          });
           status.value = response.status;
         }
     }
@@ -25,9 +28,24 @@ export const useItems = () => {
       } finally {
         response.data.items.sort((a, b) => new Date(a.date) - new Date(b.date));
         items.value = response.data.items;
-        status.value = response.status;
+        items.value.forEach((item) => {
+          item.description = toHtml(item.description);
+       });
+     status.value = response.status;
       }
   }
+
+    async function fetchRawItem(id) {
+        let response = [];
+        try {
+          response = await $fetch(`/api/items/${id}`);
+        } catch (error) {
+        } finally {
+          item.value = response.data.item;
+          status.value = response.status;
+        }
+    }
+
 
     async function fetchItem(id) {
         let response = [];
@@ -36,6 +54,7 @@ export const useItems = () => {
         } catch (error) {
         } finally {
           item.value = response.data.item;
+          item.value.description = toHtml(item.value.description);
           status.value = response.status;
         }
     }
@@ -51,6 +70,7 @@ export const useItems = () => {
       fetchAllItems,
       fetchActiveItems,
       fetchItem,
+      fetchRawItem,
       writeItem,
       items,
       item,
