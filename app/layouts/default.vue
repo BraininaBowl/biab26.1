@@ -74,7 +74,7 @@ p {
   margin: 0;
 }
 
-a {
+a:not(.tag) {
   color: var(--col-link);
   text-decoration: none;
   transition: color 0.25s ease-in-out;
@@ -83,8 +83,8 @@ a {
   display: inline-block;
 }
 
-a::after,
-a::before {
+a:not(.tag)::after,
+a:not(.tag)::before {
   content: "";
   display: inline-block;
   position: absolute;
@@ -95,15 +95,15 @@ a::before {
   transition: all 0.25s ease-in-out;
   opacity: 0;
 }
-a::after {
+a:not(.tag)::after {
   bottom: -0.125em;
 }
-a::before {
+a:not(.tag)::before {
   top: -0.125em;
 }
 
-a:hover::after,
-a:hover::before {
+a:not(.tag):hover::after,
+a:not(.tag):hover::before {
   width: 100%;
   left: 0;
   opacity: 1;

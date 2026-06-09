@@ -11,42 +11,11 @@ export const useItems = () => {
       items.value = [];
     } finally {
       response.data.items.sort((a, b) => new Date(a.date) - new Date(b.date));
-      console.log("filters", filters)
       filters.forEach((filterItem) => {
-        response.data.items = response.data.items.filter((el) => filterItem.values.includes(el[filterItem.attribute]));
+        response.data.items = response.data.items.filter((el) =>
+          filterItem.values.includes(el[filterItem.attribute]),
+        );
       });
-      items.value = response.data.items;
-      items.value.forEach((item) => {
-        item.description = toHtml(item.description);
-      });
-      status.value = response.status;
-    }
-  }
-
-  async function fetchAllItems() {
-    let response = [];
-    try {
-      response = await $fetch(`/api/items/all`);
-    } catch (error) {
-      items.value = [];
-    } finally {
-      response.data.items.sort((a, b) => new Date(a.date) - new Date(b.date));
-      items.value = response.data.items;
-      items.value.forEach((item) => {
-        item.description = toHtml(item.description);
-      });
-      status.value = response.status;
-    }
-  }
-
-  async function fetchActiveItems() {
-    let response = [];
-    try {
-      response = await $fetch(`/api/items/active`);
-    } catch (error) {
-      items.value = [];
-    } finally {
-      response.data.items.sort((a, b) => new Date(a.date) - new Date(b.date));
       items.value = response.data.items;
       items.value.forEach((item) => {
         item.description = toHtml(item.description);
@@ -86,8 +55,6 @@ export const useItems = () => {
   }
 
   return {
-    fetchAllItems,
-    fetchActiveItems,
     fetchItems,
     fetchItem,
     fetchRawItem,

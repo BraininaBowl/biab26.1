@@ -11,8 +11,7 @@
 <script setup>
 
 const { item, items, fetchItem, fetchItems, status } = useItems();
-fetchItems([{attribute: "trashed", values: [false, undefined]},]);
-
+fetchItems([{attribute: "trashed", values: [false, undefined]},]).then(resizeItems);
 function resizeItems() {
   for (const item of items.value) {
     const domItem = document.getElementById(`card_${item.id}`);
@@ -26,7 +25,6 @@ function resizeItems() {
 
 onMounted(() => {
   window.addEventListener("resize", resizeItems());
-  setTimeout(resizeItems(), 1);
 });
 onUnmounted(() => {});
 </script>

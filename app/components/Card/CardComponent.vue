@@ -1,6 +1,6 @@
 <template>
   <article :id="`card_${item.id}`" class="card_wrapper">
-    <div class="tag" v-if="item.type">{{ item.type }}</div>
+    <NuxtLink :to="`${item.type}`" class="tag" v-if="item.type">{{ item.type }}</NuxtLink>
     <div class="card" :style="{ backgroundColor: item.color ? item.color : 'var(--col-bg-light)' }">
       <img
         v-if="item.image"
@@ -56,12 +56,15 @@ article {
   font-weight: 400;
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
+  text-decoration: none;
 }
 
 .card {
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--col-border);
+  border: 0.1rem solid var(--col-border);
+  /* box-shadow: 0 0 0.25rem var(--col-border); */
+  border-radius: 0.25rem;
   width: 100%;
   height: auto;
   max-width: 400px;
