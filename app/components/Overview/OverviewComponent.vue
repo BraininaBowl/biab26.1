@@ -11,8 +11,8 @@
 <script setup>
 import toHtml from "~/utils/toHtml";
 
-const { item, items, fetchItem, fetchActiveItems, status } = useItems();
-fetchActiveItems();
+const { item, items, fetchItem, fetchFilteredItems, status } = useItems();
+fetchFilteredItems([{attr = "trashed", value = false},]]);
 
 function resizeItems() {
   for (const item of items.value) {
