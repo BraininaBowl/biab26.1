@@ -12,4 +12,5 @@ main {
   padding: var(--padding);
   flex-grow: 100;
 }
+
 </style>

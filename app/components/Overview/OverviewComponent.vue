@@ -9,10 +9,9 @@
 </template>
 
 <script setup>
-import toHtml from "~/utils/toHtml";
 
-const { item, items, fetchItem, fetchFilteredItems, status } = useItems();
-fetchFilteredItems([{attr = "trashed", value = false},]]);
+const { item, items, fetchItem, fetchItems, status } = useItems();
+fetchItems([{attribute: "trashed", values: [false, undefined]},]);
 
 function resizeItems() {
   for (const item of items.value) {
@@ -38,5 +37,9 @@ onUnmounted(() => {});
   grid-auto-rows: 1px;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 0rem 2rem;
+}
+
+.card_wrapper {
+  opacity: 0;
 }
 </style>

@@ -3,7 +3,7 @@ export const useItems = () => {
   const item = useState("item", () => null);
   const status = useState("status", () => null);
 
-  async function fetchFilteredItems(filters) {
+  async function fetchItems(filters = []) {
     let response = [];
     try {
       response = await $fetch(`/api/items/all`);
@@ -11,8 +11,9 @@ export const useItems = () => {
       items.value = [];
     } finally {
       response.data.items.sort((a, b) => new Date(a.date) - new Date(b.date));
-      filters.forEach((filter) => {
-        response.data.items = response.data.items.filter((el) => (filter.attr == filter.value));
+      console.log("filters", filters)
+      filters.forEach((filterItem) => {
+        response.data.items = response.data.items.filter((el) => filterItem.values.includes(el[filterItem.attribute]));
       });
       items.value = response.data.items;
       items.value.forEach((item) => {
@@ -87,7 +88,7 @@ export const useItems = () => {
   return {
     fetchAllItems,
     fetchActiveItems,
-    fetchFilteredItems,
+    fetchItems,
     fetchItem,
     fetchRawItem,
     writeItem,

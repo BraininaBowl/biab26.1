@@ -8,10 +8,10 @@
 </template>
 
 <script setup>
-const { item, items, fetchItem, fetchAllItems, status } = useItems();
+const { item, items, fetchItem, fetchItems, status } = useItems();
 
 onMounted(async () => {
-  fetchAllItems();
+  fetchItems();
   for (const item of items.value) {
     const domItem = document.getElementById(`card_${item.id}`);
     if (domItem) {

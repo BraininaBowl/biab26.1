@@ -46,7 +46,6 @@ article {
 }
 
 .card_wrapper {
-  opacity: 0;
   transition: opacity 400ms ease-out;
 }
 
