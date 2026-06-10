@@ -11,22 +11,27 @@
 <script setup>
 const items = new Array();
 const filters = [{ attribute: "trashed", values: [false, undefined] }]
+const parsed = true;
+const params = {filters: filters, parsed: parsed};
 const { data, status, error, refresh, clear } = await useFetch(
   "/api/items/all",
+  {
+    query: {filters: JSON.stringify(filters), parseHTML: true}
+  },
   {
     onRequestError({ request, options, error }) {
       // Handle the request errors
     },
     onResponse({ request, response, options }) {
-      response._data.data.items.sort((a, b) => new Date(a.date) - new Date(b.date));
-      filters.forEach((filterItem) => {
-        response._data.data.items = response._data.data.items.filter((el) =>
-          filterItem.values.includes(el[filterItem.attribute]),
-        );
-      });
+      // response._data.data.items.sort((a, b) => new Date(a.date) - new Date(b.date));
+      // filters.forEach((filterItem) => {
+      //   response._data.data.items = response._data.data.items.filter((el) =>
+      //     filterItem.values.includes(el[filterItem.attribute]),
+      //   );
+      // });
 
       response._data.data.items.forEach((item) => {
-        item.description = toHtml(item.description);
+        // item.description = toHtml(item.description);
         items.push(item);
       });
       
