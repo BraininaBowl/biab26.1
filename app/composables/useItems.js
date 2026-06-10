@@ -3,7 +3,7 @@ export const useItems = () => {
   const item = useState("item", () => null);
   const status = useState("status", () => null);
 
-  async function fetchItems(filters = []) {
+  async function fetchItems(filters = [], parse = true) {
     let response = [];
     try {
       response = await $fetch(`/api/items/all`);
@@ -17,9 +17,11 @@ export const useItems = () => {
         );
       });
       items.value = response.data.items;
-      items.value.forEach((item) => {
-        item.description = toHtml(item.description);
-      });
+      if (parse) {
+        items.value.forEach((item) => {
+          item.description = toHtml(item.description);
+        });
+      }
       status.value = response.status;
     }
   }
