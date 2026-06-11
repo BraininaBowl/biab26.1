@@ -5,7 +5,6 @@ export default defineEventHandler(async (event) => {
   const allItems = await Promise.all(promises);
   const items = allItems;
 
-
   return {
     status: "success",
     data: { items },
