@@ -11,7 +11,8 @@
 <script setup>
 const { items, fetchItems, status } = useItems();
 
-fetchItems([{ attribute: "trashed", values: [false, undefined] }]).then(
+
+fetchItems(filters, parse).then(
   resizeItems,
 );
 
