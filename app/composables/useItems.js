@@ -10,11 +10,20 @@ export const useItems = () => {
     } catch (error) {
       items.value = [];
     } finally {
+      items.value = response.data.items;
       response.data.items.sort((a, b) => new Date(a.date) - new Date(b.date));
       filters.forEach((filterItem) => {
-        response.data.items = response.data.items.filter((el) =>
-          filterItem.values.includes(el[filterItem.attribute]),
-        );
+        console.log("typeof(filterItem.values)", typeof(filterItem.values))
+        if (typeof(filterItem.values) == "object") {
+          response.data.items = response.data.items.filter((el) =>
+            filterItem.values.includes(el[filterItem.attribute]),
+          );
+        } else {
+          response.data.items = response.data.items.filter((el) =>
+            filterItem.values == (el[filterItem.attribute]),
+          );
+
+        }
       });
       items.value = response.data.items;
       if (parse) {
@@ -22,29 +31,6 @@ export const useItems = () => {
           item.description = toHtml(item.description);
         });
       }
-      status.value = response.status;
-    }
-  }
-
-  async function fetchRawItem(id) {
-    let response = [];
-    try {
-      response = await $fetch(`/api/items/${id}`);
-    } catch (error) {
-    } finally {
-      item.value = response.data.item;
-      status.value = response.status;
-    }
-  }
-
-  async function fetchItem(id) {
-    let response = [];
-    try {
-      response = await $fetch(`/api/items/${id}`);
-    } catch (error) {
-    } finally {
-      item.value = response.data.item;
-      item.value.description = toHtml(item.value.description);
       status.value = response.status;
     }
   }
@@ -58,8 +44,6 @@ export const useItems = () => {
 
   return {
     fetchItems,
-    fetchItem,
-    fetchRawItem,
     writeItem,
     items,
     item,
