@@ -1,6 +1,6 @@
 <template>
   <div id="notifications" role="alert"></div>
-  <main v-if="item">
+  <main v-for="item in items">
     <h2 v-if="itemId">Edit Item</h2>
     <h2 v-else>Add Item</h2>
     <FormItemComponent :item="item" />
@@ -11,8 +11,8 @@
 
 const route = useRoute();
 const itemId = route.params.id;
-const { item, fetchRawItem, writeItem } = useItems();
-fetchRawItem(itemId);
+const { items, fetchItems, status } = useItems();
+fetchItems([{ attribute: "id", values: itemId }], false);
 
 onMounted(() => {});
 </script>

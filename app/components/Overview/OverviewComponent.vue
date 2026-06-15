@@ -9,21 +9,27 @@
 </template>
 
 <script setup>
-const { item, items, fetchItem, fetchItems, status } = useItems();
+const { items, fetchItems, status } = useItems();
 
 fetchItems([{ attribute: "trashed", values: [false, undefined] }]).then(
   resizeItems,
 );
+
 function resizeItems() {
-  document.querySelectorAll(".card_wrapper").forEach((domItem) => {
-    let height = domItem.querySelector(".card").clientHeight + 64;
-    domItem.style.gridRow = "auto / span " + height;
-    domItem.style.opacity = 1;
+  document.querySelectorAll(".card_wrapper").forEach((domItem, index) => {
+    if (domItem) {
+      let card = domItem.querySelector(".card");
+      if (card) {
+        domItem.style.gridRow = "auto / span " + (card.clientHeight + 64);
+        setTimeout(()=>{domItem.style.opacity = 1;}, 50*index)
+        
+      }
+    }
   });
 }
 
 onMounted(() => {
-  window.addEventListener("resize", resizeItems());
+  window.addEventListener("resize", resizeItems);
 });
 onUnmounted(() => {});
 </script>
