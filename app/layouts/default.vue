@@ -1,12 +1,15 @@
 <template>
   <div class="layout">
-    <HeaderDefaultComponent />
+    <HeaderDefaultComponent :key="route.path" />
     <NuxtPage />
     <FooterDefaultComponent />
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+let route = useRoute()
+
+</script>
 
 <style lang="css">
 /* @import url('https://fonts.googleapis.com/css2?family=Alan+Sans:wght@300..900&display=swap'); */

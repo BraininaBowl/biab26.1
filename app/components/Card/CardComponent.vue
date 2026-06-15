@@ -62,8 +62,8 @@ article {
 .card {
   display: flex;
   flex-direction: column;
-  border: 0.1rem solid var(--col-border);
-  /* box-shadow: 0 0 0.25rem var(--col-border); */
+  /* border: 0.1rem solid var(--col-border); */
+  box-shadow: 0 0 0.125rem var(--col-border), 0 0.125rem 0.25rem rgba(from var(--col-border) r g b / 0.25);;
   border-radius: 0.25rem;
   width: 100%;
   height: auto;
@@ -85,5 +85,6 @@ article {
 .card-image {
   width: 100%;
   height: auto;
+  border-radius: 0.25rem 0.25rem 0 0;
 }
 </style>

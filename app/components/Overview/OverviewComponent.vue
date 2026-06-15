@@ -1,7 +1,7 @@
 <template>
-  <div class="loader" v-if="status == null">Loading...</div>
-  <div class="overview" v-else>
-    <!-- <div class="overview"> -->
+  <!-- <div class="loader" v-if="status == null">Loading...</div>
+  <div class="overview" v-else> -->
+    <div class="overview">
     <section class="card_container">
       <CardComponent v-for="item in items" :key="item.id" :item="item" />
     </section>
@@ -12,7 +12,7 @@
 const { items, fetchItems, status } = useItems();
 
 
-fetchItems(filters, parse).then(
+fetchItems([{ attribute: "trashed", values: [false, undefined] }], true).then(
   resizeItems,
 );
 

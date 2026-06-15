@@ -3,7 +3,7 @@
   <main v-for="item in items">
     <h2 v-if="itemId">Edit Item</h2>
     <h2 v-else>Add Item</h2>
-    <FormItemComponent :item="item" />
+    <FormItemComponent :item="item" :key="item.id"/>
   </main>
 </template>
 

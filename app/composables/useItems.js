@@ -13,7 +13,6 @@ export const useItems = () => {
       items.value = response.data.items;
       response.data.items.sort((a, b) => new Date(a.date) - new Date(b.date));
       filters.forEach((filterItem) => {
-        console.log("typeof(filterItem.values)", typeof(filterItem.values))
         if (typeof(filterItem.values) == "object") {
           response.data.items = response.data.items.filter((el) =>
             filterItem.values.includes(el[filterItem.attribute]),

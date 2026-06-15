@@ -17,10 +17,11 @@
 const route = useRoute();
 const itemId = route.params.id;
 const { items, fetchItems } = useItems();
-fetchItems([{ attribute: "id", values: itemId }, { attribute: "trashed", values: [false, undefined] }]);
+fetchItems([
+  { attribute: "id", values: itemId },
+  { attribute: "trashed", values: [false, undefined] },
+]);
 
-const item = items;
 onMounted(() => {});
 </script>
-<style lang="css" scoped>
-</style>
+<style lang="css" scoped></style>
