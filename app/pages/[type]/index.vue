@@ -1,5 +1,6 @@
 <template>
     <main>
+        <h2>{{ type }}</h2>
         <OverviewComponent :filters="filters"/>
     </main>
 </template>
