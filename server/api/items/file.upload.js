@@ -1,4 +1,4 @@
-export default defineEventHandler(async (event) => {});
+export default defineEventHandler(async (event) => {
 
 const formData = await readMultipartFormData(event);
 if (!formData || formData.length === 0) {
@@ -6,3 +6,5 @@ if (!formData || formData.length === 0) {
     statusCode: 400,    statusMessage: "No files uploaded",  });
 }
 const file = formData[0];
+});
+

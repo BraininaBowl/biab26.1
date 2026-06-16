@@ -11,8 +11,16 @@
 <script setup>
 const { items, fetchItems, status } = useItems();
 
+const props = defineProps({
+  filters: {
+    type: Object,
+    required: false,
+  },
+});
 
-fetchItems([{ attribute: "trashed", values: [false, undefined] }], true).then(
+const filters = props.filters || [];
+
+fetchItems(filters, true).then(
   resizeItems,
 );
 
