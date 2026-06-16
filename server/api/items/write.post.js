@@ -20,6 +20,10 @@ export default defineEventHandler(async (event) => {
     if (!body.id) {
       body.id = await getNewId();
     }
+    // body.forEach(element => {
+
+      
+    // });
     await storage.setItem(body.id + ".json", body);
     return;
   });

@@ -21,7 +21,18 @@
     <FormInputComponent
       v-model="formData.image"
       :formfieldData="{
-        typeField: 'text',
+        typeField: 'file',
+        label: 'Image',
+        requiredField: false,
+        id: useId(),
+        placeholder: '',
+        disabledField: formData.trashed,
+      }"
+    />
+    <FormInputComponent
+      v-model="formData.imageURL"
+      :formfieldData="{
+        typeField: 'hidden',
         label: 'Image URL',
         requiredField: false,
         id: useId(),
@@ -122,7 +133,7 @@ function writeSubmit() {
 }
 
 const handleSubmit = function () {
-  if (formData.value.image) {
+  if (formData.value.imageURL) {
     var imageHolder = document.createElement("img");
     imageHolder.src = formData.value.image;
     imageHolder.onload = function () {
@@ -177,8 +188,9 @@ const formData = ref({
   title: item.title ? item.title : "",
   description: item.description ? item.description : "",
   trashed: item.trashed,
-  imageAspectRatio: item.imageAspectRatio ? item.imageAspectRatio : null,
   image: item.image ? item.image : null,
+  imageURL: item.imageURL ? item.imageURL : null,
+  imageAspectRatio: item.imageAspectRatio ? item.imageAspectRatio : null,
   type: item.type ? item.type : "",
   color: item.color ? item.color : "#fffdec",
 });
