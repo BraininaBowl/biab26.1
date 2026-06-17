@@ -7,8 +7,7 @@
 </template>
 
 <script setup>
-let route = useRoute()
-
+let route = useRoute();
 </script>
 
 <style lang="css">
@@ -46,7 +45,7 @@ h1 {
   font-family: "AlanSans", sans-serif;
   font-weight: 800;
   font-style: normal;
-  font-size: 2.25rem;
+  font-size: 4rem;
   line-height: 1;
 }
 
@@ -54,7 +53,7 @@ h2 {
   font-family: "AlanSans", sans-serif;
   font-weight: 700;
   font-style: normal;
-  font-size: 1.75rem;
+  font-size: 2.5rem;
   line-height: 1;
   margin: 0;
 }
@@ -118,6 +117,10 @@ a:not(.tag):hover::before {
   min-height: 100vh;
 }
 
+main {
+  padding: var(--padding);
+  flex-grow: 100;
+}
 
 /* Images */
 .pixel {

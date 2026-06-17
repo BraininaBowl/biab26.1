@@ -2,7 +2,7 @@
   <main>
     <article class="item" v-for="item in items">
       <header>
-        <h1 v-if="item.title">{{ item.title }}</h1>
+        <h1 v-if="item.title" v-html="item.title"></h1>
       </header>
       <div class="details">
         <section v-if="item.description">

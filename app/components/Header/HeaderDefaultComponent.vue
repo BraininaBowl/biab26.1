@@ -1,9 +1,9 @@
 <template>
   <header :class="headerStyle">
-    <h1>
+    <h4>
       <span class="segment">Brain</span><span class="segment">in a</span
       ><span class="segment">Bowl</span>
-    </h1>
+    </h4>
     <div class="visual_container">!</div>
   </header>
 </template>
@@ -25,7 +25,9 @@ header {
   color: var(--col-fg);
   text-align: left;
 }
-
+header h4 {
+  font-weight: 800;
+}
 header.extended {
   width: 100%;
   height: 100%;
@@ -34,7 +36,7 @@ header.extended {
   justify-content: stretch;
   align-items: stretch;
 }
-header.extended h1 {
+header.extended h4 {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -51,27 +53,28 @@ header.extended .visual_container {
 }
 header.compact {
   width: 100%;
-  height: 100%;
+  height: 8ch;
   display: flex;
   flex-direction: row;
   justify-content: stretch;
-  align-items: stretch;
+  align-items: center;
+  margin: 0;
 }
-header.compact h1 {
+header.compact h4 {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
   padding: var(--padding);
-  font-size: 4rem;
+  font-size: 2rem;
   gap: 0;
   line-height: 0.9;
 }
-header.compact h1 .segment {
+header.compact h4 .segment {
   display: flex;
   align-items: row;
 }
-header.compact h1 .segment::after {
+header.compact h4 .segment::after {
   content: "\00a0";
   display: block;
 }
