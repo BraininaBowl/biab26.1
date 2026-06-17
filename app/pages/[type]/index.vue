@@ -14,8 +14,5 @@ const filters = [{ attribute: "trashed", values: [false, undefined] },{ attribut
 </script>
 
 <style lang="css" scoped>
-    main {
-        padding: var(--padding);
-        flex-grow: 100;
-    }
+
 </style>

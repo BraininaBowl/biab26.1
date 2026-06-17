@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   modules: ["@nuxt/fonts", "@nuxt/icon"],
   fonts: {
     defaults: {
-      weights: [500, 700, 800],
+      weights: [500, 700, 800, 900],
     },
   },
   nitro: {

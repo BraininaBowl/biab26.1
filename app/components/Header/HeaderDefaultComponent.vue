@@ -26,11 +26,12 @@ header {
   text-align: left;
 }
 header h4 {
-  font-weight: 800;
+  font-weight: 900;
 }
 header.extended {
   width: 100%;
   height: 100%;
+  max-height: 100vh;
   display: flex;
   flex-direction: row;
   justify-content: stretch;
@@ -50,6 +51,7 @@ header.extended .visual_container {
   width: 100%;
   margin: var(--padding);
   background-color: var(--col-fg);
+  max-height: calc(100vh - (var(--padding)*2));
 }
 header.compact {
   width: 100%;
