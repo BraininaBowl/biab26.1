@@ -66,7 +66,17 @@
       :formfieldData="{
         label: 'Description',
         requiredField: false,
-        id: 'markdown-editor',
+        id: useId(),
+        placeholder: '',
+        disabledField: formData.trashed,
+      }"
+    />
+    <FormTextareaComponent
+      v-model="formData.snippet"
+      :formfieldData="{
+        label: 'Snippet',
+        requiredField: false,
+        id: useId(),
         placeholder: '',
         disabledField: formData.trashed,
       }"
@@ -105,7 +115,7 @@
 
     <div class="button-row">
       <button type="submit" v-if="item.trashed !== true">Save item</button>
-      <NuxtLink to="./" v-if="item.trashed !== true">Back</NuxtLink>
+      <NuxtLink to="./" >Back</NuxtLink>
     </div>
   </form>
 </template>
@@ -187,6 +197,7 @@ const formData = ref({
   date: item.date ? item.date : new Date(),
   title: item.title ? item.title : "",
   description: item.description ? item.description : "",
+  snippet: item.snippet ? item.snippet : "",
   trashed: item.trashed,
   image: item.image ? item.image : null,
   imageURL: item.imageURL ? item.imageURL : null,

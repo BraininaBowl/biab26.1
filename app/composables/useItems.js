@@ -27,7 +27,12 @@ export const useItems = () => {
       items.value = response.data.items;
       if (parse) {
         items.value.forEach((item) => {
-          item.description = toHtml(item.description);
+          if (item.description){
+            item.description = toHtml(item.description);
+          }
+          if (item.snippet) {
+            item.snippet = toHtml(item.snippet);
+          }
         });
       }
       status.value = response.status;

@@ -4,7 +4,7 @@
       <span class="segment">Brain</span><span class="segment">in a</span
       ><span class="segment">Bowl</span>
     </h4>
-    <div class="visual_container">!</div>
+    <div class="visual_container"></div>
   </header>
 </template>
 

@@ -16,7 +16,7 @@
         <h3>
           {{ item.title }}
         </h3>
-        <div v-if="item.description" v-html="item.description"></div>
+        <div v-if="item.snippet" v-html="item.snippet"></div>
         <NuxtLink
           :to="`${item.id}-${returnUri(item.title)}`"
           :title="item.description"
