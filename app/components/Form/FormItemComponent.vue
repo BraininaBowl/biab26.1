@@ -19,6 +19,17 @@
       }"
     />
     <FormInputComponent
+      v-model="formData.imagePixel"
+      :formfieldData="{
+        typeField: 'text',
+        label: 'Pixel-art  ',
+        requiredField: true,
+        id: useId(),
+        placeholder: '',
+        disabledField: formData.trashed,
+      }"
+    />
+    <FormInputComponent
       v-model="formData.image"
       :formfieldData="{
         typeField: 'file',
@@ -115,7 +126,7 @@
 
     <div class="button-row">
       <button type="submit" v-if="item.trashed !== true">Save item</button>
-      <NuxtLink to="./" >Back</NuxtLink>
+      <NuxtLink to="./">Back</NuxtLink>
     </div>
   </form>
 </template>
@@ -201,6 +212,7 @@ const formData = ref({
   trashed: item.trashed,
   image: item.image ? item.image : null,
   imageURL: item.imageURL ? item.imageURL : null,
+  imagePixel: item.imagePixel ? item.imagePixel : null,
   imageAspectRatio: item.imageAspectRatio ? item.imageAspectRatio : null,
   type: item.type ? item.type : "",
   color: item.color ? item.color : "#fffdec",

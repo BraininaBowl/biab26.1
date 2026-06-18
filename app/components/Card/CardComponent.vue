@@ -1,12 +1,19 @@
 <template>
   <article :id="`card_${item.id}`" class="card_wrapper">
-    <NuxtLink :to="`${item.type}`" class="tag" v-if="item.type">{{ item.type }}</NuxtLink>
-    <div class="card" :style="{ backgroundColor: item.color ? item.color : 'var(--col-bg-light)' }">
+    <NuxtLink :to="`${item.type}`" class="tag" v-if="item.type">{{
+      item.type
+    }}</NuxtLink>
+    <div
+      class="card"
+      :style="{
+        backgroundColor: item.color ? item.color : 'var(--col-bg-light)',
+      }"
+    >
       <img
         v-if="item.image"
         :src="item.image"
         :alt="item.title"
-        class="card-image pixel"
+        :class="`card-image ${item.imagePixel ? 'pixel' : ''}`"
         :style="{
           aspectRatio: item.imageAspectRatio ? item.imageAspectRatio : 'auto',
         }"
@@ -63,7 +70,9 @@ article {
   display: flex;
   flex-direction: column;
   /* border: 0.1rem solid var(--col-border); */
-  box-shadow: 0 0 0.125rem var(--col-border), 0 0.125rem 0.25rem rgba(from var(--col-border) r g b / 0.25);;
+  box-shadow:
+    0 0 0.125rem var(--col-border),
+    0 0.125rem 0.25rem rgba(from var(--col-border) r g b / 0.25);
   border-radius: 0.25rem;
   width: 100%;
   height: auto;
