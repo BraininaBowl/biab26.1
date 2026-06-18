@@ -10,13 +10,11 @@
       }"
     >
       <img
-        v-if="item.image"
-        :src="item.image"
+        v-if="item.imageURL"
+        :src="`${decodeURI(item.imageURL)}`"
         :alt="item.title"
         :class="`card-image ${item.imagePixel ? 'pixel' : ''}`"
-        :style="{
-          aspectRatio: item.imageAspectRatio ? item.imageAspectRatio : 'auto',
-        }"
+        :style="`aspect-ratio: ${item.imageAspectRatio ? item.imageAspectRatio : 'auto'}`"
       />
       <div class="card-content">
         <p v-if="item.trashed">[Trashed]</p>

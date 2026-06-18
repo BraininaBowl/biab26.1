@@ -13,21 +13,20 @@ export const useItems = () => {
       items.value = response.data.items;
       response.data.items.sort((a, b) => new Date(a.date) - new Date(b.date));
       filters.forEach((filterItem) => {
-        if (typeof(filterItem.values) == "object") {
+        if (typeof filterItem.values == "object") {
           response.data.items = response.data.items.filter((el) =>
             filterItem.values.includes(el[filterItem.attribute]),
           );
         } else {
-          response.data.items = response.data.items.filter((el) =>
-            filterItem.values == (el[filterItem.attribute]),
+          response.data.items = response.data.items.filter(
+            (el) => filterItem.values == el[filterItem.attribute],
           );
-
         }
       });
       items.value = response.data.items;
       if (parse) {
         items.value.forEach((item) => {
-          if (item.description){
+          if (item.description) {
             item.description = toHtml(item.description);
           }
           if (item.snippet) {

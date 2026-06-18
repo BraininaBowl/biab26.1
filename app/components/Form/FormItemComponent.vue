@@ -21,7 +21,7 @@
     <FormInputComponent
       v-model="formData.imagePixel"
       :formfieldData="{
-        typeField: 'text',
+        typeField: 'checkbox',
         label: 'Pixel-art  ',
         requiredField: true,
         id: useId(),
@@ -40,6 +40,18 @@
         disabledField: formData.trashed,
       }"
     />
+    <FormInputComponent
+      v-model="formData.imageFocus"
+      :formfieldData="{
+        typeField: 'text',
+        label: 'Image focus',
+        requiredField: false,
+        id: useId(),
+        placeholder: 'center',
+        disabledField: formData.trashed,
+      }"
+    />
+
     <FormInputComponent
       v-model="formData.imageURL"
       :formfieldData="{
@@ -163,6 +175,7 @@ const handleSubmit = function () {
       formData.value.imageAspectRatio =
         imageHolder.naturalWidth / imageHolder.naturalHeight;
       document.body.removeChild(imageHolder);
+      formData.value.imageURL = encodeURI(formData.value.imageURL)
       writeSubmit();
     };
     imageHolder.onerror = function () {
