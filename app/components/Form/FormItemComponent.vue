@@ -1,5 +1,5 @@
 <template>
-  <div class="page_options" v-if="item.id !== unset">
+  <div class="page_options" v-if="item.id !== undefined">
     <div class="submenu left">
       <a @click="restoreItem()" v-if="item.trashed">Restore item</a>
       <a @click="trashItem()" v-else>Trash item</a>
@@ -19,21 +19,21 @@
       }"
     />
     <FormInputComponent
-      v-model="formData.imagePixel"
+      v-model="formData.imageURL"
       :formfieldData="{
-        typeField: 'checkbox',
-        label: 'Pixel-art  ',
-        requiredField: true,
+        typeField: 'text',
+        label: 'Image URL',
+        requiredField: false,
         id: useId(),
         placeholder: '',
         disabledField: formData.trashed,
       }"
     />
     <FormInputComponent
-      v-model="formData.image"
+      v-model="formData.imagePixel"
       :formfieldData="{
-        typeField: 'file',
-        label: 'Image',
+        typeField: 'checkbox',
+        label: 'Pixel-art  ',
         requiredField: false,
         id: useId(),
         placeholder: '',
@@ -48,18 +48,6 @@
         requiredField: false,
         id: useId(),
         placeholder: 'center',
-        disabledField: formData.trashed,
-      }"
-    />
-
-    <FormInputComponent
-      v-model="formData.imageURL"
-      :formfieldData="{
-        typeField: 'hidden',
-        label: 'Image URL',
-        requiredField: false,
-        id: useId(),
-        placeholder: '',
         disabledField: formData.trashed,
       }"
     />
@@ -175,7 +163,7 @@ const handleSubmit = function () {
       formData.value.imageAspectRatio =
         imageHolder.naturalWidth / imageHolder.naturalHeight;
       document.body.removeChild(imageHolder);
-      formData.value.imageURL = encodeURI(formData.value.imageURL)
+      formData.value.imageURL = encodeURI(formData.value.imageURL);
       writeSubmit();
     };
     imageHolder.onerror = function () {
@@ -223,7 +211,6 @@ const formData = ref({
   description: item.description ? item.description : "",
   snippet: item.snippet ? item.snippet : "",
   trashed: item.trashed,
-  image: item.image ? item.image : null,
   imageURL: item.imageURL ? item.imageURL : null,
   imagePixel: item.imagePixel ? item.imagePixel : null,
   imageAspectRatio: item.imageAspectRatio ? item.imageAspectRatio : null,

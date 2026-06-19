@@ -122,6 +122,10 @@ main {
   flex-grow: 100;
 }
 
+section {
+  margin: 0 0 4rem;
+}
+
 /* Images */
 .pixel {
   image-rendering: pixelated;

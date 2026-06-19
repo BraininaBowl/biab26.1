@@ -1,9 +1,15 @@
 <template>
   <div id="notifications" role="alert"></div>
   <main>
-    <h2 v-if="itemId">Edit Item</h2>
-    <h2 v-else>Add Item</h2>
-    <FormItemComponent :item="item" />
+    <section>
+      <h2 v-if="itemId">Edit Item</h2>
+      <h2 v-else>Add Item</h2>
+      <FormItemComponent :item="item" />
+    </section>
+    <section>
+      <h2>Upload image</h2>
+      <FormImageComponent />
+    </section>
   </main>
 </template>
 
@@ -18,5 +24,4 @@ if (itemId) {
 onMounted(() => {});
 </script>
 
-<style lang="css" scoped>
-</style>
+<style lang="css" scoped></style>

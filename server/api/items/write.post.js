@@ -16,14 +16,12 @@ export default defineEventHandler(async (event) => {
     }
   
     const body = await readBody(event);
-    const storage = useStorage("itemStore");
+    const itemStorage = useStorage("itemStore");
     if (!body.id) {
       body.id = await getNewId();
     }
-    // body.forEach(element => {
 
-      
-    // });
-    await storage.setItem(body.id + ".json", body);
+    await itemStorage.setItem(body.id + ".json", body);
     return;
+  
   });
