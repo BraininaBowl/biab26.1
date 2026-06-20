@@ -1,4 +1,4 @@
-export const useImages = () => {
+export const useImages = async () => {
   const images = useState("images", () => []);
   const status = useState("status", () => null);
 
@@ -12,8 +12,8 @@ export const useImages = () => {
 
     const response = await $fetch("/api/images/upload", {
       method: "post",
-      body: file,
-      // body: formData,
+      // body: file,
+      body: formData,
       enctype: "multipart/form-data",
     });
 

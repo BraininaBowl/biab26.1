@@ -1,5 +1,6 @@
 export default defineEventHandler(async (event) => {
   const formData = await readMultipartFormData(event);
+  console.log("formData", formData)
   const storage = useStorage("uploads");
   const maxFileSize = 3;
   const allowedTypes = ["jpeg", "jpg", "png", "gif", "svg"];
