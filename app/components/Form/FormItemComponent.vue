@@ -156,14 +156,14 @@ function writeSubmit() {
 const handleSubmit = function () {
   if (formData.value.imageURL) {
     var imageHolder = document.createElement("img");
-    imageHolder.src = formData.value.image;
+    imageHolder.src = "`../${formData.value.image}`";
     imageHolder.onload = function () {
       imageHolder.style.visibility = "hidden";
       document.body.appendChild(imageHolder);
       formData.value.imageAspectRatio =
         imageHolder.naturalWidth / imageHolder.naturalHeight;
       document.body.removeChild(imageHolder);
-      formData.value.imageURL = encodeURI(formData.value.imageURL);
+      // formData.value.imageURL = encodeURI(formData.value.imageURL);
       writeSubmit();
     };
     imageHolder.onerror = function () {

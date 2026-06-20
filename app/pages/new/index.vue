@@ -6,10 +6,6 @@
       <h2 v-else>Add Item</h2>
       <FormItemComponent :item="item" />
     </section>
-    <section>
-      <h2>Upload image</h2>
-      <FormImageComponent />
-    </section>
   </main>
 </template>
 

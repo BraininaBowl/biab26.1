@@ -5,7 +5,7 @@
         v-if="item.imageURL"
         :alt="item.title"
         :class="`page-image ${item.imagePixel ? 'pixel' : ''}`"
-        :style="`aspect-ratio: ${item.imageAspectRatio ? item.imageAspectRatio : 'auto'}; background-image: url('${decodeURI(item.imageURL)}'); background-position: ${item.imageFocus? item.imageFocus : 'center' };`"
+        :style="`aspect-ratio: ${item.imageAspectRatio ? item.imageAspectRatio : 'auto'}; background-image: url('${item.imageURL}'); background-position: ${item.imageFocus? item.imageFocus : 'center' };`"
       ></div>
       <header>
         <h1 v-if="item.title" v-html="item.title"></h1>

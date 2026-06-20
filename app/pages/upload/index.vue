@@ -1,6 +1,6 @@
 <template>
   <main class="container">
-    <h1>Secure File Upload Demo</h1>
+    <h1>Image upload</h1>
     <p class="description">
       Upload images (JPEG, PNG, WebP, AVIF) up to 5MB. Files are validated and
       sanitized for security.
@@ -70,11 +70,10 @@
       <div class="file-grid">
         <div v-for="file in uploadedFiles" :key="file.url" class="file-card">
           <div class="image-container">
-            <NuxtImg
-              :src="file.url"
+            <img 
+              :src="`/images/${file.name}`"
               :alt="file.name"
               class="uploaded-image"
-              placeholder="blur"
               :modifiers="{
                 width: 300,
                 height: 200,
@@ -89,9 +88,6 @@
             <div class="file-actions">
               <button @click="copyUrl(file.url)" class="copy-btn">
                 Copy URL
-              </button>
-              <button @click="deleteFile(file)" class="delete-btn">
-                Delete
               </button>
             </div>
           </div>
@@ -231,18 +227,12 @@ async function copyUrl(url) {
   try {
     const fullUrl = window.location.origin + url;
     await navigator.clipboard.writeText(fullUrl);
-    console.log("URL copied to clipboard:", fullUrl);
+    addNotification("URL copied to clipboard:", fullUrl);
   } catch (err) {
     console.error("Failed to copy URL:", err);
   }
 }
 
-function deleteFile(file) {
-  const index = uploadedFiles.value.indexOf(file);
-  if (index > -1) {
-    uploadedFiles.value.splice(index, 1);
-  }
-}
 </script>
 
 <style scoped>

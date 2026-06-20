@@ -1,6 +1,6 @@
 <template>
   <article :id="`card_${item.id}`" class="card_wrapper">
-    <NuxtLink :to="`${item.type}`" class="tag" v-if="item.type">{{
+    <NuxtLink :to="`${item.type}`" class="tag clear" v-if="item.type">{{
       item.type
     }}</NuxtLink>
     <div
@@ -11,7 +11,7 @@
     >
       <img
         v-if="item.imageURL"
-        :src="`${decodeURI(item.imageURL)}`"
+        :src="`${item.imageURL}`"
         :alt="item.title"
         :class="`card-image ${item.imagePixel ? 'pixel' : ''}`"
         :style="`aspect-ratio: ${item.imageAspectRatio ? item.imageAspectRatio : 'auto'}`"

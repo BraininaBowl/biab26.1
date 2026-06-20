@@ -76,7 +76,7 @@ p {
   margin: 0;
 }
 
-a:not(.tag) {
+a:not(.clear) {
   color: var(--col-link);
   text-decoration: none;
   transition: color 0.25s ease-in-out;
@@ -85,8 +85,13 @@ a:not(.tag) {
   display: inline-block;
 }
 
-a:not(.tag)::after,
-a:not(.tag)::before {
+a.clear {
+  color: unset;
+  text-decoration: unset;
+}
+
+a:not(.clear)::after,
+a:not(.clear)::before {
   content: "";
   display: inline-block;
   position: absolute;
@@ -97,15 +102,15 @@ a:not(.tag)::before {
   transition: all 0.25s ease-in-out;
   opacity: 0;
 }
-a:not(.tag)::after {
+a:not(.clear)::after {
   bottom: -0.125em;
 }
-a:not(.tag)::before {
+a:not(.clear)::before {
   top: -0.125em;
 }
 
-a:not(.tag):hover::after,
-a:not(.tag):hover::before {
+a:not(.clear):hover::after,
+a:not(.clear):hover::before {
   width: 100%;
   left: 0;
   opacity: 1;

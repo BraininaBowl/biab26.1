@@ -1,21 +1,23 @@
 <template>
   <header :class="headerStyle">
-    <h4>
-      <span class="segment">Brain</span><span class="segment">in a</span
-      ><span class="segment">Bowl</span>
-    </h4>
+    <a class="clear" href="/">
+      <h4>
+        <span class="segment">Brain</span><span class="segment">in a</span
+        ><span class="segment">Bowl</span>
+      </h4>
+    </a>
     <div class="visual_container"></div>
   </header>
 </template>
 
 <script setup>
-let headerStyle
-let route = useRoute()
+let headerStyle;
+let route = useRoute();
 
 if (route.path === "/") {
-    headerStyle = "extended"
+  headerStyle = "extended";
 } else {
-    headerStyle = "compact"
+  headerStyle = "compact";
 }
 </script>
 
@@ -27,6 +29,7 @@ header {
 }
 header h4 {
   font-weight: 900;
+  transition: all 0.2s ease-out;
 }
 header.extended {
   width: 100%;
@@ -51,7 +54,7 @@ header.extended .visual_container {
   width: 100%;
   margin: var(--padding);
   background-color: var(--col-fg);
-  max-height: calc(100vh - (var(--padding)*2));
+  max-height: calc(100vh - (var(--padding) * 2));
 }
 header.compact {
   width: 100%;

@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
-  modules: ["@nuxt/fonts", "@nuxt/icon", "@nuxt/image"],
+  modules: ["@nuxt/fonts", "@nuxt/icon"],
   fonts: {
     defaults: {
       weights: [500, 700, 800, 900],

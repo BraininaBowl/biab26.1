@@ -45,6 +45,22 @@ export default defineEventHandler(async (event) => {
     const { filename = "file", type, data } = p;
     const bytes = data.length;
 
+
+    if (bytes > maxFileSize * 1024 * 1024) {
+      // in bytes
+      throw createError({
+        statusCode: 400,
+        statusMessage: `File exceeds maximum size of ${maxFileSize}MB`,
+      });
+    }
+    if (!type || !allowedTypes.includes(type)) {
+      throw createError({
+        statusCode: 400,
+        statusMessage: `File type ${type || "unknown"} not allowed.
+            Allowed types: ${allowedTypes.join(", ")}`,
+      });
+    }
+
     // Generate safe filename
     const base = sanitizeBase(filename) || "upload";
     const ext = pickExt(filename, type);
@@ -52,44 +68,22 @@ export default defineEventHandler(async (event) => {
     const safeName = `${base}-${id}${ext}`;
 
     // Write file to disk
-    // await writeFile(`${UPLOAD_DIR}/${safeName}`, data);
 
     results.push({
-      name: filename,
+      name: `${safeName}`,
       type: type,
       bytes: bytes,
       url: `/images/${safeName}`,
     });
-    console.log("data", data)
     await storage.setItemRaw(`${safeName}`, data);
-
-
   }
 
   return results;
-  // if (!formData || formData.length === 0) {
-  //   throw createError({
-  //     statusCode: 400,
-  //     statusMessage: "No files uploaded",
-  //   });
-  // }
 
-  // const file = formData[0];
 
-  // if (Object.keys(file.data).length > maxFileSize * 1024 * 1024) {
-  //   // in bytes
-  //   throw createError({
-  //     statusCode: 400,
-  //     statusMessage: `File exceeds maximum size of ${maxFileSize}MB`,
-  //   });
-  // }
-  // if (!file.type || !allowedTypes.includes(file.type)) {
-  //   throw createError({
-  //     statusCode: 400,
-  //     statusMessage: `File type ${file.type || "unknown"} not allowed.
-  //         Allowed types: ${allowedTypes.join(", ")}`,
-  //   });
-  // }
+
+
+
 
   // const fileName = `${Date.now()}.${file.type}`;
   // await storage.setItemRaw(`${fileName}`, file.data);
