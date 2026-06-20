@@ -2,7 +2,7 @@ export const useImages = async () => {
   const images = useState("images", () => []);
   const status = useState("status", () => null);
 
-  async function uploadImage(file) {
+  function uploadImage(file) {
     const formData = new FormData();
     // const re = /(?:\.([^.]+))?$/;
     // const extention = re.exec("file")
@@ -10,7 +10,7 @@ export const useImages = async () => {
     // formData.append("type", extention)
 
 
-    const response = await $fetch("/api/images/upload", {
+    const response = $fetch("/api/images/upload", {
       method: "post",
       // body: file,
       body: formData,

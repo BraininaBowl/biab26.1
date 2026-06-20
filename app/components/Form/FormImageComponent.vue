@@ -23,7 +23,7 @@ const { uploadImage } = useImages();
 const form = new Object();
 
 function submitFile() {
-  const status = uploadImage(form.image);
+  const status = uploadImage(form);
   status.catch((error) => {
     addNotification("Error uploading image, please try again later.", "error");
   });
