@@ -1,5 +1,5 @@
 <template>
-    <NuxtLayout class="layout" />
+    <NuxtLayout />
 </template>
 
 <script setup>
@@ -150,7 +150,7 @@ a:not(.clear):hover::before {
   opacity: 1;
 }
 
-.layout {
+#__nuxt, .layout {
   display: flex;
   flex-direction: column;
   min-height: 100vh;

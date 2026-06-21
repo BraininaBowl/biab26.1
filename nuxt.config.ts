@@ -19,6 +19,7 @@ export default defineNuxtConfig({
       images: {
         driver: "fs",
         base: "server/data/images",
+        ignore: ".*",
       },
     },
   },
