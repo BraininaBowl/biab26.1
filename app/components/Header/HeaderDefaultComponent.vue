@@ -1,36 +1,50 @@
 <template>
   <header :class="headerStyle">
-    <a class="clear" href="/">
+    <NuxtLink class="clear" href="/">
       <h4>
         <span class="segment">Brain</span><span class="segment">in a</span
         ><span class="segment">Bowl</span>
       </h4>
-    </a>
+    </NuxtLink>
     <div class="visual_container"></div>
   </header>
 </template>
 
 <script setup>
-let headerStyle;
-let route = useRoute();
+const headerStyle = useState('headerStyle')
+const { currentRoute } = useRouter();
 
-if (route.path === "/") {
-  headerStyle = "extended";
-} else {
-  headerStyle = "compact";
-}
+watch(
+  currentRoute,
+  () => {
+    if (currentRoute.value.path === '/') {
+      headerStyle.value = "extended";
+    } else {
+      headerStyle.value = "compact";
+    }
+  },
+  { deep: true, immediate: true },
+);
+
+onMounted(() => {
+});
 </script>
 
 <style lang="css" scoped>
 header {
-  background-color: var(--col-bg);
   color: var(--col-fg);
   text-align: left;
+  position: relative;
 }
-header h4 {
-  font-weight: 900;
+header, header * {
   transition: all 0.2s ease-out;
 }
+
+header h4 {
+  font-weight: 900;
+  padding: var(--padding);
+}
+
 header.extended {
   width: 100%;
   height: 100%;
@@ -39,15 +53,21 @@ header.extended {
   flex-direction: row;
   justify-content: stretch;
   align-items: stretch;
+  transform-origin: center;
 }
+
+header.extended, header.extended * {
+  transition: all 0.25s ease-out;
+}
+
 header.extended h4 {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-start;
-  padding: var(--padding);
   font-size: min(20vh, 10vw);
-  line-height: 0.9;
+  line-height: 0.8;
+  height: auto;
 }
 header.extended .visual_container {
   display: block;
@@ -65,15 +85,20 @@ header.compact {
   align-items: center;
   margin: 0;
 }
+
+header.compact, header.compact * {
+  transition: all 0.5s ease-out;
+}
+
 header.compact h4 {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  padding: var(--padding);
   font-size: 2rem;
   gap: 0;
   line-height: 0.9;
+  margin: 0;
 }
 header.compact h4 .segment {
   display: flex;

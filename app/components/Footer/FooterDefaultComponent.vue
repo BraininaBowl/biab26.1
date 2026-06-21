@@ -9,7 +9,6 @@
 
 <style lang="css" scoped>
 footer {
-    background-color: var(--col-bg);
     color: var(--col-fg);
     text-align: left;
     padding: var(--padding);

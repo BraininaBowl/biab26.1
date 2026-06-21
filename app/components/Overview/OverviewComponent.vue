@@ -47,8 +47,11 @@ onUnmounted(() => {});
 .card_container {
   display: grid;
   grid-auto-rows: 1px;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 0rem 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 0rem 1.5rem;
+  perspective: 500px;
+  perspective-origin: center;
+  
 }
 
 .card_wrapper {

@@ -51,7 +51,14 @@ article {
 }
 
 .card_wrapper {
-  transition: opacity 500ms ease-out;
+  transition:
+    opacity 500ms ease-out,
+    transform 125ms ease-out;
+}
+
+.card_wrapper:hover {
+  transform: scale(1.025);
+  transform-style: preserve-3d;
 }
 
 .tag {
@@ -70,13 +77,19 @@ article {
   /* border: 0.1rem solid var(--col-border); */
   box-shadow:
     0 0 0.125rem var(--col-border),
-    0 0.125rem 0.25rem rgba(from var(--col-border) r g b / 0.25);
+    0 0.125rem 0.25rem rgba(from var(--col-border) r g b / 0.5);
+  transition: box-shadow 125ms ease-out;
   border-radius: 0.25rem;
   width: 100%;
   height: auto;
-  max-width: 400px;
-  background-color: var(--col-bg-light);
+  background-color: var(--col-bg);
   align-items: flex-start;
+}
+
+.card_wrapper:hover .card {
+  box-shadow:
+    0 0 0.125rem rgba(from var(--col-border) r g b / 0.9),
+    0 0.25rem 0.5rem rgba(from var(--col-border) r g b / 0.25);
 }
 
 .card-content {

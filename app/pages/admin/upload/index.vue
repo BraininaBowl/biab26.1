@@ -116,6 +116,11 @@
 </template>
 
 <script setup>
+definePageMeta({
+  layout: 'admin',
+})
+
+
 const fileInput = ref();
 const uploading = ref(false);
 const uploadProgress = ref(0);

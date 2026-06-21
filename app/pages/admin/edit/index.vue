@@ -5,7 +5,11 @@
   </main>
 </template>
 
-<script setup></script>
+<script setup>
+definePageMeta({
+  layout: 'admin',
+})
+</script>
 
 <style lang="css" scoped>
 </style>

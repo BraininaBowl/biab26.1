@@ -11,7 +11,7 @@
       </p>
       <div v-if="item.description" v-html="item.description" class="description"></div>
       <NuxtLink
-        :to="`${item.id}-${returnUri(item.title)}`"
+        :to="`/admin/edit/${item.id}-${returnUri(item.title)}`"
         :title="item.description"
         >Edit
       </NuxtLink>
