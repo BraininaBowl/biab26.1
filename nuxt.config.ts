@@ -16,7 +16,12 @@ export default defineNuxtConfig({
         base: "server/data/items",
         ignore: ".*",
       },
-      images: {
+      itemDataStore: {
+        driver: "fs",
+        base: "server/data/itemData",
+        ignore: ".*",
+      },
+      imageStore: {
         driver: "fs",
         base: "server/data/images",
         ignore: ".*",

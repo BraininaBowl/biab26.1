@@ -75,6 +75,7 @@ header.extended .visual_container {
   margin: var(--padding);
   background-color: var(--col-fg);
   max-height: calc(100vh - (var(--padding) * 2));
+  border-radius: 0.25rem;
 }
 header.compact {
   width: 100%;

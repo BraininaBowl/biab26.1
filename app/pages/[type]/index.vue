@@ -1,5 +1,6 @@
 <template>
     <main>
+        <div class="divider"></div>
         <h1 v-if="title" v-html="title"></h1>
         <OverviewComponent :filters="filters"/>
     </main>

@@ -10,7 +10,7 @@ export const useItems = () => {
     } catch (error) {
       items.value = [];
     } finally {
-      items.value = response.data.items;
+      // items.value = response.data.items;
       response.data.items.sort((a, b) => new Date(a.date) - new Date(b.date));
       filters.forEach((filterItem) => {
         if (typeof filterItem.values == "object") {

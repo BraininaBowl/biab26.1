@@ -1,6 +1,5 @@
 <template>
-  <main>
-    <article class="item" v-for="item in items">
+  <main class="item" v-for="item in items">
       <div
         v-if="item.imageURL"
         :alt="item.title"
@@ -16,7 +15,6 @@
           <p class="area" v-html="item.description"></p>
         </section>
       </div>
-    </article>
   </main>
 </template>
 
@@ -40,29 +38,6 @@ onMounted(() => {});
   background-repeat: no-repeat;
 }
 
-article.item {
-  display: flex;
-  flex-direction: column;
-  gap: calc(var(--padding) * 2);
-}
-
-.divider {
-  width: 100%;
-  height: 1rem;
-  background-image: linear-gradient(
-    135deg,
-        rgba(from var(--col-fg) r g b / 0) 0%,
-        rgba(from var(--col-fg) r g b / 0) 33%,
-        rgba(from var(--col-fg) r g b / 1) 33%,
-        rgba(from var(--col-fg) r g b / 1) 66%,
-        rgba(from var(--col-fg) r g b / 0) 66%,
-        rgba(from var(--col-fg) r g b / 0) 100%
-        );
-  background-repeat: repeat;
-  background-size: calc(var(--padding) * 1.5), var(--padding);
-  background-position-x: calc(var(--padding) * -1);
-}
-
 H1:before {
   content: ' ';
   display: inline-block;
@@ -72,6 +47,6 @@ H1:before {
   width: 1rem;
   border-radius: 0.125rem;
   margin-right: 1rem;
-  transform: translateY(-0.125rem) rotate(-45deg);
+  transform: translateY(-0.25rem) rotate(-45deg);
 }
 </style>

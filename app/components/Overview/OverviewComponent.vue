@@ -1,7 +1,7 @@
 <template>
   <!-- <div class="loader" v-if="status == null">Loading...</div>
   <div class="overview" v-else> -->
-    <div class="overview">
+  <div class="overview">
     <section class="card_container">
       <CardComponent v-for="item in items" :key="item.id" :item="item" />
     </section>
@@ -20,21 +20,22 @@ const props = defineProps({
 
 const filters = props.filters || [];
 
-fetchItems(filters, true).then(
-  resizeItems,
-);
+fetchItems(filters, true).then(resizeItems);
 
 function resizeItems() {
-  document.querySelectorAll(".card_wrapper").forEach((domItem, index) => {
-    if (domItem) {
-      let card = domItem.querySelector(".card");
-      if (card) {
-        domItem.style.gridRow = "auto / span " + (card.clientHeight + 64);
-        setTimeout(()=>{domItem.style.opacity = 1;}, 50*index)
-        
+  if (document) {
+    document.querySelectorAll(".card_wrapper").forEach((domItem, index) => {
+      if (domItem) {
+        let card = domItem.querySelector(".card");
+        if (card) {
+          domItem.style.gridRow = "auto / span " + (card.clientHeight + 64);
+          setTimeout(() => {
+            domItem.style.opacity = 1;
+          }, 50 * index);
+        }
       }
-    }
-  });
+    });
+  }
 }
 
 onMounted(() => {
@@ -51,7 +52,6 @@ onUnmounted(() => {});
   gap: 0rem 1.5rem;
   perspective: 500px;
   perspective-origin: center;
-  
 }
 
 .card_wrapper {

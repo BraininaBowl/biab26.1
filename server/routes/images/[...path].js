@@ -1,5 +1,5 @@
 export default defineEventHandler(async (event) => {
-    const storage = useStorage("images");  
+    const storage = useStorage("imageStore");  
     const path = await getRouterParam(event, "path");  
   
     if (!path) {

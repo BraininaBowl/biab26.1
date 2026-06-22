@@ -192,7 +192,7 @@ async function uploadFiles(files) {
       }
     }, 200);
 
-    const response = await $fetch("/api/images/upload", {
+    const response = await $fetch("/api/imageStore/upload", {
       method: "POST",
       body: formData,
     });

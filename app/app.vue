@@ -1,9 +1,8 @@
 <template>
-    <NuxtLayout />
+  <NuxtLayout />
 </template>
 
-<script setup>
-</script>
+<script setup></script>
 
 <style lang="css">
 /* @import url('https://fonts.googleapis.com/css2?family=Alan+Sans:wght@300..900&display=swap'); */
@@ -12,7 +11,8 @@
   --col-bg: #f9f5d7;
   --col-bg-light: #fffdec;
   --col-fg: #282828;
-  --col-border: #7c6f64;
+  /* --col-border: #7c6f64; */
+  --col-border: #A79F94;
   --col-area-bg: #ebdbb2;
   --col-link: #458588;
   --col-link-hover: #83a598;
@@ -37,15 +37,15 @@ body {
   color: var(--col-fg);
   background-image:
     radial-gradient(
-        rgba(from var(--col-fg) r g b / 0) 25%,
-        rgba(from var(--col-fg) r g b / 0.15) 100%
-        ),
-      radial-gradient(
-        circle,
-        rgba(0, 0, 0, 0) calc(var(--padding) / 8),
-        var(--col-bg-light) calc(var(--padding) / 8),
-        var(--col-bg-light) 100%
-      ),
+      rgba(from var(--col-fg) r g b / 0) 25%,
+      rgba(from var(--col-fg) r g b / 0.15) 100%
+    ),
+    radial-gradient(
+      circle,
+      rgba(0, 0, 0, 0) calc(var(--padding) / 8),
+      var(--col-bg-light) calc(var(--padding) / 8),
+      var(--col-bg-light) 100%
+    ),
     linear-gradient(
       rgba(from var(--col-border) r g b / 0.25) 0px,
       rgba(from var(--col-border) r g b / 0.25) 1px,
@@ -150,7 +150,8 @@ a:not(.clear):hover::before {
   opacity: 1;
 }
 
-#__nuxt, .layout {
+#__nuxt,
+.layout {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -159,10 +160,30 @@ a:not(.clear):hover::before {
 main {
   padding: 0 var(--padding) var(--padding);
   flex-grow: 100;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--padding) * 2);
 }
 
 section {
   margin: 0 0 4rem;
+}
+
+.divider {
+  width: 100%;
+  height: 0.75rem;
+  background-image: linear-gradient(
+    135deg,
+    rgba(from var(--col-fg) r g b / 0) 0%,
+    rgba(from var(--col-fg) r g b / 0) 33%,
+    rgba(from var(--col-fg) r g b / 1) 33%,
+    rgba(from var(--col-fg) r g b / 1) 66%,
+    rgba(from var(--col-fg) r g b / 0) 66%,
+    rgba(from var(--col-fg) r g b / 0) 100%
+  );
+  background-repeat: repeat;
+  background-size: calc(var(--padding) * 1), var(--padding);
+  background-position-x: calc(var(--padding) * -0.45);
 }
 
 /* Images */

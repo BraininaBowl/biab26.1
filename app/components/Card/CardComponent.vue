@@ -45,7 +45,7 @@ defineProps({
 article {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.5rem;
   justify-content: stretch;
   align-items: flex-start;
 }
@@ -54,11 +54,6 @@ article {
   transition:
     opacity 500ms ease-out,
     transform 125ms ease-out;
-}
-
-.card_wrapper:hover {
-  transform: scale(1.025);
-  transform-style: preserve-3d;
 }
 
 .tag {
@@ -74,10 +69,9 @@ article {
 .card {
   display: flex;
   flex-direction: column;
-  /* border: 0.1rem solid var(--col-border); */
   box-shadow:
-    0 0 0.125rem var(--col-border),
-    0 0.125rem 0.25rem rgba(from var(--col-border) r g b / 0.5);
+    0 0 0 0 rgba(from var(--col-bg-light) r g b / 1),
+    0 0 0 0.0775rem rgba(from var(--col-border) r g b / 0.5);
   transition: box-shadow 125ms ease-out;
   border-radius: 0.25rem;
   width: 100%;
@@ -88,8 +82,9 @@ article {
 
 .card_wrapper:hover .card {
   box-shadow:
-    0 0 0.125rem rgba(from var(--col-border) r g b / 0.9),
-    0 0.25rem 0.5rem rgba(from var(--col-border) r g b / 0.25);
+    0 0 0 0.25rem rgba(from var(--col-bg-light) r g b / 1),
+    0 0 0.125rem 0.25rem rgba(from var(--col-border) r g b / 1),
+    0 0.125rem 0.25rem 0.25rem rgba(from var(--col-border) r g b / 0.5);
 }
 
 .card-content {
