@@ -2,7 +2,7 @@
   <main class="container">
     <h1>Image upload</h1>
     <p class="description">
-      Upload images (JPEG, PNG, WebP, AVIF) up to 5MB. Files are validated and
+      Upload images (JPEG, PNG, WebP, Gif, Svg) up to 3MB. Files are validated and
       sanitized for security.
     </p>
 

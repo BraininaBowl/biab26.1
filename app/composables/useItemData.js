@@ -1,4 +1,4 @@
-export const useItems = () => {
+export const useItemData = () => {
   const data = useState("data", () => []);
   const status = useState("status", () => null);
 
@@ -15,16 +15,24 @@ export const useItems = () => {
     }
   }
 
-  async function writeItem(dataObject) {
-    const response = await $fetch("/api/items/write", {
+  async function writeItemData(type, value) {
+    const response = await $fetch("/api/itemData/write", {
       method: "POST",
-      body: dataObject,
+      body: { type: type, value: value   },
+    });
+  }
+
+  async function removeItemData(type, value) {
+    const response = await $fetch("/api/itemData/remove", {
+      method: "POST",
+      body: { type: type, value: value   },
     });
   }
 
   return {
-    fetchItems,
-    writeItem,
+    fetchItemData,
+    writeItemData,
+    removeItemData,
     items,
     item,
     status,
