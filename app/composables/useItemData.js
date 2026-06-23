@@ -1,5 +1,5 @@
 export const useItemData = () => {
-  const data = useState("data", () => []);
+  const itemTypes = useState("data", () => []);
   const status = useState("status", () => null);
 
   async function fetchItemData(type) {
@@ -10,7 +10,7 @@ export const useItemData = () => {
       data.value = [];
     } finally {
       response.data.items.sort((a, b) => a - b);
-      data.value = response.data.items;
+      itemTypes.value = response.data.items;
       status.value = response.status;
     }
   }
@@ -18,14 +18,14 @@ export const useItemData = () => {
   async function writeItemData(type, value) {
     const response = await $fetch("/api/itemData/write", {
       method: "POST",
-      body: { type: type, value: value   },
+      body: { type: type, value: value },
     });
   }
 
   async function removeItemData(type, value) {
     const response = await $fetch("/api/itemData/remove", {
       method: "POST",
-      body: { type: type, value: value   },
+      body: { type: type, value: value },
     });
   }
 
@@ -33,8 +33,7 @@ export const useItemData = () => {
     fetchItemData,
     writeItemData,
     removeItemData,
-    items,
-    item,
+    itemTypes, 
     status,
   };
 };
