@@ -1,34 +1,31 @@
 <template>
-    <div :class="`formfield ${formfieldData.typeField}`">
-      <label
-        class="hidden"
-        :for="formfieldData.id"
-        v-if="formfieldData.labelHidden === true"
-        >{{ formfieldData.label }} <span class="required" v-if="formfieldData.requiredField">*</span></label
-      >
-      <label :for="formfieldData.id" v-else>{{ formfieldData.label }} <span class="required" v-if="formfieldData.requiredField">*</span></label>
-      <input
-        type="checkbox"
-        :id="formfieldData.id"
-        :placeholder="formfieldData.placeholder"
-        v-model="model"
-        :required="formfieldData.requiredField"
-        :disabled="formfieldData.disabledField"
-        :autocomplete="formfieldData.autocomplete"
-      />
-    </div>
-  </template>
-  
-  <script setup>
-  const model = defineModel();
-  defineProps({
-    formfieldData: {
-      type: Object,
-      required: true,
-    },
-  });
+  <div :class="`formfield ${formfieldData.typeField}`"  v-for="(itemDataType, index) in itemDataTypes" :key="itemDataType">
+    <label :for="`${formfieldData.id}-${index}`"
+      >{{ ItemDataType }}</label
+    >
+    <input
+      type="checkbox"
+      :id="`${formfieldData.id}-${index}`"
+      :placeholder="formfieldData.placeholder"
+      v-model="model"
+      required="false"
+      :disabled="formfieldData.disabledField"
+      :autocomplete="formfieldData.autocomplete"
+    />
+  </div>
+</template>
 
-  
-  </script>
-  
-  <style lang="css" scoped></style>
+<script setup>
+const model = defineModel();
+defineProps({
+  formfieldData: {
+    type: Object,
+    required: true,
+  },
+});
+
+const { fetchItemData, itemTypes } = useItemData();
+const itemDataTypes = fetchItemData(formfieldData.itemDataType);
+</script>
+
+<style lang="css" scoped></style>
