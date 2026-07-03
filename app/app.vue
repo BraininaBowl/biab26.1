@@ -184,6 +184,7 @@ section {
   background-repeat: repeat;
   background-size: calc(var(--padding) * 1), var(--padding);
   background-position-x: calc(var(--padding) * -0.45);
+  border-radius: 0.5rem;
 }
 
 /* Images */

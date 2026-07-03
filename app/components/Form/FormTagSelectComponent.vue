@@ -9,10 +9,8 @@
     <input
     :type="`${formfieldData.unique ? 'radio' : 'checkbox'}`"
     :id="`${formfieldData.id}-${index}`"
-    :placeholder="formfieldData.placeholder"
     :value="itemDataType"
     v-model="model"
-    :required="formfieldData.requiredField"
     :disabled="formfieldData.disabledField"
     :autocomplete="formfieldData.autocomplete"
     :name="`${formfieldData.id}`"

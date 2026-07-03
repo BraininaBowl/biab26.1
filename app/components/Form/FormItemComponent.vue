@@ -8,7 +8,7 @@
   <FormTagAddComponent tagType="type" />
   <FormTagAddComponent tagType="tag" />
   <form @submit.prevent="handleSubmit">
-    <!-- <FormInputComponent
+    <FormInputComponent
       v-model="formData.type"
       :formfieldData="{
         typeField: 'text',
@@ -18,19 +18,17 @@
         placeholder: '',
         disabledField: formData.trashed,
       }"
-    /> -->
-    <FormTagSelectComponent
+    />
+    <!-- <FormTagSelectComponent
       v-model="formData.type"
       :formfieldData="{
         label: 'Item type',
-        requiredField: true,
         id: useId(),
-        placeholder: '',
         disabledField: formData.trashed,
         itemDataType: 'type',
         unique: true,
       }" 
-    />
+    /> -->
     <FormInputComponent
       v-model="formData.imageURL"
       :formfieldData="{
@@ -189,7 +187,7 @@ const handleSubmit = function () {
   } else {
     formData.value.imageAspectRatio = null;
   }
-  console.log("formdata", formData.value);
+  console.log("formdata", formData.value.type);
 
   if (continueSubmit) {
     writeSubmit();
