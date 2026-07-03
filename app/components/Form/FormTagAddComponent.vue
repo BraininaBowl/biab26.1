@@ -2,28 +2,34 @@
 
   <form @submit.prevent="handleSubmit">
     <FormInputComponent
-      v-model="formData.type"
+      v-model="formData.value"
       :formfieldData="{
         typeField: 'text',
-        label: 'Type',
+        label: 'New ' + tagType,
         requiredField: true,
         id: useId(),
         placeholder: '',
-        disabledField: formData.trashed,
       }"
     />
     <div class="button-row">
-      <button type="submit" >Add tag</button>
-      <NuxtLink to="./">Back</NuxtLink>
+      <button type="submit" v-html="'Add ' + tagType" ></button>
     </div>
   </form>
 </template>
 
 <script setup>
 const { writeItemData, itemTypes } = useItemData();
+const props = defineProps({
+  tagType: {
+    type: String,
+    required: false,
+  },
+});
+
+const tagType = props.tagType || "";
 
 function handleSubmit() {
-  const status = writeItemData(formData.value);
+  const status = writeItemData(tagType, formData.value);
   status.catch((error) => {
     addNotification("Error saving item, please try again later.", "error");
   });

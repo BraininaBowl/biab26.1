@@ -5,9 +5,10 @@
       <a @click="trashItem()" v-else>Trash item</a>
     </div>
   </div>
-
+  <FormTagAddComponent tagType="type" />
+  <FormTagAddComponent tagType="tag" />
   <form @submit.prevent="handleSubmit">
-    <FormInputComponent
+    <!-- <FormInputComponent
       v-model="formData.type"
       :formfieldData="{
         typeField: 'text',
@@ -17,6 +18,18 @@
         placeholder: '',
         disabledField: formData.trashed,
       }"
+    /> -->
+    <FormTagSelectComponent
+      v-model="formData.type"
+      :formfieldData="{
+        label: 'Item type',
+        requiredField: true,
+        id: useId(),
+        placeholder: '',
+        disabledField: formData.trashed,
+        itemDataType: 'type',
+        unique: true,
+      }" 
     />
     <FormInputComponent
       v-model="formData.imageURL"
@@ -154,6 +167,7 @@ function writeSubmit() {
 }
 
 const handleSubmit = function () {
+  let continueSubmit = true;
   if (formData.value.imageURL) {
     var imageHolder = document.createElement("img");
     imageHolder.src = "`../${formData.value.image}`";
@@ -164,9 +178,9 @@ const handleSubmit = function () {
         imageHolder.naturalWidth / imageHolder.naturalHeight;
       document.body.removeChild(imageHolder);
       // formData.value.imageURL = encodeURI(formData.value.imageURL);
-      writeSubmit();
     };
     imageHolder.onerror = function () {
+      continueSubmit = false;
       addNotification(
         "Error loading image, please check the URL and try again.",
         "error",
@@ -174,6 +188,10 @@ const handleSubmit = function () {
     };
   } else {
     formData.value.imageAspectRatio = null;
+  }
+  console.log("formdata", formData.value);
+
+  if (continueSubmit) {
     writeSubmit();
   }
 };

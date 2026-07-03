@@ -3,14 +3,14 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   let typeContent = await storage.getItem(body.type + ".json");
   if (typeContent) {
-    if (!typeContent.contains(body.value)) {
-      typeContent.append(body.value);
+    if (!typeContent.includes(body.value.value)) {
+      typeContent.push(body.value.value);
     } else {
-      return("Value already exists.")
+      return "Value already exists.";
     }
   } else {
-    typeContent = new Array(body.value);
+    typeContent = new Array(body.value.value);
   }
-  await itemStorage.setItem(body.type + ".json", body);
+  await storage.setItem(body.type + ".json", typeContent);
   return;
 });

@@ -5,7 +5,7 @@
       <section>
         <NuxtLink to="/admin/new/">New</NuxtLink
         ><NuxtLink to="/admin/edit/">Edit</NuxtLink
-        ><NuxtLink to="/admin/upload/">Upload</NuxtLink>
+        ><NuxtLink to="/admin/add/image/">Add Image</NuxtLink>
       </section>
       <section>
         <NuxtLink to="/">Exit</NuxtLink>

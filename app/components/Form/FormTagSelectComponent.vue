@@ -1,31 +1,37 @@
 <template>
-  <div :class="`formfield ${formfieldData.typeField}`"  v-for="(itemDataType, index) in itemDataTypes" :key="itemDataType">
-    <label :for="`${formfieldData.id}-${index}`"
-      >{{ ItemDataType }}</label
-    >
+    <p v-html="formfieldData.label"></p>
+
+<div
+    :class="`formfield ${formfieldData.unique ? 'radio' : 'checkbox'}`"
+    v-for="(itemDataType, index) in itemTypes"
+    :key="itemTypes"
+  >
     <input
-      type="checkbox"
-      :id="`${formfieldData.id}-${index}`"
-      :placeholder="formfieldData.placeholder"
-      v-model="model"
-      required="false"
-      :disabled="formfieldData.disabledField"
-      :autocomplete="formfieldData.autocomplete"
-    />
+    :type="`${formfieldData.unique ? 'radio' : 'checkbox'}`"
+    :id="`${formfieldData.id}-${index}`"
+    :placeholder="formfieldData.placeholder"
+    :value="itemDataType"
+    v-model="model"
+    :required="formfieldData.requiredField"
+    :disabled="formfieldData.disabledField"
+    :autocomplete="formfieldData.autocomplete"
+    :name="`${formfieldData.id}`"
+  />
+  <label :for="`${formfieldData.id}-${index}`" v-html="itemDataType"></label>
   </div>
 </template>
 
 <script setup>
-const model = defineModel();
-defineProps({
+const model = defineProps({
   formfieldData: {
     type: Object,
-    required: true,
+    required: false,
   },
 });
 
+const formfieldData = model.formfieldData || {};
 const { fetchItemData, itemTypes } = useItemData();
-const itemDataTypes = fetchItemData(formfieldData.itemDataType);
+fetchItemData(formfieldData.itemDataType);
 </script>
 
 <style lang="css" scoped></style>

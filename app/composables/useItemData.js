@@ -9,9 +9,11 @@ export const useItemData = () => {
     } catch (error) {
       data.value = [];
     } finally {
-      response.data.items.sort((a, b) => a - b);
-      itemTypes.value = response.data.items;
-      status.value = response.status;
+      if (response.data && response.data.typeContent) {
+        response.data.typeContent.sort((a, b) => a - b);
+        itemTypes.value = response.data.typeContent;
+        status.value = response.status;
+      }
     }
   }
 
@@ -33,7 +35,7 @@ export const useItemData = () => {
     fetchItemData,
     writeItemData,
     removeItemData,
-    itemTypes, 
+    itemTypes,
     status,
   };
 };
