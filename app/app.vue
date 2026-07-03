@@ -101,6 +101,15 @@ h3 {
   margin: 0;
 }
 
+h5 {
+  font-family: "AlanSans", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 1rem;
+  line-height: 1;
+  margin: 0;
+}
+
 p {
   font-family: "AlanSans", sans-serif;
   font-weight: 500;
@@ -113,10 +122,11 @@ p {
 a:not(.clear) {
   color: var(--col-link);
   text-decoration: none;
-  transition: color 0.25s ease-in-out;
-  font-weight: 700;
+  transition: all 0.25s ease-in-out;
+  font-weight: 500;
   position: relative;
   display: inline-block;
+  z-index: 2;
 }
 
 a.clear {
@@ -124,29 +134,30 @@ a.clear {
   text-decoration: unset;
 }
 
-a:not(.clear)::after,
-a:not(.clear)::before {
+a:not(.clear)::before{
   content: "";
   display: inline-block;
   position: absolute;
   left: 50%;
   width: 0;
-  height: 2px;
+  height: calc(100% + 0.25em);
   background-color: var(--col-link);
   transition: all 0.25s ease-in-out;
   opacity: 0;
-}
-a:not(.clear)::after {
+  border-radius: 0.125rem;
+  z-index: -1;
+  top: -0.125em;
   bottom: -0.125em;
 }
-a:not(.clear)::before {
-  top: -0.125em;
+
+a:not(.clear):hover {
+  color: var(--col-bg-light);
+  color: #fff;
 }
 
-a:not(.clear):hover::after,
 a:not(.clear):hover::before {
-  width: 100%;
-  left: 0;
+  width: calc(100% + 0.5em);
+  left: -0.25em;
   opacity: 1;
 }
 

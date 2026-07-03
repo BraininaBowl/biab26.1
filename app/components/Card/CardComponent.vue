@@ -1,34 +1,37 @@
 <template>
   <article :id="`card_${item.id}`" class="card_wrapper">
-    <NuxtLink :to="`${item.type}`" class="tag clear" v-if="item.type">{{
-      item.type
-    }}</NuxtLink>
-    <div
-      class="card"
+    <NuxtLink
+      :to="`${item.id}-${returnUri(item.title)}`"
+      :title="item.title"
+      v-if="item.imageURL"
+      :class="`card card-image clear ${item.imagePixel ? 'pixel' : ''}`"
+      :style="`aspect-ratio: ${item.imageAspectRatio ? item.imageAspectRatio : 'auto'}; background-image: url(${item.imageURL}); background-size: cover; background-position: center;`"
+    >
+      <div class="card_hover">
+        <NuxtLink :to="`${item.type}`" class="" v-if="item.type" v-html="item.type + 's'"></NuxtLink>
+        \
+        <NuxtLink :to="`${item.id}-${returnUri(item.title)}`" class="" v-if="item.type" v-html="item.title"></NuxtLink>
+      </div>
+    </NuxtLink>
+    <NuxtLink
+      :to="`${item.id}-${returnUri(item.title)}`"
+      :title="item.title"
+      class="card card-content clear"
       :style="{
         backgroundColor: item.color ? item.color : 'var(--col-bg-light)',
       }"
+      v-else
     >
-      <img
-        v-if="item.imageURL"
-        :src="`${item.imageURL}`"
-        :alt="item.title"
-        :class="`card-image ${item.imagePixel ? 'pixel' : ''}`"
-        :style="`aspect-ratio: ${item.imageAspectRatio ? item.imageAspectRatio : 'auto'}`"
-      />
-      <div class="card-content">
-        <p v-if="item.trashed">[Trashed]</p>
-        <h3>
-          {{ item.title }}
-        </h3>
-        <div v-if="item.snippet" v-html="item.snippet"></div>
-        <NuxtLink
-          :to="`${item.id}-${returnUri(item.title)}`"
-          :title="item.description"
-          >Go to item
-        </NuxtLink>
+      <h3>
+        {{ item.title }}
+      </h3>
+      <div v-if="item.snippet" v-html="item.snippet"></div>
+      <div class="card_hover">
+        <NuxtLink :to="`${item.type}`" class="" v-if="item.type" v-html="item.type + 's'"></NuxtLink>
+        \
+        <NuxtLink :to="`${item.id}-${returnUri(item.title)}`" class="" v-if="item.type" v-html="item.title"></NuxtLink>
       </div>
-    </div>
+    </NuxtLink>
   </article>
 </template>
 
@@ -78,6 +81,7 @@ article {
   height: auto;
   background-color: var(--col-bg);
   align-items: flex-start;
+  position: relative;
 }
 
 .card_wrapper:hover .card {
@@ -88,18 +92,39 @@ article {
 }
 
 .card-content {
-  display: flex;
-  flex-direction: column;
   gap: 0.5rem;
-  padding: 1rem;
+  padding: 1rem 1rem 2rem;
+}
+
+.card_hover {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem 0.5rem;
   width: 100%;
-  height: 100%;
   align-items: flex-start;
+  /* background-color: rgba(from var(--col-bg-light) r g b / 0.9); */
+  background-color: var(--col-bg-light);
+  opacity: 0;
+  transition: opacity 250ms ease-out;
+  left: 0rem;
+}
+
+
+.card_wrapper:hover .card_hover {
+  opacity: 1;
+}
+
+.card_hover, .card_hover h5, .card_hover a {
+  font-size: 0.9rem;
+  line-height: 1;
+  margin: 0;
 }
 
 .card-image {
   width: 100%;
   height: auto;
-  border-radius: 0.25rem 0.25rem 0 0;
 }
 </style>
