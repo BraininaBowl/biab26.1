@@ -2,6 +2,13 @@
   <!-- <div class="loader" v-if="status == null">Loading...</div>
   <div class="overview" v-else> -->
   <div class="overview">
+    <section class="filters">
+      I make:
+      <NuxtLink v-for="type in types" :key="type" :to="`/${type}`" class="filter_link">
+        {{ type }}s
+      </NuxtLink>
+      <span v-if="path!=='/'">|</span><NuxtLink  v-if="path!=='/'" to="/" class="filter_link">Show all</NuxtLink>
+    </section>
     <section class="card_container">
       <CardComponent v-for="item in items" :key="item.id" :item="item" />
     </section>
@@ -9,8 +16,9 @@
 </template>
 
 <script setup>
-const { items, fetchItems, status } = useItems();
-
+const { items, fetchItems, types } = useItems();
+const path = useRoute().path;
+console.log("path in OverviewComponent: ", path);
 const props = defineProps({
   filters: {
     type: Object,

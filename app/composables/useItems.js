@@ -1,17 +1,36 @@
 export const useItems = () => {
   const items = useState("items", () => []);
   const item = useState("item", () => null);
+  const tags = useState("tags", () => []);
+  const types = useState("types", () => []);
   const status = useState("status", () => null);
 
   async function fetchItems(filters = [], parse = true) {
     let response = [];
+    let typesContainer = new Set();
+    let tagsContainer = new Set();
     try {
       response = await $fetch(`/api/items/all`);
     } catch (error) {
       items.value = [];
     } finally {
-      // items.value = response.data.items;
       response.data.items.sort((a, b) => new Date(a.date) - new Date(b.date));
+      response.data.items.forEach((item) => {
+        if (item.type && item.trashed !== true) {
+          typesContainer.add(item.type);
+        }
+        if (item.tag && item.trashed !== true) {
+          item.tag.forEach((t) => tagsContainer.add(t));
+        }
+        if (parse) {
+          if (item.description) {
+            item.description = toHtml(item.description);
+          }
+          if (item.snippet) {
+            item.snippet = toHtml(item.snippet);
+          }
+        }
+      });
       filters.forEach((filterItem) => {
         if (typeof filterItem.values == "object") {
           response.data.items = response.data.items.filter((el) =>
@@ -23,17 +42,9 @@ export const useItems = () => {
           );
         }
       });
+      types.value = Array.from(typesContainer);
+      tags.value = Array.from(tagsContainer);
       items.value = response.data.items;
-      if (parse) {
-        items.value.forEach((item) => {
-          if (item.description) {
-            item.description = toHtml(item.description);
-          }
-          if (item.snippet) {
-            item.snippet = toHtml(item.snippet);
-          }
-        });
-      }
       status.value = response.status;
     }
   }
@@ -50,6 +61,8 @@ export const useItems = () => {
     writeItem,
     items,
     item,
+    tags,
+    types,
     status,
   };
 };

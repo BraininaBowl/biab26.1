@@ -180,6 +180,23 @@ section {
   margin: 0 0 4rem;
 }
 
+.filters {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: var(--padding);
+  font-size: 1rem;
+  width: 100%;
+  font-weight: 700;
+  border-bottom: 1px solid var(--col-border);
+  padding-bottom: 0.5rem;
+  border-top: 1px solid var(--col-border);
+  padding-top: 0.5rem;
+}
+
 .divider {
   width: 100%;
   height: 0.75rem;
