@@ -1,18 +1,36 @@
 export const useItemData = () => {
-  const itemTypes = useState("data", () => []);
+  const types = useState("types", () => []);
+  const tags = useState("tags", () => []);
   const status = useState("status", () => null);
 
-  async function fetchItemData(type) {
-    let response = [];
+  async function fetchTypes() {
+    let typeResponse = [];
     try {
-      response = await $fetch(`/api/itemData/${type}`);
+      typeResponse = await $fetch(`/api/itemData/type`);
     } catch (error) {
-      data.value = [];
+      types.value = [];
     } finally {
-      if (response.data && response.data.typeContent) {
-        response.data.typeContent.sort((a, b) => a - b);
-        itemTypes.value = response.data.typeContent;
-        status.value = response.status;
+      if (typeResponse.data && typeResponse.data.content) {
+        typeResponse.data.content.sort((a, b) => a - b);
+        types.value = typeResponse.data.content;
+        status.value = typeResponse.status;
+      }
+    }
+  }
+
+  async function fetchTags() {
+    let tagResponse = [];
+    try {
+      tagResponse = await $fetch(`/api/itemData/tag`);
+    } catch (error) {
+      tags.value = [];
+    } finally {
+      console.log("tagResponse in composable: ", tagResponse);
+      if (tagResponse.data && tagResponse.data.content) {
+        tagResponse.data.content.sort((a, b) => a - b);
+        tags.value = tagResponse.data.content;
+        status.value = tagResponse.status;
+        console.log("tags in composable: ", tags);
       }
     }
   }
@@ -32,10 +50,12 @@ export const useItemData = () => {
   }
 
   return {
-    fetchItemData,
+    fetchTypes,
+    fetchTags,
     writeItemData,
     removeItemData,
-    itemTypes,
+    types,
+    tags,
     status,
   };
 };

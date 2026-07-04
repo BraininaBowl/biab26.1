@@ -1,20 +1,19 @@
 <template>
   <p v-html="formfieldData.label"></p>
   <div
-    class="formfield checkbox"
-    v-for="(tag, index) in tags"
-    
+    class="formfield radio"
+    v-for="(type, index) in types"
   >
     <input
-      type="checkbox"
+      type="radio"
       :id="`${formfieldData.id}-${index}`"
-      :value="tag"
+      :value="type"
       v-model="model"
       :disabled="formfieldData.disabledField"
       :autocomplete="formfieldData.autocomplete"
       :name="`${formfieldData.id}`"
     />
-    <label :for="`${formfieldData.id}-${index}`" v-html="tag"></label>
+    <label :for="`${formfieldData.id}-${index}`" v-html="type"></label>
   </div>
 </template>
 
@@ -28,8 +27,8 @@ const props = defineProps({
 });
 
 const formfieldData = props.formfieldData || {};
-const { fetchTags, tags } = useItemData();
-await fetchTags();
+const { fetchTypes, types } = useItemData();
+await fetchTypes();
 </script>
 
 <style lang="css" scoped></style>

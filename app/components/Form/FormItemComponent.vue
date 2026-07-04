@@ -8,27 +8,35 @@
   <FormTagAddComponent tagType="type" />
   <FormTagAddComponent tagType="tag" />
   <form @submit.prevent="handleSubmit">
-    <FormInputComponent
-      v-model="formData.type"
-      :formfieldData="{
-        typeField: 'text',
-        label: 'Type',
-        requiredField: true,
-        id: useId(),
-        placeholder: '',
-        disabledField: formData.trashed,
-      }"
-    />
-    <!-- <FormTagSelectComponent
+    <FormTypeSelectComponent
       v-model="formData.type"
       :formfieldData="{
         label: 'Item type',
         id: useId(),
         disabledField: formData.trashed,
         itemDataType: 'type',
-        unique: true,
-      }" 
-    /> -->
+      }"
+    />
+    <FormInputComponent
+      v-model="formData.title"
+      :formfieldData="{
+        typeField: 'text',
+        label: 'Title',
+        requiredField: true,
+        id: useId(),
+        placeholder: '',
+        disabledField: formData.trashed,
+      }"
+    />
+    <FormTagSelectComponent
+      v-model="formData.tag"
+      :formfieldData="{
+        label: 'Item tags',
+        id: useId(),
+        disabledField: formData.trashed,
+        itemDataType: 'tag',
+      }"
+    />
     <FormInputComponent
       v-model="formData.imageURL"
       :formfieldData="{
@@ -70,17 +78,6 @@
         placeholder: '',
         requiredField: false,
         id: useId(),
-      }"
-    />
-    <FormInputComponent
-      v-model="formData.title"
-      :formfieldData="{
-        typeField: 'text',
-        label: 'Title',
-        requiredField: true,
-        id: useId(),
-        placeholder: '',
-        disabledField: formData.trashed,
       }"
     />
     <FormTextareaComponent
@@ -187,7 +184,7 @@ const handleSubmit = function () {
   } else {
     formData.value.imageAspectRatio = null;
   }
-  console.log("formdata", formData.value.type);
+  console.log("formdata", formData);
 
   if (continueSubmit) {
     writeSubmit();
@@ -231,6 +228,7 @@ const formData = ref({
   imagePixel: item.imagePixel ? item.imagePixel : null,
   imageAspectRatio: item.imageAspectRatio ? item.imageAspectRatio : null,
   type: item.type ? item.type : "",
+  tag: item.tag ? item.tag : [],
   color: item.color ? item.color : "#fffdec",
 });
 

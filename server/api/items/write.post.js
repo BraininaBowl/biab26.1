@@ -1,8 +1,8 @@
 export default defineEventHandler(async (event) => {
   
     async function getNewId() {
-      const keys = await storage.keys();
-      const promises = keys.map((key) => storage.getItem(key));
+      const keys = await itemStorage.keys();
+      const promises = keys.map((key) => itemStorage.getItem(key));
       const items = await Promise.all(promises);
   
       if (items === undefined || items.length == 0) {
