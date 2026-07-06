@@ -1,20 +1,21 @@
 <template>
-
-  <form @submit.prevent="handleSubmit">
-    <FormInputComponent
-      v-model="formData.value"
-      :formfieldData="{
-        typeField: 'text',
-        label: 'New ' + tagType,
-        requiredField: true,
-        id: useId(),
-        placeholder: '',
-      }"
-    />
-    <div class="button-row">
-      <button type="submit" v-html="'Add ' + tagType" ></button>
-    </div>
-  </form>
+  <div class="formSection">
+    <form @submit.prevent="handleSubmit">
+      <FormInputComponent
+        v-model="formData.value"
+        :formfieldData="{
+          typeField: 'text',
+          label: 'New ' + tagType,
+          requiredField: true,
+          id: useId(),
+          placeholder: '',
+        }"
+      />
+      <div class="button-row">
+        <button type="submit" v-html="'Add ' + tagType"></button>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script setup>
@@ -38,26 +39,9 @@ function handleSubmit() {
   });
 }
 
-const formData = ref({
-});
+const formData = ref({});
 
 onMounted(() => {});
 </script>
 
-<style lang="css" scoped>
-.formfield.hidden {
-  display: none;
-}
-
-.formfield {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1rem;
-  max-width: 80ch;
-}
-
-textarea {
-  min-height: 10ch;
-  height: 100%;
-}
-</style>
+<style lang="css" scoped></style>

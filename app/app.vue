@@ -222,6 +222,67 @@ section {
   image-rendering: crisp-edges;
 }
 
+/* Form */
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  /* max-width: 80ch; */
+  background-color: var(--col-bg-light);
+  border: 1px solid var(--col-border);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin: 2rem auto;
+}
+
+.formfield.hidden {
+  display: none;
+}
+
+.formfield {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  gap: 0.5rem;
+}
+
+.formfield.checkbox, .formfield.radio {
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  gap: 0.5rem;  
+}
+
+textarea {
+  min-height: 10ch;
+  height: 100%;
+}
+
+.formSection .formTagsContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.formSection .formTagsContainer .formfield  label {
+  display: block;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--col-border);
+  border-radius: 0.5rem;
+  background-color: var(--col-area-bg);
+  cursor: pointer;
+}
+
+.formSection .formTagsContainer .formfield input:checked + label {
+  background-color: var(--col-link);
+  color: var(--col-bg);
+}
+
+.formSection .formTagsContainer .formfield input {
+  display: none;
+}
+
 /* Notifications */
 #notifications {
   position: fixed;

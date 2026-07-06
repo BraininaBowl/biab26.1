@@ -148,7 +148,6 @@
 </template>
 
 <script setup>
-import FormImageSelectComponent from './FormImageSelectComponent.vue';
 
 const props = defineProps({
   item: {
@@ -244,20 +243,4 @@ const formData = ref({
 onMounted(() => {});
 </script>
 
-<style lang="css" scoped>
-.formfield.hidden {
-  display: none;
-}
-
-.formfield {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1rem;
-  max-width: 80ch;
-}
-
-textarea {
-  min-height: 10ch;
-  height: 100%;
-}
-</style>
+<style lang="css" scoped></style>

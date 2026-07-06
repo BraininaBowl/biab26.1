@@ -1,4 +1,5 @@
 <template>
+  <div class="formSection">
     <div class="formfield">
       <label
         class="hidden"
@@ -17,6 +18,7 @@
         :disabled="formfieldData.disabledField"
       />
     </div>
+  </div>
   </template>
   
   <script setup>

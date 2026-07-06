@@ -1,15 +1,16 @@
 <template>
-  <div id="notifications" role="alert"></div>
   <main>
     <OverviewEditComponent />
   </main>
 </template>
 
 <script setup>
+const filters = [];
 definePageMeta({
-  layout: 'admin',
+layout: 'admin',
 })
 </script>
 
 <style lang="css" scoped>
+
 </style>
