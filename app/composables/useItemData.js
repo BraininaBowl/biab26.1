@@ -25,12 +25,10 @@ export const useItemData = () => {
     } catch (error) {
       tags.value = [];
     } finally {
-      console.log("tagResponse in composable: ", tagResponse);
       if (tagResponse.data && tagResponse.data.content) {
         tagResponse.data.content.sort((a, b) => a - b);
         tags.value = tagResponse.data.content;
         status.value = tagResponse.status;
-        console.log("tags in composable: ", tags);
       }
     }
   }

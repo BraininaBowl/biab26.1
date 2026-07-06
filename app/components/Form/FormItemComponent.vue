@@ -37,7 +37,15 @@
         itemDataType: 'tag',
       }"
     />
-    <FormInputComponent
+    <FormImageSelectComponent
+      v-model="formData.imageURL"
+      :formfieldData="{
+        label: 'Item image',
+        id: useId(),
+        disabledField: formData.trashed,
+      }"
+    />
+    <!-- <FormInputComponent
       v-model="formData.imageURL"
       :formfieldData="{
         typeField: 'text',
@@ -47,7 +55,7 @@
         placeholder: '',
         disabledField: formData.trashed,
       }"
-    />
+    /> -->
     <FormInputComponent
       v-model="formData.imagePixel"
       :formfieldData="{
@@ -140,6 +148,8 @@
 </template>
 
 <script setup>
+import FormImageSelectComponent from './FormImageSelectComponent.vue';
+
 const props = defineProps({
   item: {
     type: Object,
@@ -184,7 +194,6 @@ const handleSubmit = function () {
   } else {
     formData.value.imageAspectRatio = null;
   }
-  console.log("formdata", formData);
 
   if (continueSubmit) {
     writeSubmit();

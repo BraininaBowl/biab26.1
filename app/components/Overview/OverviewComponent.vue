@@ -18,7 +18,6 @@
 <script setup>
 const { items, fetchItems, types } = useItems();
 const path = useRoute().path;
-console.log("path in OverviewComponent: ", path);
 const props = defineProps({
   filters: {
     type: Object,
