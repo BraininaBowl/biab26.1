@@ -7,7 +7,7 @@ export const useImages = () => {
     try {
       response = await $fetch("/api/images/upload", {
         method: "POST",
-        body: data,
+        body: { data },
       });
     } catch (error) {
       images.value = [];

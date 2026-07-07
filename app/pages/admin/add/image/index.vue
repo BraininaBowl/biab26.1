@@ -120,7 +120,7 @@ const handleSubmit = function () {
 
 const uploadFiles = async function (file) {
   const imageData = new FormData();
-  imageData.append("files", file);
+  imageData.append("file",file);
   postImage(imageData);
   console.log("status", status);
   // await $fetch("/api/images/upload.post.js", {
