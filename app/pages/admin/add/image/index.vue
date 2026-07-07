@@ -119,23 +119,15 @@ const handleSubmit = function () {
 };
 
 const uploadFiles = async function (file) {
-  const imageData = new FormData();
-  imageData.append("file",file);
-  postImage(imageData);
-  console.log("status", status);
-  // await $fetch("/api/images/upload.post.js", {
-  //   method: "POST",
-  //   body: imageData,
-  // }).then((res) => {
-  //   console.log("res", res)
-  //   if (res && res.length > 0) {
-  //     formData.value.imageURL = res[0].url;
-  //     formData.value.imageId = res[0].id;
-  //     applyMeta();
-  //   } else {
-  //     throw new Error("No files were uploaded.");
-  //   }
-  // });
+  console.log("file", file.value);
+  const formData = new FormData();
+  formData.append("files", file);
+  await postImage(formData).then(() => {
+    console.log("status.value", status.value);
+  }).catch((error) => {
+    console.error("Error uploading image:", error);
+    addNotification("Error uploading image: " + error.message, "error");
+  });
 };
 
 const applyMeta = function () {
