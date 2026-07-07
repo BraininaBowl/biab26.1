@@ -12,11 +12,11 @@ export const useImages = () => {
     } catch (error) {
       images.value = [];
     } finally {
-      console.log("result", result);
+      console.log("response", response);
 
-      if (result && result.length > 0) {
-        status.value.imageURL = res[0].url;
-        status.value.imageId = res[0].id;
+      if (response && response.length > 0) {
+        status.value.imageURL = response[0].url;
+        status.value.imageId = response[0].id;
         applyMeta();
       } else {
         throw new Error("No files were uploaded.");

@@ -121,8 +121,8 @@ const handleSubmit = function () {
 const uploadFiles = async function (file) {
   const imageData = new FormData();
   imageData.append("files", file);
-  postImage(data)
-  console.log("result", result)
+  postImage(imageData);
+  console.log("status", status);
   // await $fetch("/api/images/upload.post.js", {
   //   method: "POST",
   //   body: imageData,
