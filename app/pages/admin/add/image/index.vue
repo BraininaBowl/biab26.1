@@ -101,6 +101,7 @@ const props = defineProps({
 });
 const item = props.item || {};
 const { writeItem } = useItems();
+const { postImage, status } = useImages();
 const formData = ref({
   file: null,
   name: item.name ? item.name : "",
@@ -120,19 +121,21 @@ const handleSubmit = function () {
 const uploadFiles = async function (file) {
   const imageData = new FormData();
   imageData.append("files", file);
-
-  const response = await $fetch("/api/images/upload", {
-    method: "POST",
-    body: imageData,
-  }).then((res) => {
-    if (res && res.length > 0) {
-      formData.value.imageURL = res[0].url;
-      formData.value.imageId = res[0].id;
-      applyMeta();
-    } else {
-      throw new Error("No files were uploaded.");
-    }
-  });
+  postImage(data)
+  console.log("result", result)
+  // await $fetch("/api/images/upload.post.js", {
+  //   method: "POST",
+  //   body: imageData,
+  // }).then((res) => {
+  //   console.log("res", res)
+  //   if (res && res.length > 0) {
+  //     formData.value.imageURL = res[0].url;
+  //     formData.value.imageId = res[0].id;
+  //     applyMeta();
+  //   } else {
+  //     throw new Error("No files were uploaded.");
+  //   }
+  // });
 };
 
 const applyMeta = function () {
