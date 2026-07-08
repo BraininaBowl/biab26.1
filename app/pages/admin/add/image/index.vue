@@ -113,21 +113,25 @@ const formData = ref({
 });
 
 const handleSubmit = function () {
+  console.log("formData", formData);
+  console.log("formDatavalue.file", formData.value.file);
   uploadFiles(formData.value.file);
 
   // upload image, then apply meta, then writeSubmit
 };
 
 const uploadFiles = async function (file) {
-  console.log("file", file.value);
-  const formData = new FormData();
-  formData.append("files", file);
-  await postImage(formData).then(() => {
-    console.log("status.value", status.value);
-  }).catch((error) => {
-    console.error("Error uploading image:", error);
-    addNotification("Error uploading image: " + error.message, "error");
-  });
+  const imageFormData = new FormData();
+  imageFormData.set("files", file);
+  console.log(imageFormData);
+  await postImage(imageFormData)
+    .then(() => {
+      console.log("status.value", status.value);
+    })
+    .catch((error) => {
+      console.error("Error uploading image:", error);
+      addNotification("Error uploading image: " + error.message, "error");
+    });
 };
 
 const applyMeta = function () {

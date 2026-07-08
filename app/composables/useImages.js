@@ -2,11 +2,11 @@ export const useImages = () => {
   const images = useState("images", () => []);
   const status = useState("status", () => null);
 
-  async function postImage(file) {
-    console.log("file", file);
+  async function postImage(imageFormData) {
+    console.log("imageFormData in useImages", imageFormData);
     await $fetch(`/api/images/upload`, {
       method: "POST",
-      body: file,
+      body: imageFormData,
     })
       .then((res) => {
         console.log("res", res);

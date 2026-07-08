@@ -19,7 +19,6 @@ export default defineEventHandler(async (event) => {
   }
 
   function pickExt(filename, mime) {
-
     // Fallback to MIME type
     if (mime === "image/jpeg") return ".jpg";
     if (mime === "image/png") return ".png";
@@ -44,7 +43,6 @@ export default defineEventHandler(async (event) => {
   for (const p of files) {
     const { filename = "file", type, data } = p;
     const bytes = data.length;
-
 
     if (bytes > maxFileSize * 1024 * 1024) {
       // in bytes
@@ -79,11 +77,6 @@ export default defineEventHandler(async (event) => {
   }
 
   return results;
-
-
-
-
-
 
   // const fileName = `${Date.now()}.${file.type}`;
   // await storage.setItemRaw(`${fileName}`, file.data);
