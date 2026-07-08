@@ -1,3 +1,9 @@
+# Hiya!
+
+This is my journey figuring out my new website. Expect a lot of diversions, silly mistakes, and bad ideas.
+
+I'll also use this repo to sync work-in-progress between devices. Don't expect every update to be a working product.
+
 # Nuxt Minimal Starter
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
