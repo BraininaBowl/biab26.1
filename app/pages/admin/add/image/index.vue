@@ -4,7 +4,7 @@
       <h2>Upload image</h2>
       <form @submit.prevent="handleSubmit">
         <FormInputComponent
-          @change="(event) => formData.file = event.target.files[0]"
+          @change="(event) => (formData.file = event.target.files[0])"
           :formfieldData="{
             typeField: 'file',
             label: 'File',
@@ -101,7 +101,7 @@ const props = defineProps({
 });
 const item = props.item || {};
 const { writeItem } = useItems();
-const { postImage, status } = useImages();
+const { postImage, status, postImageMetaData } = useImages();
 const formData = ref({
   file: null,
   name: item.name ? item.name : "",
@@ -126,7 +126,7 @@ const uploadFiles = async function (file) {
   console.log(imageFormData);
   await postImage(imageFormData)
     .then(() => {
-      console.log("status.value", status.value);
+      applyMeta();
     })
     .catch((error) => {
       console.error("Error uploading image:", error);
@@ -136,9 +136,13 @@ const uploadFiles = async function (file) {
 
 const applyMeta = function () {
   let continueSubmit = true;
-  if (formData.value.imageURL) {
+  if (status.value.imageName) {
+    if (!formData.value.name) {
+      formData.value.name = status.value.imageName;
+    }
+    formData.value.imageURL = status.value.imageURL;
     var imageHolder = document.createElement("img");
-    imageHolder.src = "`../${formData.value.image}`";
+    imageHolder.src = "`../images/${status.value.imageURL}`";
     imageHolder.onload = function () {
       imageHolder.style.visibility = "hidden";
       document.body.appendChild(imageHolder);
@@ -164,13 +168,8 @@ const applyMeta = function () {
 };
 
 function writeSubmit() {
-  const status = writeItem(formData.value);
-  status.catch((error) => {
-    addNotification("Error saving item, please try again later.", "error");
-  });
-  status.finally(() => {
-    addNotification("Item saved successfully.", "success");
-  });
+  postImageMetaData(formData.value)
+
 }
 
 onMounted(() => {});
