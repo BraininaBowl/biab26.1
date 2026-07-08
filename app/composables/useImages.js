@@ -1,6 +1,6 @@
 export const useImages = () => {
   const images = useState("images", () => []);
-  const status = useState("status", () => null);
+  const status = useState("status", () => ({}));
 
   async function postImage(imageFormData) {
     console.log("imageFormData in useImages", imageFormData);
@@ -12,7 +12,7 @@ export const useImages = () => {
         console.log("res", res);
         if (res && res.length > 0) {
           status.value.imageURL = res[0].url;
-          status.value.imageId = res[0].id;
+          status.value.imageName = res[0].name;
         } else {
           throw new Error("No files were uploaded.");
         }

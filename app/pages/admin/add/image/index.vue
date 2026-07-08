@@ -5,7 +5,6 @@
       <form @submit.prevent="handleSubmit">
         <FormInputComponent
           @change="(event) => formData.file = event.target.files[0]"
-          v-model="formData.file"
           :formfieldData="{
             typeField: 'file',
             label: 'File',
