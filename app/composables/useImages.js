@@ -1,6 +1,6 @@
 export const useImages = () => {
   const images = useState("images", () => []);
-  const status = useState("status", () => {});
+  const status = useState("status", () => new Object());
 
   async function postImage(imageFormData) {
     await $fetch(`/api/images/upload`, {
@@ -8,6 +8,9 @@ export const useImages = () => {
       body: imageFormData,
     })
       .then((res) => {
+        console.log("res", res)
+        console.log("res[0]", res[0])
+        console.log("res[0].name", res[0].name)
         if (res && res.length > 0) {
           status.value.error = null;
           status.value.success = true;
@@ -16,6 +19,7 @@ export const useImages = () => {
         } else {
           throw new Error("No files were uploaded.");
         }
+        console.log("status.value", status.value)
       })
       .catch((error) => {
       });

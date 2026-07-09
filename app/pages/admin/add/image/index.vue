@@ -159,14 +159,11 @@ const applyMeta = function () {
   }
 
   if (continueSubmit) {
-    writeSubmit();
+    console.log("formData.value", formData.value)
+    postImageMetaData(formData.value)
   }
 };
 
-function writeSubmit() {
-  postImageMetaData(formData.value)
-
-}
 
 onMounted(() => {});
 </script>
