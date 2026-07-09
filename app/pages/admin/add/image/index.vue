@@ -113,8 +113,6 @@ const formData = ref({
 });
 
 const handleSubmit = function () {
-  console.log("formData", formData);
-  console.log("formDatavalue.file", formData.value.file);
   uploadFiles(formData.value.file);
 
   // upload image, then apply meta, then writeSubmit
@@ -123,13 +121,11 @@ const handleSubmit = function () {
 const uploadFiles = async function (file) {
   const imageFormData = new FormData();
   imageFormData.set("files", file);
-  console.log(imageFormData);
   await postImage(imageFormData)
     .then(() => {
       applyMeta();
     })
     .catch((error) => {
-      console.error("Error uploading image:", error);
       addNotification("Error uploading image: " + error.message, "error");
     });
 };

@@ -214,27 +214,8 @@ async function uploadFiles(files) {
     }, 1000);
   } catch (err) {
     error.value = err.data?.message || "Upload failed. Please try again.";
-    console.error("Upload failed:", err);
   } finally {
     uploading.value = false;
-  }
-}
-
-function formatBytes(bytes) {
-  if (bytes === 0) return "0 Bytes";
-  const k = 1024;
-  const sizes = ["Bytes", "KB", "MB", "GB"];
-  const i = Math.floor(Math.log(bytes) / Math.log(k));
-  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
-}
-
-async function copyUrl(url) {
-  try {
-    const fullUrl = window.location.origin + url;
-    await navigator.clipboard.writeText(fullUrl);
-    addNotification("URL copied to clipboard:", fullUrl);
-  } catch (err) {
-    console.error("Failed to copy URL:", err);
   }
 }
 
