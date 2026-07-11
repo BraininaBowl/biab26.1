@@ -3,50 +3,52 @@ export const useImages = () => {
   const status = useState("status", () => new Object());
 
   async function postImage(imageFormData) {
-    await $fetch(`/api/images/upload`, {
+    let res = await $fetch(`/api/images/upload`, {
       method: "POST",
       body: imageFormData,
-    })
-      .then((res) => {
-        console.log("res", res)
-        console.log("res[0]", res[0])
-        console.log("res[0].name", res[0].name)
-        if (res && res.length > 0) {
-          status.value.error = null;
-          status.value.success = true;
-          status.value.imageURL = res[0].url;
-          status.value.imageName = res[0].name;
-        } else {
-          throw new Error("No files were uploaded.");
-        }
-        console.log("status.value", status.value)
-      })
-      .catch((error) => {
-      });
+    });
+
+    status.error = null;
+    status.success = true;
+    status.imageURL = res[0].url;
+    status.imageName = res[0].name;
   }
 
   async function postImageMetaData(imageMetaData) {
     await $fetch(`/api/images/writeMetaData`, {
       method: "POST",
       body: imageMetaData,
-    }).then((res) => {
-    });
+    }).then((res) => {});
   }
 
   async function fetchImages() {
     let response = [];
     try {
-      response = await $fetch(`/api/images/all`);
+      response = await $fetch(`/api/images/metaData`);
     } catch (error) {
       images.value = [];
     } finally {
-      images.value = response.data.keys;
+      images.value = response.data;
     }
   }
 
+  async function fetchImage(id) {
+    let response = [];
+    try {
+      response = await $fetch(`/api/images/${id}`);
+    } catch (error) {
+      images.value = [];
+    } finally {
+      images.value = response.data;
+    }
+  }
+ 
+  
   return {
     postImage,
+    postImageMetaData,
     fetchImages,
+    fetchImage,
     images,
     status,
   };

@@ -103,7 +103,6 @@ const item = props.item || {};
 const { writeItem } = useItems();
 const { postImage, status, postImageMetaData } = useImages();
 const formData = ref({
-  file: null,
   name: item.name ? item.name : "",
   imageURL: item.imageURL ? item.imageURL : null,
   imageFocus: item.imageFocus ? item.imageFocus : null,
@@ -114,8 +113,6 @@ const formData = ref({
 
 const handleSubmit = function () {
   uploadFiles(formData.value.file);
-
-  // upload image, then apply meta, then writeSubmit
 };
 
 const uploadFiles = async function (file) {
@@ -123,47 +120,28 @@ const uploadFiles = async function (file) {
   imageFormData.set("files", file);
   await postImage(imageFormData)
     .then(() => {
-      applyMeta();
+      applyMetaData();
     })
     .catch((error) => {
       addNotification("Error uploading image: " + error.message, "error");
     });
 };
 
-const applyMeta = function () {
-  let continueSubmit = true;
-  if (status.value.imageName) {
-    if (!formData.value.name) {
-      formData.value.name = status.value.imageName;
-    }
-    formData.value.imageURL = status.value.imageURL;
-    var imageHolder = document.createElement("img");
-    imageHolder.src = "`../images/${status.value.imageURL}`";
-    imageHolder.onload = function () {
-      imageHolder.style.visibility = "hidden";
-      document.body.appendChild(imageHolder);
-      formData.value.imageAspectRatio =
-        imageHolder.naturalWidth / imageHolder.naturalHeight;
-      document.body.removeChild(imageHolder);
-      // formData.value.imageURL = encodeURI(formData.value.imageURL);
-    };
-    imageHolder.onerror = function () {
-      continueSubmit = false;
-      addNotification(
-        "Error loading image, please check the URL and try again.",
-        "error",
-      );
-    };
-  } else {
-    formData.value.imageAspectRatio = null;
+const applyMetaData = function () {
+  if (!formData.value.name) {
+    formData.value.name = status.imageName;
   }
-
-  if (continueSubmit) {
-    console.log("formData.value", formData.value)
-    postImageMetaData(formData.value)
-  }
+  formData.value.imageURL = status.imageURL;
+  let imageHolder = document.createElement("img");
+  imageHolder.src = `${status.imageURL}`;
+  imageHolder.onload = function () {
+    imageHolder.style.visibility = "hidden";
+    document.body.appendChild(imageHolder);
+    formData.value.imageAspectRatio =
+      imageHolder.naturalWidth / imageHolder.naturalHeight;
+    postImageMetaData(formData.value);
+  };
 };
-
 
 onMounted(() => {});
 </script>

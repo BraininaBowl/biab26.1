@@ -24,7 +24,7 @@
         <input
           type="radio"
           :id="`${formfieldData.id}-${index}`"
-          :value="`${image.id}`"
+          :value="`${image}`"
           v-model="model"
           :disabled="formfieldData.disabledField"
           :autocomplete="formfieldData.autocomplete"
@@ -32,7 +32,7 @@
         />
         <label
           :for="`${formfieldData.id}-${index}`"
-          :style="{ backgroundImage: `url('${image.imageURL}')` }"
+          :style="{ backgroundImage: `url('/images/${image}')` }"
           class="formImagePreview"
         ></label>
       </div>

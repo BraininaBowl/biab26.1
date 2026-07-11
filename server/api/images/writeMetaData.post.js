@@ -5,11 +5,13 @@ export default defineEventHandler(async (event) => {
   function newId() {
     let newId = 0;
     if (content) {
-      content.forEach((item) => {
-        if (item.id && item.id > newId) {
-            newId = item.id + 1 
+      for (let key in content) {
+        const item = content[key];
+        console.log("item", item.id)
+        if (item.id >= newId) {
+          newId = item.id + 1;
         }
-      })
+      }
     }
     return newId;
   }
@@ -19,7 +21,8 @@ export default defineEventHandler(async (event) => {
   if (!content) {
     content = new Object();
   }
-    content[body.id] = body;
+  content[body.id] = body;
+  console.log("content post-add", content);
   await storage.setItem("imageMetaData.json", content);
   return "success";
 });
