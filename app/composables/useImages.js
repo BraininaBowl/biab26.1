@@ -1,5 +1,6 @@
 export const useImages = () => {
   const images = useState("images", () => []);
+  const image = useState("image", () => new Object);
   const status = useState("status", () => new Object());
 
   async function postImage(imageFormData) {
@@ -32,13 +33,13 @@ export const useImages = () => {
   }
 
   async function fetchImage(id) {
-    let response = [];
+    let response = new Object();
     try {
       response = await $fetch(`/api/images/${id}`);
+      image.value = response.data;
+      status.value = response.status;
     } catch (error) {
-      images.value = [];
-    } finally {
-      images.value = response.data;
+      image.value = [];
     }
   }
  
@@ -49,6 +50,7 @@ export const useImages = () => {
     fetchImages,
     fetchImage,
     images,
+    image,
     status,
   };
 };

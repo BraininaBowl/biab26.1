@@ -105,7 +105,6 @@
 </template>
 
 <script setup>
-
 const props = defineProps({
   item: {
     type: Object,
@@ -156,6 +155,16 @@ const handleSubmit = function () {
   }
 };
 
+const currentDate = function () {
+  const date = new Date();
+  let month = ("0" + (date.getMonth() + 1)).slice(-2);
+  let day = ("0" + date.getDate()).slice(-2);
+  let year = date.getFullYear();
+  let hours = ("0" + date.getHours()).slice(-2);
+  let minutes = ("0" + date.getMinutes()).slice(-2);
+  return year + "-" + month + "-" + day + "T" + hours + ":" + minutes;
+};
+
 const trashItem = async function () {
   item.trashed = true;
   formData.value.trashed = true;
@@ -184,7 +193,7 @@ const restoreItem = async function () {
 
 const formData = ref({
   id: item.id ? item.id : null,
-  date: item.date ? item.date : new Date(),
+  date: item.date ? item.date : currentDate(),
   title: item.title ? item.title : "",
   description: item.description ? item.description : "",
   snippet: item.snippet ? item.snippet : "",
