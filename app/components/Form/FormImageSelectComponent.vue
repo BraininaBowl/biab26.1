@@ -32,7 +32,7 @@
         />
         <label
           :for="`${formfieldData.id}-${image.id}`"
-          :style="`backgroundImage: 'url('${image.imageURL}')'`"
+          :style="{backgroundImage: `url(${image.imageURL})`}"
           class="formImagePreview"
         ></label>
       </div>
@@ -52,7 +52,6 @@ const props = defineProps({
 const formfieldData = props.formfieldData || {};
 const { fetchImages, images } = useImages();
 await fetchImages();
-console.log("Images", images.value);
 </script>
 
 <style lang="css" scoped>

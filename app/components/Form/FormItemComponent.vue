@@ -38,54 +38,11 @@
       }"
     />
     <FormImageSelectComponent
-      v-model="formData.imageURL"
+      v-model="formData.imageId"
       :formfieldData="{
         label: 'Item image',
         id: useId(),
         disabledField: formData.trashed,
-      }"
-    />
-    <!-- <FormInputComponent
-      v-model="formData.imageURL"
-      :formfieldData="{
-        typeField: 'text',
-        label: 'Image URL',
-        requiredField: false,
-        id: useId(),
-        placeholder: '',
-        disabledField: formData.trashed,
-      }"
-    /> -->
-    <FormInputComponent
-      v-model="formData.imagePixel"
-      :formfieldData="{
-        typeField: 'checkbox',
-        label: 'Pixel-art  ',
-        requiredField: false,
-        id: useId(),
-        placeholder: '',
-        disabledField: formData.trashed,
-      }"
-    />
-    <FormInputComponent
-      v-model="formData.imageFocus"
-      :formfieldData="{
-        typeField: 'text',
-        label: 'Image focus',
-        requiredField: false,
-        id: useId(),
-        placeholder: 'center',
-        disabledField: formData.trashed,
-      }"
-    />
-    <FormInputComponent
-      v-model="formData.imageAspectRatio"
-      :formfieldData="{
-        typeField: 'hidden',
-        label: 'Image Aspect Ratio',
-        placeholder: '',
-        requiredField: false,
-        id: useId(),
       }"
     />
     <FormTextareaComponent
@@ -232,9 +189,7 @@ const formData = ref({
   description: item.description ? item.description : "",
   snippet: item.snippet ? item.snippet : "",
   trashed: item.trashed,
-  imageURL: item.imageURL ? item.imageURL : null,
-  imagePixel: item.imagePixel ? item.imagePixel : null,
-  imageAspectRatio: item.imageAspectRatio ? item.imageAspectRatio : null,
+  imageId: item.imageId ? item.imageId : null,
   type: item.type ? item.type : "",
   tag: item.tag ? item.tag : [],
   color: item.color ? item.color : "#fffdec",

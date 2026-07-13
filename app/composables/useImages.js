@@ -25,10 +25,9 @@ export const useImages = () => {
     let response = [];
     try {
       response = await $fetch(`/api/images/metaData`);
+      images.value = response.data ? Object.values(response.data) : [];
     } catch (error) {
       images.value = [];
-    } finally {
-      images.value = response.data;
     }
   }
 

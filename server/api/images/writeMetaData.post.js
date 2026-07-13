@@ -7,7 +7,6 @@ export default defineEventHandler(async (event) => {
     if (content) {
       for (let key in content) {
         const item = content[key];
-        console.log("item", item.id)
         if (item.id >= newId) {
           newId = item.id + 1;
         }
@@ -22,7 +21,6 @@ export default defineEventHandler(async (event) => {
     content = new Object();
   }
   content[body.id] = body;
-  console.log("content post-add", content);
   await storage.setItem("imageMetaData.json", content);
   return "success";
 });
