@@ -5,25 +5,25 @@
       <div class="formfield checkbox imageRadio">
         <input
           type="radio"
-          :id="`${formfieldData.id}-${index}`"
+          :id="`${formfieldData.id}-none`"
           :value="false"
           v-model="model"
           :disabled="formfieldData.disabledField"
           :autocomplete="formfieldData.autocomplete"
           :name="`${formfieldData.id}`"
         />
-        <label :for="`${formfieldData.id}-${index}`" class="formImagePreview"
+        <label :for="`${formfieldData.id}-none`" class="formImagePreview"
           >None</label
         >
       </div>
       <div
         class="formfield checkbox imageRadio"
-        v-for="(image, index) in images"
-        :key="index"
+        v-for="image in images"
+        :key="image.id"
       >
         <input
           type="radio"
-          :id="`${formfieldData.id}-${index}`"
+          :id="`${formfieldData.id}-${image.id}`"
           :value="`${image.id}`"
           v-model="model"
           :disabled="formfieldData.disabledField"
@@ -31,8 +31,8 @@
           :name="`${formfieldData.id}`"
         />
         <label
-          :for="`${formfieldData.id}-${index}`"
-          :style="{ backgroundImage: `url('${image.imageURL}')` }"
+          :for="`${formfieldData.id}-${image.id}`"
+          :style="`backgroundImage: 'url('${image.imageURL}')'`"
           class="formImagePreview"
         ></label>
       </div>
@@ -52,6 +52,7 @@ const props = defineProps({
 const formfieldData = props.formfieldData || {};
 const { fetchImages, images } = useImages();
 await fetchImages();
+console.log("Images", images.value);
 </script>
 
 <style lang="css" scoped>
