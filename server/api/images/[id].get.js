@@ -2,17 +2,12 @@ export default defineEventHandler(async (event) => {
   const storage = useStorage("itemDataStore");
   const id = getRouterParam(event, "id");
   const content = await storage.getItem("imageMetaData.json");
-  console.log("id", id)
   Object.entries(content).forEach((item) => {
-    if (item.id === id) {
-      console.log("Item match")
+    if (toString(item[1].id) == toString(id)) {
       return {
         status: "succes",
-        data: item,
+        data: item[1],
       };
-    } else {
-      console.log("No item match")
-
     }
   });
 });
