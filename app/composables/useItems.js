@@ -1,5 +1,5 @@
 export const useItems = () => {
-  const { fetchImage, image } = useImages();
+  const { fetchImage } = useImages();
   const items = useState("items", () => []);
   const item = useState("item", () => null);
   const tags = useState("tags", () => []);
@@ -7,15 +7,12 @@ export const useItems = () => {
   const itemStatus = useState("itemStatus", () => null);
 
   async function fetchItems(filters = [], parse = true) {
-    let response = [];
     let typesContainer = new Set();
     let tagsContainer = new Set();
     try {
-      response = await $fetch(`/api/items/all`);
-    } catch (error) {
-      items.value = [];
-    } finally {
-      response.data.items.forEach((item) => {
+      const response = await $fetch(`/api/items/all`);
+      let fetchedItems = response.data.items;
+      fetchedItems.forEach((item) => {
         if (item.type && item.trashed !== true) {
           typesContainer.add(item.type);
         }
@@ -25,39 +22,48 @@ export const useItems = () => {
       });
       filters.forEach((filterItem) => {
         if (typeof filterItem.values == "object") {
-          response.data.items = response.data.items.filter((el) =>
+          fetchedItems = fetchedItems.filter((el) =>
             filterItem.values.includes(el[filterItem.attribute]),
           );
         } else {
-          response.data.items = response.data.items.filter(
+          fetchedItems = fetchedItems.filter(
             (el) => filterItem.values == el[filterItem.attribute],
           );
         }
       });
-      response.data.items.forEach(async (item) => {
-        if (item.imageId) {
-          await fetchImage(item.imageId)
-          if (image) {
-            item.imageURL = image.imageURL
-            item.imageAspectRatio = image.imageAspectRatio
-            item.imagePixel = image.imagePixel
-            item.imageFocus = image.imageFocus
+
+      const resolvedItems = await Promise.all(
+        fetchedItems.map(async (item) => {
+          if (item.imageId) {
+            const imageData = await fetchImage(item.imageId);
+            if (imageData) {
+              item.imageURL = imageData.imageURL;
+              item.imageAspectRatio = imageData.imageAspectRatio;
+              item.imagePixel = imageData.imagePixel;
+              item.imageFocus = imageData.imageFocus;  
+            }
           }
-        }
-        if (parse) {
-          if (item.description) {
-            item.description = toHtml(item.description);
+          if (parse) {
+            if (item.description) {
+              item.description = toHtml(item.description);
+            }
+            if (item.snippet) {
+              item.snippet = toHtml(item.snippet);
+            }
           }
-          if (item.snippet) {
-            item.snippet = toHtml(item.snippet);
-          }
-        }
-      });
-      response.data.items.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+          return item;
+        }),
+      );
+
+      resolvedItems.sort((a, b) => new Date(a.date) - new Date(b.date));
       types.value = Array.from(typesContainer);
       tags.value = Array.from(tagsContainer);
-      items.value = response.data.items;
-      itemStatus.value = response.itemStatus;
+      items.value = resolvedItems;
+      itemStatus.value = response.status;
+    } catch (error) {
+      items.value = [];
+    } finally {
     }
   }
 

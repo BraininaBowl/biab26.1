@@ -1,6 +1,4 @@
 <template>
-  <!-- <div class="loader" v-if="status == null">Loading...</div>
-  <div class="overview" v-else> -->
   <div class="overview">
     <section class="filters">
       I make:

@@ -1,7 +1,7 @@
 export const useItemData = () => {
   const types = useState("types", () => []);
   const tags = useState("tags", () => []);
-  const status = useState("status", () => null);
+  const itemStatus = useState("itemStatus", () => null);
 
   async function fetchTypes() {
     let typeResponse = [];
@@ -13,7 +13,7 @@ export const useItemData = () => {
       if (typeResponse.data && typeResponse.data.content) {
         typeResponse.data.content.sort((a, b) => a - b);
         types.value = typeResponse.data.content;
-        status.value = typeResponse.status;
+        itemStatus.value = typeResponse.itemStatus;
       }
     }
   }
@@ -28,7 +28,7 @@ export const useItemData = () => {
       if (tagResponse.data && tagResponse.data.content) {
         tagResponse.data.content.sort((a, b) => a - b);
         tags.value = tagResponse.data.content;
-        status.value = tagResponse.status;
+        itemStatus.value = tagResponse.itemStatus;
       }
     }
   }
@@ -54,6 +54,6 @@ export const useItemData = () => {
     removeItemData,
     types,
     tags,
-    status,
+    itemStatus,
   };
 };

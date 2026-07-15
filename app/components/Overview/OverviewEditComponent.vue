@@ -1,5 +1,5 @@
 <template>
-  <div class="loader" v-if="status == null">Loading...</div>
+  <div class="loader" v-if="itemStatus == null">Loading...</div>
   <div class="overview" v-else>
     <section class="list">
       <CardEditComponent v-for="item in items" :key="item.id" :item="item" />
@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-const { items,  fetchItems, status } = useItems();
+const { items,  fetchItems, itemStatus } = useItems();
 
 onMounted(async () => {
   fetchItems();
