@@ -46,6 +46,16 @@
       }"
     />
     <FormTextareaComponent
+      v-model="formData.snippet"
+      :formfieldData="{
+        label: 'Snippet',
+        requiredField: false,
+        id: useId(),
+        placeholder: '',
+        disabledField: formData.trashed,
+      }"
+    />
+    <FormTextareaComponent
       v-model="formData.description"
       :formfieldData="{
         label: 'Description',
@@ -55,10 +65,22 @@
         disabledField: formData.trashed,
       }"
     />
-    <FormTextareaComponent
-      v-model="formData.snippet"
+    <FormInputComponent
+      v-model="formData.linkTitle"
       :formfieldData="{
-        label: 'Snippet',
+        typeField: 'text',
+        label: 'Link Title',
+        requiredField: false,
+        id: useId(),
+        placeholder: '',
+        disabledField: formData.trashed,
+      }"
+    />
+    <FormInputComponent
+      v-model="formData.linkURL"
+      :formfieldData="{
+        typeField: 'text',
+        label: 'Link URL',
         requiredField: false,
         id: useId(),
         placeholder: '',
@@ -137,7 +159,6 @@ const handleSubmit = function () {
       formData.value.imageAspectRatio =
         imageHolder.naturalWidth / imageHolder.naturalHeight;
       document.body.removeChild(imageHolder);
-      // formData.value.imageURL = encodeURI(formData.value.imageURL);
     };
     imageHolder.onerror = function () {
       continueSubmit = false;
@@ -202,6 +223,8 @@ const formData = ref({
   type: item.type ? item.type : "",
   tag: item.tag ? item.tag : [],
   color: item.color ? item.color : "#fffdec",
+  linkTitle: item.linkTitle ? item.linkTitle : "",
+  linkURL: item.linkURL ? item.linkURL : "",
 });
 
 onMounted(() => {});
