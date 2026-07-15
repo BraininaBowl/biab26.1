@@ -1,7 +1,7 @@
 export const useImages = () => {
   const images = useState("images", () => []);
   const image = useState("image", () => new Object());
-  const status = useState("status", () => new Object());
+  const imageStatus = useState("imageStatus", () => new Object());
 
   async function postImage(imageFormData) {
     let res = await $fetch(`/api/images/upload`, {
@@ -9,10 +9,10 @@ export const useImages = () => {
       body: imageFormData,
     });
 
-    status.error = null;
-    status.success = true;
-    status.imageURL = res[0].url;
-    status.imageName = res[0].name;
+    imageStatus.value.error = null;
+    imageStatus.value.success = true;
+    imageStatus.value.imageURL = res[0].url;
+    imageStatus.value.imageName = res[0].name;
   }
 
   async function postImageMetaData(imageMetaData) {
@@ -34,9 +34,8 @@ export const useImages = () => {
 
   async function fetchImage(id) {
     let response = await $fetch(`/api/images/${id}`);
-    console.log("response", response);
     image.value = response.data;
-    status.value = response.status;
+    imageStatus.value = response.imageStatus;
   }
 
   return {
@@ -46,6 +45,6 @@ export const useImages = () => {
     fetchImage,
     images,
     image,
-    status,
+    imageStatus,
   };
 };

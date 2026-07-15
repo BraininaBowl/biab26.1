@@ -4,7 +4,7 @@ export const useItems = () => {
   const item = useState("item", () => null);
   const tags = useState("tags", () => []);
   const types = useState("types", () => []);
-  const status = useState("status", () => null);
+  const itemStatus = useState("itemStatus", () => null);
 
   async function fetchItems(filters = [], parse = true) {
     let response = [];
@@ -36,18 +36,13 @@ export const useItems = () => {
       });
       response.data.items.forEach(async (item) => {
         if (item.imageId) {
-          await fetchImage(item.imageId).then((image) => {
-            item.imageURL = image.imageURL;
-            item.imageAspectRatio = image.imageAspectRatio;
-            item.imagePixel = image.imagePixel;
-            item.imageFocus = image.imageFocus;
-          });
-          // if (image) {
-          //   item.imageURL = image.imageURL
-          //   item.imageAspectRatio = image.imageAspectRatio
-          //   item.imagePixel = image.imagePixel
-          //   item.imageFocus = image.imageFocus
-          // }
+          await fetchImage(item.imageId)
+          if (image) {
+            item.imageURL = image.imageURL
+            item.imageAspectRatio = image.imageAspectRatio
+            item.imagePixel = image.imagePixel
+            item.imageFocus = image.imageFocus
+          }
         }
         if (parse) {
           if (item.description) {
@@ -62,7 +57,7 @@ export const useItems = () => {
       types.value = Array.from(typesContainer);
       tags.value = Array.from(tagsContainer);
       items.value = response.data.items;
-      status.value = response.status;
+      itemStatus.value = response.itemStatus;
     }
   }
 
@@ -80,6 +75,6 @@ export const useItems = () => {
     item,
     tags,
     types,
-    status,
+    itemStatus,
   };
 };

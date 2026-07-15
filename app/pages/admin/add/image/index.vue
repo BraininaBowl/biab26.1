@@ -101,7 +101,7 @@ const props = defineProps({
 });
 const item = props.item || {};
 const { writeItem } = useItems();
-const { postImage, status, postImageMetaData } = useImages();
+const { postImage, imageStatus, postImageMetaData } = useImages();
 const formData = ref({
   name: item.name ? item.name : "",
   imageURL: item.imageURL ? item.imageURL : null,
@@ -129,11 +129,11 @@ const uploadFiles = async function (file) {
 
 const applyMetaData = function () {
   if (!formData.value.name) {
-    formData.value.name = status.imageName;
+    formData.value.name = imageStatus.imageName;
   }
-  formData.value.imageURL = status.imageURL;
+  formData.value.imageURL = imageStatus.imageURL;
   let imageHolder = document.createElement("img");
-  imageHolder.src = `${status.imageURL}`;
+  imageHolder.src = `${imageStatus.imageURL}`;
   imageHolder.onload = function () {
     imageHolder.style.visibility = "hidden";
     document.body.appendChild(imageHolder);
