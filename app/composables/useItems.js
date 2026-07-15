@@ -36,13 +36,11 @@ export const useItems = () => {
       });
       response.data.items.forEach(async (item) => {
         if (item.imageId) {
-          await fetchImage(item.imageId).then(() => {
-            console.log("image", image)
+          await fetchImage(item.imageId).then((image) => {
             item.imageURL = image.imageURL;
             item.imageAspectRatio = image.imageAspectRatio;
             item.imagePixel = image.imagePixel;
             item.imageFocus = image.imageFocus;
-            console.log(item);
           });
           // if (image) {
           //   item.imageURL = image.imageURL
