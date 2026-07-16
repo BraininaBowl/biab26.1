@@ -112,7 +112,9 @@ const formData = ref({
 });
 
 const handleSubmit = function () {
-  uploadFiles(formData.value.file);
+  if (formData.value.file) {
+    uploadFiles(formData.value.file);
+  }
 };
 
 const uploadFiles = async function (file) {
@@ -139,7 +141,7 @@ const applyMetaData = function () {
     document.body.appendChild(imageHolder);
     formData.value.imageAspectRatio =
       imageHolder.naturalWidth / imageHolder.naturalHeight;
-    console.log("formData", formData)
+    console.log("formData", formData);
     postImageMetaData(formData.value);
   };
 };
