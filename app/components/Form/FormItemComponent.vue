@@ -7,7 +7,7 @@
   </div>
   <FormTagAddComponent tagType="type" />
   <FormTagAddComponent tagType="tag" />
-  <form @submit.prevent="handleSubmit">
+  <form @submit.prevent="writeSubmit">
     <FormTypeSelectComponent
       v-model="formData.type"
       :formfieldData="{
@@ -148,33 +148,6 @@ function writeSubmit() {
   });
 }
 
-const handleSubmit = function () {
-  let continueSubmit = true;
-  if (formData.value.imageURL) {
-    var imageHolder = document.createElement("img");
-    imageHolder.src = "`../${formData.value.image}`";
-    imageHolder.onload = function () {
-      imageHolder.style.visibility = "hidden";
-      document.body.appendChild(imageHolder);
-      formData.value.imageAspectRatio =
-        imageHolder.naturalWidth / imageHolder.naturalHeight;
-      document.body.removeChild(imageHolder);
-    };
-    imageHolder.onerror = function () {
-      continueSubmit = false;
-      addNotification(
-        "Error loading image, please check the URL and try again.",
-        "error",
-      );
-    };
-  } else {
-    formData.value.imageAspectRatio = null;
-  }
-
-  if (continueSubmit) {
-    writeSubmit();
-  }
-};
 
 const currentDate = function () {
   const date = new Date();

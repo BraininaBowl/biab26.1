@@ -15,10 +15,11 @@ export const useImages = () => {
   }
 
   async function postImageMetaData(imageMetaData) {
+    console.log("in postImageMetaData in composable")
     await $fetch(`/api/images/writeMetaData`, {
       method: "POST",
       body: imageMetaData,
-    }).then((res) => {});
+    });
   }
 
   async function fetchImages() {

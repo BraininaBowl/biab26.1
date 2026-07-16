@@ -100,7 +100,7 @@ const props = defineProps({
   },
 });
 const item = props.item || {};
-const { writeItem } = useItems();
+// const { writeItem } = useItems();
 const { postImage, imageStatus, postImageMetaData } = useImages();
 const formData = ref({
   name: item.name ? item.name : "",
@@ -139,6 +139,7 @@ const applyMetaData = function () {
     document.body.appendChild(imageHolder);
     formData.value.imageAspectRatio =
       imageHolder.naturalWidth / imageHolder.naturalHeight;
+    console.log("formData", formData)
     postImageMetaData(formData.value);
   };
 };
