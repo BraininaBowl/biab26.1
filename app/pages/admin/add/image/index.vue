@@ -120,29 +120,29 @@ const handleSubmit = function () {
 const uploadFiles = async function (file) {
   const imageFormData = new FormData();
   imageFormData.set("files", file);
-  await postImage(imageFormData)
-    .then(() => {
-      applyMetaData();
-    })
-    .catch((error) => {
-      addNotification("Error uploading image: " + error.message, "error");
-    });
+  try {
+    await postImage(imageFormData);
+    applyMetaData();
+  } catch (error) {
+    addNotification("Error uploading image: " + error.message, "error");
+  }
 };
 
 const applyMetaData = function () {
   if (!formData.value.name) {
-    formData.value.name = imageStatus.imageName;
+    formData.value.name = imageStatus.value.imageName;
   }
-  formData.value.imageURL = imageStatus.imageURL;
-  let imageHolder = document.createElement("img");
-  imageHolder.src = `${imageStatus.imageURL}`;
-  imageHolder.onload = function () {
-    imageHolder.style.visibility = "hidden";
-    document.body.appendChild(imageHolder);
+  formData.value.imageURL = imageStatus.value.imageURL;
+  const imageHolder = new Image();
+  imageHolder.src = imageStatus.value.imageURL;
+  imageHolder.onload = async function () {
     formData.value.imageAspectRatio =
       imageHolder.naturalWidth / imageHolder.naturalHeight;
-    console.log("formData", formData);
-    postImageMetaData(formData.value);
+    const response = postImageMetaData(formData.value);
+    if (response && response.data) {
+      formData.value.imageId = response.data.id;
+      addNotification("Image uploaded successfully");
+    }
   };
 };
 

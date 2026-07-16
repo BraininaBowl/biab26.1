@@ -3,24 +3,21 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event);
   let content = await storage.getItem("imageMetaData.json");
   function newId() {
-    let newId = 0;
+    let maxId = -1;
     if (content) {
       for (let key in content) {
         const item = content[key];
-        if (item.id >= newId) {
-          newId = item.id + 1;
+        if (item.id > maxId) {
+          maxId = item.id;
         }
       }
     }
-    return newId;
+    return maxId + 1;
   }
-  if (!body.id) {
+  if (body.id === undefined || body.id === null || body.id === "") {
     body.id = newId();
-  }
-  if (!content) {
-    content = new Object();
   }
   content[body.id] = body;
   await storage.setItem("imageMetaData.json", content);
-  return "success";
+  return { status: "success", data: body };
 });
