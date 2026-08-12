@@ -8,6 +8,28 @@
   <FormTagAddComponent tagType="type" />
   <FormTagAddComponent tagType="tag" />
   <form @submit.prevent="writeSubmit">
+    <FormInputComponent
+      v-model="formData.hidden"
+      :formfieldData="{
+        typeField: 'checkbox',
+        label: 'Hidden',
+        requiredField: false,
+        id: useId(),
+        placeholder: '',
+        disabledField: formData.trashed,
+      }"
+    />
+    <FormInputComponent
+      v-model="formData.featured"
+      :formfieldData="{
+        typeField: 'checkbox',
+        label: 'Featured',
+        requiredField: false,
+        id: useId(),
+        placeholder: '',
+        disabledField: formData.trashed,
+      }"
+    />
     <FormTypeSelectComponent
       v-model="formData.type"
       :formfieldData="{
@@ -148,7 +170,6 @@ function writeSubmit() {
   });
 }
 
-
 const currentDate = function () {
   const date = new Date();
   let month = ("0" + (date.getMonth() + 1)).slice(-2);
@@ -192,6 +213,8 @@ const formData = ref({
   description: item.description ? item.description : "",
   snippet: item.snippet ? item.snippet : "",
   trashed: item.trashed,
+  hidden: item.hidden,
+  featured: item.featured,
   imageId: item.imageId ? item.imageId : null,
   type: item.type ? item.type : "",
   tag: item.tag ? item.tag : [],

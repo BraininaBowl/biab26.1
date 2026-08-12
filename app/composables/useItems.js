@@ -1,7 +1,7 @@
 export const useItems = () => {
   const { fetchImage } = useImages();
   const items = useState("items", () => []);
-  const item = useState("item", () => null);
+  // const item = useState("item", () => null);
   const tags = useState("tags", () => []);
   const types = useState("types", () => []);
   const itemStatus = useState("itemStatus", () => null);
@@ -78,7 +78,7 @@ export const useItems = () => {
     fetchItems,
     writeItem,
     items,
-    item,
+    // item,
     tags,
     types,
     itemStatus,

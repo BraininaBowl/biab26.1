@@ -8,19 +8,15 @@
       :style="`aspect-ratio: ${item.imageAspectRatio ? item.imageAspectRatio : 'auto'}; background-image: url(${item.imageURL});`"
     >
       <div class="card_hover">
-        <NuxtLink
-          :to="`${item.type}`"
-          class=""
+        <span
           v-if="item.type"
           v-html="item.type + 's'"
-        ></NuxtLink>
+        ></span>
         \
-        <NuxtLink
-          :to="`${item.id}-${returnUri(item.title)}`"
-          class=""
+        <span
           v-if="item.type"
           v-html="item.title"
-        ></NuxtLink>
+        ></span>
       </div>
     </NuxtLink>
     <NuxtLink
@@ -37,19 +33,15 @@
       </h3>
       <div v-if="item.snippet" v-html="item.snippet"></div>
       <div class="card_hover">
-        <NuxtLink
-          :to="`${item.type}`"
-          class=""
-          v-if="item.type"
-          v-html="item.type + 's'"
-        ></NuxtLink>
-        \
-        <NuxtLink
-          :to="`${item.id}-${returnUri(item.title)}`"
-          class=""
-          v-if="item.type"
-          v-html="item.title"
-        ></NuxtLink>
+        <span
+        v-if="item.type"
+        v-html="item.type + 's'"
+      ></span>
+      \
+      <span
+        v-if="item.type"
+        v-html="item.title"
+      ></span>
       </div>
     </NuxtLink>
   </article>

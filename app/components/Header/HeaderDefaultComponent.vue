@@ -6,18 +6,29 @@
         ><span class="segment">Bowl</span>
       </h4>
     </NuxtLink>
-    <div class="visual_container"></div>
+    <div class="visual_container">
+      <div :class="`visual_wrapper ${item.imagePixel ? 'pixel' : ''}`" v-for="item in featuredItems" :key="item.id">
+          <div v-for="index in 7" :class="`visual_item visual_item_${index}`" :style="`background-image: url('${item.imageURL}'); background-position: ${(index-1) * 20}% center; transform:translateX(${(index-1) * 100}%) rotateY(${-21 + ((index-1) * 7)}deg)`"></div>
+      </div>
+    </div>
   </header>
 </template>
 
 <script setup>
-const headerStyle = useState('headerStyle')
+const headerStyle = useState("headerStyle");
 const { currentRoute } = useRouter();
+const { fetchItems, items } = useItems();
+
+await fetchItems([
+  { attribute: "featured", values: [true] },
+  { attribute: "trashed", values: [false, undefined] },
+]);
+const featuredItems = items;
 
 watch(
   currentRoute,
   () => {
-    if (currentRoute.value.path === '/') {
+    if (currentRoute.value.path === "/") {
       headerStyle.value = "extended";
     } else {
       headerStyle.value = "compact";
@@ -26,8 +37,7 @@ watch(
   { deep: true, immediate: true },
 );
 
-onMounted(() => {
-});
+onMounted(() => {});
 </script>
 
 <style lang="css" scoped>
@@ -36,7 +46,8 @@ header {
   text-align: left;
   position: relative;
 }
-header, header * {
+header,
+header * {
   transition: all 0.2s ease-out;
 }
 
@@ -56,7 +67,8 @@ header.extended {
   transform-origin: center;
 }
 
-header.extended, header.extended * {
+header.extended,
+header.extended * {
   transition: all 0.25s ease-out;
 }
 
@@ -77,6 +89,30 @@ header.extended .visual_container {
   max-height: calc(100vh - (var(--padding) * 2));
   border-radius: 0.25rem;
 }
+
+header.extended .visual_wrapper {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  perspective: 500px;
+  perspective-origin: center;
+  transform-style: preserve-3d;
+  mix-blend-mode: lighten;
+}
+
+header.extended .visual_item {
+  display: block;
+  width: 20%;
+  height: 100%;
+  overflow: hidden;
+  background-size: 500% 100%;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 0;
+}
+
 header.compact {
   width: 100%;
   height: 8ch;
@@ -87,7 +123,8 @@ header.compact {
   margin: 0;
 }
 
-header.compact, header.compact * {
+header.compact,
+header.compact * {
   transition: all 0.5s ease-out;
 }
 
