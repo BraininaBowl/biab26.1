@@ -12,15 +12,21 @@
         v-for="item in featuredItems"
         :key="item.id"
       >
-        <div
-          v-for="index in 7"
-          :class="`visual_item visual_item_${index}`"
-          :style="{
-            backgroundImage: `url('${item.imageURL}')`,
-            backgroundPosition: `calc(${index - 1} * (100% / 6)) center`,
-            transform: `translateX(${(index - 1) * 100}%) rotateY(${-21 + (index - 1) * 7}deg) translateZ(${(Math.cos(((-21 + (index - 1) * 7) * Math.PI) / 180) * 30) -50}px)`,
-          }"
-        ></div>
+        <div class="visual_item">
+          <div
+            v-for="index in 7"
+            :class="`visual_slice visual_slice_${index}`"
+            :style="{
+              backgroundImage: `url('${item.imageURL}')`,
+              backgroundPosition: `calc(${index - 1} * (100% / 6)) center`,
+              transform: `
+              translateX(${300 - (4 - index) * 100}px)
+            translateZ(${Math.cos(((-21 + (index - 1) * 7) * Math.PI) / 180) * 30 - 50}px)
+            rotateY(${-21 + (index - 1) * 7}deg)
+            `,
+            }"
+          ></div>
+        </div>
       </div>
     </div>
   </header>
@@ -103,7 +109,9 @@ header.extended .visual_container {
 }
 
 header.extended .visual_wrapper {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -115,16 +123,25 @@ header.extended .visual_wrapper {
 }
 
 header.extended .visual_item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: translateZ(-80vw);
+}
+
+header.extended .visual_slice {
   display: block;
-  width: calc((100% / 7) + 0.5px); 
+  width: calc((100% / 7) + 0.5px);
   height: 100%;
   overflow: hidden;
   background-size: 700% 100%;
   background-repeat: no-repeat;
-  position: absolute;
-  top: 0;
-  left: 0;
   backface-visibility: hidden;
+  transform-origin: center; 
+  border: 2px solid #ffffff;
 }
 
 header.compact {
