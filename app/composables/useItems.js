@@ -1,11 +1,12 @@
 export const useItems = () => {
   const { fetchImage } = useImages();
   const items = useState("items", () => []);
+  const featuredItems = useState("featuredItems", () => []);
   // const item = useState("item", () => null);
   const tags = useState("tags", () => []);
   const types = useState("types", () => []);
   const itemStatus = useState("itemStatus", () => null);
-
+  
   async function fetchItems(filters = [], parse = true) {
     let typesContainer = new Set();
     let tagsContainer = new Set();
@@ -67,6 +68,50 @@ export const useItems = () => {
     }
   }
 
+  async function fetchFeaturedItems() {
+    const filters = [
+      { attribute: "featured", values: [true] },
+      { attribute: "trashed", values: [false, undefined] },
+    ]
+    try {
+      const response = await $fetch(`/api/items/all`);
+      let fetchedItems = response.data.items;
+      filters.forEach((filterItem) => {
+        if (typeof filterItem.values == "object") {
+          fetchedItems = fetchedItems.filter((el) =>
+            filterItem.values.includes(el[filterItem.attribute]),
+          );
+        } else {
+          fetchedItems = fetchedItems.filter(
+            (el) => filterItem.values == el[filterItem.attribute],
+          );
+        }
+      });
+
+      const resolvedItems = await Promise.all(
+        fetchedItems.map(async (item) => {
+          if (item.imageId) {
+            const imageData = await fetchImage(item.imageId);
+            if (imageData) {
+              item.imageURL = imageData.imageURL;
+              item.imageAspectRatio = imageData.imageAspectRatio;
+              item.imagePixel = imageData.imagePixel;
+              item.imageFocus = imageData.imageFocus;  
+            }
+          }
+          return item;
+        }),
+      );
+
+      resolvedItems.sort((a, b) => new Date(a.date) - new Date(b.date));
+      featuredItems.value = resolvedItems;
+    } catch (error) {
+      featuredItems.value = [];
+    } finally {
+    }
+  }
+
+
   async function writeItem(dataObject) {
     const response = await $fetch("/api/items/write", {
       method: "POST",
@@ -76,8 +121,10 @@ export const useItems = () => {
 
   return {
     fetchItems,
+    fetchFeaturedItems,
     writeItem,
     items,
+    featuredItems,
     // item,
     tags,
     types,
