@@ -7,8 +7,20 @@
       </h4>
     </NuxtLink>
     <div class="visual_container">
-      <div :class="`visual_wrapper ${item.imagePixel ? 'pixel' : ''}`" v-for="item in featuredItems" :key="item.id">
-          <div v-for="index in 7" :class="`visual_item visual_item_${index}`" :style="`background-image: url('${item.imageURL}'); background-position: ${(index-1) * 20}% center; transform:translateX(${(index-1) * 100}%) rotateY(${-21 + ((index-1) * 7)}deg)`"></div>
+      <div
+        :class="`visual_wrapper ${item.imagePixel ? 'pixel' : ''}`"
+        v-for="item in featuredItems"
+        :key="item.id"
+      >
+        <div
+          v-for="index in 7"
+          :class="`visual_item visual_item_${index}`"
+          :style="{
+            backgroundImage: `url('${item.imageURL}')`,
+            backgroundPosition: `calc(${index - 1} * (100% / 6)) center`,
+            transform: `translateX(${(index - 1) * 100}%) rotateY(${-21 + (index - 1) * 7}deg) translateZ(${(Math.cos(((-21 + (index - 1) * 7) * Math.PI) / 180) * 30) -50}px)`,
+          }"
+        ></div>
       </div>
     </div>
   </header>
@@ -104,13 +116,15 @@ header.extended .visual_wrapper {
 
 header.extended .visual_item {
   display: block;
-  width: 20%;
+  width: calc((100% / 7) + 0.5px); 
   height: 100%;
   overflow: hidden;
-  background-size: 500% 100%;
+  background-size: 700% 100%;
   background-repeat: no-repeat;
   position: absolute;
   top: 0;
+  left: 0;
+  backface-visibility: hidden;
 }
 
 header.compact {
