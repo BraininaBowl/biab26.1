@@ -2,24 +2,42 @@
   <header :class="headerStyle">
     <NuxtLink class="clear" href="/">
       <h4>
-        <span class="segment">Brain</span><span class="segment">in a</span
-        ><span class="segment">Bowl</span>
+        <span class="segment">Brain</span> <span class="segment">in a</span>
+        <span class="segment">Bowl</span>
       </h4>
     </NuxtLink>
     <div class="visual_container">
       <div
-        :class="`visual_wrapper ${item.imagePixel ? 'pixel' : ''}`"
+        :class="`visual_wrapper`"
         v-for="item in featuredItems"
         :key="item.id"
       >
         <div class="visual_item">
           <div
             v-for="index in 7"
-            :class="`visual_slice visual_slice_${index} crt`"
+            :class="`visual_slice visual_slice_bottom visual_slice_${index}`"
             :style="{
               backgroundImage: `url('${item.imageURL}')`,
               backgroundPosition: `calc(${index - 1} * (100% / 6)) center`,
-              transform: `rotateY(${-21 + (index - 1) * 7}deg) translateZ(calc(91vw))`,
+              transform: `scaleY(-1) translateY(-100%) rotateY(${-21 + (index - 1) * 7}deg) translateZ(calc(92.5vw))`,
+            }"
+          ></div>
+          <div
+            v-for="index in 7"
+            :class="`visual_slice visual_slice_top visual_slice_${index}`"
+            :style="{
+              backgroundImage: `url('${item.imageURL}')`,
+              backgroundPosition: `calc(${index - 1} * (100% / 6)) center`,
+              transform: `scaleY(-1) translateY(100%) rotateY(${-21 + (index - 1) * 7}deg) translateZ(calc(92.5vw))`,
+            }"
+          ></div>
+          <div
+            v-for="index in 7"
+            :class="`visual_slice visual_slice_${index} crt  ${item.imagePixel ? 'pixel' : ''}`"
+            :style="{
+              backgroundImage: `url('${item.imageURL}')`,
+              backgroundPosition: `calc(${index - 1} * (100% / 6)) center`,
+              transform: `rotateY(${-21 + (index - 1) * 7}deg) translateZ(calc(92.5vw))`,
             }"
           ></div>
         </div>
@@ -122,12 +140,13 @@ header.extended .visual_item {
   width: 100%;
   height: 100%;
   position: relative;
-  transform: rotateY(-0.1deg) translateZ(-100vw) translateX(calc(50% - (80vw / 14)));
+  transform: rotateY(-0.1deg) translateZ(-98vw)
+    translateX(calc(50% - (80vw / 14)));  
 }
 
 header.extended .visual_slice {
   display: block;
-  width: calc((80vw / 7));
+  width: calc((80vw / 7) + 1px);
   height: 100%;
   overflow: hidden;
   background-size: 700% 100%;
@@ -137,35 +156,79 @@ header.extended .visual_slice {
   position: absolute;
   left: 0;
   /* border: 2px solid #ffffff; */
-  box-shadow: inset 0px 25px 20px -20px rgba(0,0,0,1), inset 0px -25px 20px -20px rgba(0,0,0,1), inset 0px 50px 60px -50px rgba(255,255,255,0.8);
+  box-shadow:
+    inset 0px 25px 20px -20px rgba(0, 0, 0, 1),
+    inset 0px -25px 20px -20px rgba(0, 0, 0, 1);
 }
 
 header.extended .visual_slice_1 {
   border-radius: 2.5vw 0 0 2.5vw;
-  box-shadow: inset 0px 25px 20px -20px rgba(0,0,0,1), inset 0px -25px 20px -20px rgba(0,0,0,1), inset 25px 0px 20px -20px rgba(0,0,0,1), inset 0px 50px 60px -50px rgba(255,255,255,0.8) ;
-  filter: blur(1px);
+  box-shadow:
+    inset 0px 25px 20px -20px rgba(0, 0, 0, 1),
+    inset 0px -25px 20px -20px rgba(0, 0, 0, 1),
+    inset 25px 0px 20px -20px rgba(0, 0, 0, 1);
+  /* filter: blur(2px); */
 }
-
-header.extended .visual_slice_2 {
-  filter: blur(0.6px);
+/* header.extended .visual_slice_2 {
+  filter: blur(1px);
 }
 header.extended .visual_slice_3 {
-  filter: blur(0.3px);
+  filter: blur(0.5px);
+}
+header.extended .visual_slice_4 {
+  filter: blur(0.25px);
 }
 header.extended .visual_slice_5 {
-  filter: blur(0.3px);
+  filter: blur(0.5px);
 }
 header.extended .visual_slice_6 {
-  filter: blur(0.3px);
-}
-
-
+  filter: blur(1px);
+} */
 header.extended .visual_slice_7 {
   border-radius: 0 2.5vw 2.5vw 0;
-  box-shadow: inset 0px 25px 20px -20px rgba(0,0,0,1), inset 0px -25px 20px -20px rgba(0,0,0,1), inset -25px 0px 20px -20px rgba(0,0,0,1), inset 0px 50px 60px -50px rgba(255,255,255,0.8) ;
-  filter: blur(1px);
+  box-shadow:
+    inset 0px 25px 20px -20px rgba(0, 0, 0, 1),
+    inset 0px -25px 20px -20px rgba(0, 0, 0, 1),
+    inset -25px 0px 20px -20px rgba(0, 0, 0, 1);
+  /* filter: blur(2px); */
 }
 
+header.extended .visual_slice.visual_slice_bottom,
+header.extended .visual_slice.visual_slice_top {
+  /* filter: blur(6px); */
+  opacity: 0.2;
+  /* animation: flicker-alt 1s infinite; */
+  /* box-shadow: inset 0px 80%; */
+}
+
+.visual_slice_bottom::after,
+.visual_slice_top::after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+
+.visual_slice_top::after {
+  background-image: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 1) 86%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+.visual_slice_bottom::after {
+  background-image: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 1) 86%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
 
 header.compact {
   width: 100%;
@@ -211,195 +274,67 @@ header.compact .visual_container {
 
 @keyframes flicker {
   0% {
-    opacity: 0.27861;
+    opacity: 0.139305;
   }
   5% {
-    opacity: 0.34769;
+    opacity: 0.173845;
   }
   10% {
-    opacity: 0.23604;
+    opacity: 0.11802;
   }
   15% {
-    opacity: 0.90626;
+    opacity: 0.45313;
   }
   20% {
-    opacity: 0.18128;
+    opacity: 0.09064;
   }
   25% {
-    opacity: 0.83891;
+    opacity: 0.419455;
   }
   30% {
-    opacity: 0.65583;
+    opacity: 0.327915;
   }
   35% {
-    opacity: 0.67807;
+    opacity: 0.339035;
   }
   40% {
-    opacity: 0.26559;
+    opacity: 0.132795;
   }
   45% {
-    opacity: 0.84693;
+    opacity: 0.423465;
   }
   50% {
-    opacity: 0.96019;
+    opacity: 0.480095;
   }
   55% {
-    opacity: 0.08594;
+    opacity: 0.04297;
   }
   60% {
-    opacity: 0.20313;
+    opacity: 0.101565;
   }
   65% {
-    opacity: 0.71988;
+    opacity: 0.35994;
   }
   70% {
-    opacity: 0.53455;
+    opacity: 0.267275;
   }
   75% {
-    opacity: 0.37288;
+    opacity: 0.18644;
   }
   80% {
-    opacity: 0.71428;
+    opacity: 0.35714;
   }
   85% {
-    opacity: 0.70419;
+    opacity: 0.352095;
   }
   90% {
-    opacity: 0.7003;
+    opacity: 0.35015;
   }
   95% {
-    opacity: 0.36108;
+    opacity: 0.18054;
   }
   100% {
-    opacity: 0.24387;
-  }
-}
-@keyframes textShadow {
-  0% {
-    text-shadow:
-      0.4389924193300864px 0 1px rgba(0, 30, 255, 0.5),
-      -0.4389924193300864px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  5% {
-    text-shadow:
-      2.7928974010788217px 0 1px rgba(0, 30, 255, 0.5),
-      -2.7928974010788217px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  10% {
-    text-shadow:
-      0.02956275843481219px 0 1px rgba(0, 30, 255, 0.5),
-      -0.02956275843481219px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  15% {
-    text-shadow:
-      0.40218538552878136px 0 1px rgba(0, 30, 255, 0.5),
-      -0.40218538552878136px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  20% {
-    text-shadow:
-      3.4794037899852017px 0 1px rgba(0, 30, 255, 0.5),
-      -3.4794037899852017px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  25% {
-    text-shadow:
-      1.6125630401149584px 0 1px rgba(0, 30, 255, 0.5),
-      -1.6125630401149584px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  30% {
-    text-shadow:
-      0.7015590085143956px 0 1px rgba(0, 30, 255, 0.5),
-      -0.7015590085143956px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  35% {
-    text-shadow:
-      3.896914047650351px 0 1px rgba(0, 30, 255, 0.5),
-      -3.896914047650351px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  40% {
-    text-shadow:
-      3.870905614848819px 0 1px rgba(0, 30, 255, 0.5),
-      -3.870905614848819px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  45% {
-    text-shadow:
-      2.231056963361899px 0 1px rgba(0, 30, 255, 0.5),
-      -2.231056963361899px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  50% {
-    text-shadow:
-      0.08084290417898504px 0 1px rgba(0, 30, 255, 0.5),
-      -0.08084290417898504px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  55% {
-    text-shadow:
-      2.3758461067427543px 0 1px rgba(0, 30, 255, 0.5),
-      -2.3758461067427543px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  60% {
-    text-shadow:
-      2.202193051050636px 0 1px rgba(0, 30, 255, 0.5),
-      -2.202193051050636px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  65% {
-    text-shadow:
-      2.8638780614874975px 0 1px rgba(0, 30, 255, 0.5),
-      -2.8638780614874975px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  70% {
-    text-shadow:
-      0.48874025155497314px 0 1px rgba(0, 30, 255, 0.5),
-      -0.48874025155497314px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  75% {
-    text-shadow:
-      1.8948491305757957px 0 1px rgba(0, 30, 255, 0.5),
-      -1.8948491305757957px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  80% {
-    text-shadow:
-      0.0833037308038857px 0 1px rgba(0, 30, 255, 0.5),
-      -0.0833037308038857px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  85% {
-    text-shadow:
-      0.09769827255241735px 0 1px rgba(0, 30, 255, 0.5),
-      -0.09769827255241735px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  90% {
-    text-shadow:
-      3.443339761481782px 0 1px rgba(0, 30, 255, 0.5),
-      -3.443339761481782px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  95% {
-    text-shadow:
-      2.1841838852799786px 0 1px rgba(0, 30, 255, 0.5),
-      -2.1841838852799786px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
-  }
-  100% {
-    text-shadow:
-      2.6208764473832513px 0 1px rgba(0, 30, 255, 0.5),
-      -2.6208764473832513px 0 1px rgba(255, 0, 80, 0.3),
-      0 0 3px;
+    opacity: 0.121935;
   }
 }
 .crt::after {
@@ -437,8 +372,5 @@ header.compact .visual_container {
     100% 2px,
     3px 100%;
   pointer-events: none;
-}
-.crt {
-  animation: textShadow 1.6s infinite;
 }
 </style>
