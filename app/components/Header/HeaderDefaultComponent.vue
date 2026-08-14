@@ -37,7 +37,7 @@
             :style="{
               backgroundImage: `url('${item.imageURL}')`,
               backgroundPosition: `calc(${index - 1} * (100% / 6)) center`,
-              transform: `rotateY(${-21 + (index - 1) * 7}deg) translateZ(calc(92.5vw))`,
+              transform: `rotateY(${-21 + (index - 1) * 7}deg) translateZ(92.5vw)`,
             }"
           ></div>
         </div>
@@ -73,6 +73,8 @@ header {
   color: var(--col-fg);
   text-align: left;
   position: relative;
+  background-color: var(--col-fg);
+  margin-bottom: var(--padding);
 }
 header,
 header * {
@@ -82,6 +84,7 @@ header * {
 header h4 {
   font-weight: 900;
   padding: var(--padding);
+  color: var(--col-bg);
 }
 
 header.extended {
@@ -141,7 +144,7 @@ header.extended .visual_item {
   height: 100%;
   position: relative;
   transform: rotateY(-0.1deg) translateZ(-98vw)
-    translateX(calc(50% - (80vw / 14)));  
+    translateX(calc(50% - (80vw / 14)));
 }
 
 header.extended .visual_slice {
@@ -157,16 +160,16 @@ header.extended .visual_slice {
   left: 0;
   /* border: 2px solid #ffffff; */
   box-shadow:
-    inset 0px 25px 20px -20px rgba(0, 0, 0, 1),
-    inset 0px -25px 20px -20px rgba(0, 0, 0, 1);
+    inset 0px 25px 15px -20px rgba(0, 0, 0, 1),
+    inset 0px -25px 15px -20px rgba(0, 0, 0, 1);
 }
 
 header.extended .visual_slice_1 {
-  border-radius: 2.5vw 0 0 2.5vw;
+  /* border-radius: 2.5vw 0 0 2.5vw; */
   box-shadow:
-    inset 0px 25px 20px -20px rgba(0, 0, 0, 1),
-    inset 0px -25px 20px -20px rgba(0, 0, 0, 1),
-    inset 25px 0px 20px -20px rgba(0, 0, 0, 1);
+    inset 0px 25px 15px -20px rgba(0, 0, 0, 1),
+    inset 0px -25px 15px -20px rgba(0, 0, 0, 1),
+    inset 25px 0px 15px -20px rgba(0, 0, 0, 1);
   /* filter: blur(2px); */
 }
 /* header.extended .visual_slice_2 {
@@ -185,11 +188,12 @@ header.extended .visual_slice_6 {
   filter: blur(1px);
 } */
 header.extended .visual_slice_7 {
-  border-radius: 0 2.5vw 2.5vw 0;
+  /* border-radius: 0 2.5vw 2.5vw 0; */
   box-shadow:
-    inset 0px 25px 20px -20px rgba(0, 0, 0, 1),
-    inset 0px -25px 20px -20px rgba(0, 0, 0, 1),
-    inset -25px 0px 20px -20px rgba(0, 0, 0, 1);
+    inset 0px 25px 15px -20px rgba(0, 0, 0, 1),
+    inset 0px -25px 15px -20px rgba(0, 0, 0, 1),
+    inset -25px 0px 15px -20px rgba(0, 0, 0, 1);
+
   /* filter: blur(2px); */
 }
 
@@ -211,7 +215,6 @@ header.extended .visual_slice.visual_slice_top {
   left: 0;
   right: 0;
 }
-
 
 .visual_slice_top::after {
   background-image: linear-gradient(
@@ -238,6 +241,7 @@ header.compact {
   justify-content: stretch;
   align-items: center;
   margin: 0;
+  background-color: unset;
 }
 
 header.compact,
@@ -254,6 +258,7 @@ header.compact h4 {
   gap: 0;
   line-height: 0.9;
   margin: 0;
+  color: var(--col-fg);
 }
 header.compact h4 .segment {
   display: flex;
@@ -264,10 +269,11 @@ header.compact h4 .segment::after {
   display: block;
 }
 header.compact .visual_container {
-  display: none;
+  /* display: none; */
   width: 0;
   margin: 0;
   background-color: var(--col-fg);
+  opacity: 0;
 }
 
 /* Scanlines */

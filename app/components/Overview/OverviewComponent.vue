@@ -50,13 +50,17 @@ onUnmounted(() => {});
 </script>
 
 <style lang="css" scoped>
+.overview {
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
 .card_container {
   display: grid;
   grid-auto-rows: 1px;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 0rem 1.5rem;
-  perspective: 500px;
-  perspective-origin: center;
 }
 
 .card_wrapper {
