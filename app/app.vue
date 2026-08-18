@@ -9,7 +9,8 @@
 
 :root {
   --col-bg: #f9f5d7;
-  --col-bg-light: #fffdec;
+  /* --col-bg-light: #fffdec; */
+  --col-bg-light: #fefffe;
   --col-fg: #282828;
   /* --col-border: #7c6f64; */
   --col-border: #A79F94;
