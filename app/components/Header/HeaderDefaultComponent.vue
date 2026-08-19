@@ -1,5 +1,6 @@
 <template>
   <header :class="headerStyle">
+
     <NuxtLink class="clear" href="/">
       <h4>
         <span class="segment">Brain</span> <span class="segment">in a</span>
@@ -11,13 +12,13 @@
         :class="`visual_wrapper`"
         v-for="item in featuredItems"
         :key="item.id"
+        :style="`--background-image: url('${item.imageURL}')`"
       >
         <div class="visual_item">
           <div
             v-for="index in 7"
             :class="`visual_slice visual_slice_bottom visual_slice_${index}`"
             :style="{
-              backgroundImage: `url('${item.imageURL}')`,
               backgroundPosition: `calc(${index - 1} * (100% / 6)) center`,
               transform: `scaleY(-1) translateY(-100%) rotateY(${-21 + (index - 1) * 7}deg) translateZ(calc(92.5vw))`,
             }"
@@ -26,7 +27,6 @@
             v-for="index in 7"
             :class="`visual_slice visual_slice_top visual_slice_${index}`"
             :style="{
-              backgroundImage: `url('${item.imageURL}')`,
               backgroundPosition: `calc(${index - 1} * (100% / 6)) center`,
               transform: `scaleY(-1) translateY(100%) rotateY(${-21 + (index - 1) * 7}deg) translateZ(calc(92.5vw))`,
             }"
@@ -35,7 +35,6 @@
             v-for="index in 7"
             :class="`visual_slice visual_slice_${index} crt  ${item.imagePixel ? 'pixel' : ''}`"
             :style="{
-              backgroundImage: `url('${item.imageURL}')`,
               backgroundPosition: `calc(${index - 1} * (100% / 6)) center`,
               transform: `rotateY(${-21 + (index - 1) * 7}deg) translateZ(92.5vw)`,
             }"
@@ -152,80 +151,59 @@ header.extended .visual_slice {
   width: calc((80vw / 7) + 1px);
   height: 100%;
   overflow: hidden;
+  background-image: var(--background-image);
   background-size: 700% 100%;
   background-repeat: no-repeat;
   backface-visibility: hidden;
   transform-origin: center;
   position: absolute;
   left: 0;
-  /* border: 2px solid #ffffff; */
   box-shadow:
     inset 0px 25px 15px -20px rgba(0, 0, 0, 1),
     inset 0px -25px 15px -20px rgba(0, 0, 0, 1);
 }
 
 header.extended .visual_slice_1 {
-  /* border-radius: 2.5vw 0 0 2.5vw; */
   box-shadow:
     inset 0px 25px 15px -20px rgba(0, 0, 0, 1),
     inset 0px -25px 15px -20px rgba(0, 0, 0, 1),
     inset 25px 0px 15px -20px rgba(0, 0, 0, 1);
-  /* filter: blur(2px); */
 }
-/* header.extended .visual_slice_2 {
-  filter: blur(1px);
-}
-header.extended .visual_slice_3 {
-  filter: blur(0.5px);
-}
-header.extended .visual_slice_4 {
-  filter: blur(0.25px);
-}
-header.extended .visual_slice_5 {
-  filter: blur(0.5px);
-}
-header.extended .visual_slice_6 {
-  filter: blur(1px);
-} */
+
 header.extended .visual_slice_7 {
-  /* border-radius: 0 2.5vw 2.5vw 0; */
   box-shadow:
     inset 0px 25px 15px -20px rgba(0, 0, 0, 1),
     inset 0px -25px 15px -20px rgba(0, 0, 0, 1),
     inset -25px 0px 15px -20px rgba(0, 0, 0, 1);
-
-  /* filter: blur(2px); */
 }
 
 header.extended .visual_slice.visual_slice_bottom,
 header.extended .visual_slice.visual_slice_top {
-  /* filter: blur(6px); */
   opacity: 0.2;
-  /* animation: flicker-alt 1s infinite; */
-  /* box-shadow: inset 0px 80%; */
 }
 
-.visual_slice_bottom::after,
-.visual_slice_top::after {
+header.extended .visual_slice_bottom::after,
+header.extended .visual_slice_top::after {
   content: "";
   display: block;
   position: absolute;
+  width: calc(100% + 4px);
   top: 0;
   bottom: 0;
-  left: 0;
-  right: 0;
+  left: -2px;
+  right: -2px;
 }
 
-.visual_slice_top::after {
-  background-image: linear-gradient(
+header.extended .visual_slice_top {
+  background-image: var(--background-image), linear-gradient(
     0deg,
     rgba(0, 0, 0, 1) 0%,
     rgba(0, 0, 0, 1) 86%,
     rgba(0, 0, 0, 0) 100%
   );
 }
-.visual_slice_bottom::after {
-  background-image: linear-gradient(
+header.extended .visual_slice_bottom {
+  background-image: var(--background-image), linear-gradient(
     180deg,
     rgba(0, 0, 0, 1) 0%,
     rgba(0, 0, 0, 1) 86%,
