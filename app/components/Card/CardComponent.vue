@@ -5,8 +5,12 @@
       :title="item.title"
       v-if="item.imageURL"
       :class="`card card_image clear ${item.imagePixel ? 'pixel' : ''}`"
-      :style="`aspect-ratio: ${item.imageAspectRatio ? item.imageAspectRatio : 'auto'}; background-image: url(${item.imageURL});`"
+      :style="`aspect-ratio: ${item.imageAspectRatio ? item.imageAspectRatio : 'auto'};`"
     >
+      <div
+        class="card_image_inner"
+        :style="`background-image: url(${item.imageURL});`"
+      ></div>
     </NuxtLink>
     <NuxtLink
       :to="`${item.id}-${returnUri(item.title)}`"
@@ -65,8 +69,20 @@ article {
 }
 
 .card_image {
+  background-color: var(--col-fg);
+}
+
+.card_image_inner {
   background-size: 100% auto;
   background-position: center;
-  transition: background-size 250ms ease-out;
+  mix-blend-mode: lighten;
+
+    display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color: var(--col-bg-light);
+  align-items: flex-start;
+  position: relative;
 }
 </style>

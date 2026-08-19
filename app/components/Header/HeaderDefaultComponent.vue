@@ -1,6 +1,5 @@
 <template>
   <header :class="headerStyle">
-
     <NuxtLink class="clear" href="/">
       <h4>
         <span class="segment">Brain</span> <span class="segment">in a</span>
@@ -33,7 +32,7 @@
           ></div>
           <div
             v-for="index in 7"
-            :class="`visual_slice visual_slice_${index} crt  ${item.imagePixel ? 'pixel' : ''}`"
+            :class="`visual_slice visual_slice_main visual_slice_${index} crt  ${item.imagePixel ? 'pixel' : ''}`"
             :style="{
               backgroundPosition: `calc(${index - 1} * (100% / 6)) center`,
               transform: `rotateY(${-21 + (index - 1) * 7}deg) translateZ(92.5vw)`,
@@ -114,8 +113,6 @@ header.extended h4 {
 header.extended .visual_container {
   display: block;
   width: 100%;
-  margin: var(--padding);
-  background-color: var(--col-fg);
   max-height: calc(100vh - (var(--padding) * 2));
   border-radius: 0.25rem;
 }
@@ -148,7 +145,7 @@ header.extended .visual_item {
 
 header.extended .visual_slice {
   display: block;
-  width: calc((80vw / 7) + 1px);
+  width: calc((80vw / 7) + 0.5px);
   height: 100%;
   overflow: hidden;
   background-image: var(--background-image);
@@ -182,33 +179,25 @@ header.extended .visual_slice.visual_slice_top {
   opacity: 0.2;
 }
 
-header.extended .visual_slice_bottom::after,
-header.extended .visual_slice_top::after {
-  content: "";
-  display: block;
-  position: absolute;
-  width: calc(100% + 4px);
-  top: 0;
-  bottom: 0;
-  left: -2px;
-  right: -2px;
-}
-
 header.extended .visual_slice_top {
-  background-image: var(--background-image), linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(0, 0, 0, 1) 86%,
-    rgba(0, 0, 0, 0) 100%
-  );
+  background-image:
+    linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 1) 86%,
+      rgba(0, 0, 0, 0) 100%
+    ),
+    var(--background-image);
 }
 header.extended .visual_slice_bottom {
-  background-image: var(--background-image), linear-gradient(
-    180deg,
-    rgba(0, 0, 0, 1) 0%,
-    rgba(0, 0, 0, 1) 86%,
-    rgba(0, 0, 0, 0) 100%
-  );
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(0, 0, 0, 1) 86%,
+      rgba(0, 0, 0, 0) 100%
+    ),
+    var(--background-image);
 }
 
 header.compact {
