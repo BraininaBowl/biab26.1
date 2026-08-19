@@ -109,7 +109,7 @@
         disabledField: formData.trashed,
       }"
     />
-    <FormInputComponent
+    <!-- <FormInputComponent
       v-model="formData.color"
       :formfieldData="{
         typeField: 'color',
@@ -119,7 +119,7 @@
         placeholder: '',
         disabledField: formData.trashed,
       }"
-    />
+    /> -->
     <FormInputComponent
       v-model="formData.id"
       :formfieldData="{
@@ -218,7 +218,7 @@ const formData = ref({
   imageId: item.imageId ? item.imageId : null,
   type: item.type ? item.type : "",
   tag: item.tag ? item.tag : [],
-  color: item.color ? item.color : "#fffdec",
+  // color: item.color ? item.color : "#fffdec",
   linkTitle: item.linkTitle ? item.linkTitle : "",
   linkURL: item.linkURL ? item.linkURL : "",
 });

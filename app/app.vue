@@ -86,7 +86,7 @@ h1 {
 
 h2 {
   font-family: "AlanSans", sans-serif;
-  font-weight: 700;
+  font-weight: 800;
   font-style: normal;
   font-size: 2.5rem;
   line-height: 1;
@@ -95,7 +95,7 @@ h2 {
 
 h3 {
   font-family: "AlanSans", sans-serif;
-  font-weight: 700;
+  font-weight: 800;
   font-style: normal;
   font-size: 1.5rem;
   line-height: 1;

@@ -33,7 +33,7 @@ function resizeItems() {
       if (domItem) {
         let card = domItem.querySelector(".card");
         if (card) {
-          domItem.style.gridRow = "auto / span " + (card.clientHeight + 24);
+          domItem.style.gridRow = "auto / span " + (card.clientHeight + 32);
           setTimeout(() => {
             domItem.style.opacity = 1;
           }, 50 * index);

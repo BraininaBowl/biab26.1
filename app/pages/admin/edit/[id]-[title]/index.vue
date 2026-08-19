@@ -19,7 +19,7 @@ const { items, fetchItems, writeItem } = useItems();
 if (itemId) {
   await fetchItems([
   { attribute: "id", values: itemId },
-]);
+], false);
 }
 
 onMounted(() => {});

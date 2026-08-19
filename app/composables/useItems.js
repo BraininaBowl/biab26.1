@@ -57,7 +57,7 @@ export const useItems = () => {
         }),
       );
 
-      resolvedItems.sort((a, b) => new Date(a.date) - new Date(b.date));
+      resolvedItems.sort((a, b) => new Date(b.date) - new Date(a.date));
       types.value = Array.from(typesContainer);
       tags.value = Array.from(tagsContainer);
       items.value = resolvedItems;

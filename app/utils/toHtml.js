@@ -10,9 +10,10 @@ export default function (string) {
   let header5On = false;
   let header6On = false;
   let paragOn = false;
+  let linkOn = false;
 
   function closePrevious() {
-    let toReturn = " ";
+    let toReturn = "";
     if (boldOn) {
       toReturn += "</b> ";
       boldOn = false;
@@ -49,6 +50,10 @@ export default function (string) {
       toReturn += "</p> ";
       paragOn = false;
     }
+    if (linkOn) {
+      toReturn += "</a> ";
+      linkOn = false;
+    }
     return toReturn;
   }
 
@@ -69,6 +74,11 @@ export default function (string) {
       sections[index] = "<br>";
     }
 
+    if (section == "/h") {
+      sections[index] = "<hr>";
+    }
+
+
     if (section == "*") {
       if (italicOn) {
         sections[index] = "</i>";
@@ -87,6 +97,18 @@ export default function (string) {
         boldOn = true;
       }
     }
+    if (section == "[") {
+      sections[index] = "<a href='";
+      linkOn = true;
+    }
+    if (section == "]{") {
+      sections[index] = "' target='_blank' rel='noopener noreferrer'>";
+    }
+    if (section == "}") {
+      sections[index] = "</a>";
+      linkOn = false;
+    }
+
 
     if (section == "#") {
         sections[index] = closePrevious() + "<h1>";
