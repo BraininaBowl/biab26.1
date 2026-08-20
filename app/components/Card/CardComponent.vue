@@ -68,7 +68,7 @@ defineProps({
 
 .card_content {
 	gap: 0.5rem;
-	padding: 1rem 1rem;
+	padding: 1.25rem 1rem 1rem;
 }
 
 .card_image {
