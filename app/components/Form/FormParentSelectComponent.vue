@@ -1,30 +1,32 @@
 <template>
-  <div class="formSection">
-    <p v-html="formfieldData.label"></p>
-    <div class="formTagsContainer" v-if="items.length > 0">
-      <div class="formfield checkbox" v-for="(item, index) in items">
-        <input
-          type="checkbox"
-          :id="`${formfieldData.id}-${index}`"
-          :value="item.id"
-          v-model="model"
-          :disabled="formfieldData.disabledField"
-          :autocomplete="formfieldData.autocomplete"
-          :name="`${formfieldData.id}`"
-        />
-        <label :for="`${formfieldData.id}-${index}`" :v-html="item.title"></label>
-      </div>
-    </div>
-  </div>
+	<div class="formSection">
+		<label :for="`${formfieldData.id}`">Parent</label><br />
+
+		<select
+			name="parent"
+			:id="`${formfieldData.id}`"
+			v-model="model"
+			:value="parent"
+			:disabled="formfieldData.disabledField"
+			:autocomplete="formfieldData.autocomplete"
+		>
+			<option :value="false">None</option>
+			<option
+				v-for="item in items"
+				:value="item.id"
+				v-html="`${item.id} - ${item.title} (${item.type})`"
+			></option>
+		</select>
+	</div>
 </template>
 
 <script setup>
 const model = defineModel();
 const props = defineProps({
-  formfieldData: {
-    type: Object,
-    required: true,
-  },
+	formfieldData: {
+		type: Object,
+		required: true,
+	},
 });
 
 const formfieldData = props.formfieldData || {};
