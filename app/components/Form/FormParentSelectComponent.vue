@@ -6,7 +6,6 @@
 			name="parent"
 			:id="`${formfieldData.id}`"
 			v-model="model"
-			:value="parent"
 			:disabled="formfieldData.disabledField"
 			:autocomplete="formfieldData.autocomplete"
 		>

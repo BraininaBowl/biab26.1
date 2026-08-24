@@ -110,7 +110,7 @@
 			}"
 		/>
 		<FormParentSelectComponent
-			v-model="formData.type"
+			v-model="formData.parent"
 			:formfieldData="{
 				label: 'Parent',
 				id: useId(),

@@ -33,7 +33,7 @@
         <label
           :for="`${formfieldData.id}-${image.id}`"
           :style="{backgroundImage: `url(${image.imageURL})`}"
-          class="formImagePreview"
+          :class="`formImagePreview ${image.imagePixel? 'pixel' : ''}`"
         ></label>
       </div>
     </div>
@@ -41,6 +41,7 @@
 </template>
 
 <script setup>
+
 const model = defineModel();
 const props = defineProps({
   formfieldData: {
