@@ -2,7 +2,7 @@
 	<article :id="`card_${item.id}`" class="card_wrapper">
 		<div class="card_label">{{ item.type }}</div>
 		<NuxtLink
-			:to="`${item.id}-${returnUri(item.title)}`"
+			:to="`${item.type}s/${item.id}-${returnUri(item.title)}`"
 			:title="item.title"
 			v-if="item.imageURL"
 			:class="`card card_image clear ${item.imagePixel ? 'pixel' : ''}`"
@@ -14,7 +14,7 @@
 			></div>
 		</NuxtLink>
 		<NuxtLink
-			:to="`${item.id}-${returnUri(item.title)}`"
+			:to="`${item.type}s/${item.id}-${returnUri(item.title)}`"
 			:title="item.title"
 			class="card card_content clear"
 			:style="{
@@ -62,8 +62,8 @@ defineProps({
 	position: relative;
 	border: 0.075rem solid var(--col-border);
 	transition:
-  box-shadow 125ms ease-out,
-  transform 125ms ease-out;
+		box-shadow 125ms ease-out,
+		transform 125ms ease-out;
 }
 
 .card_content {
@@ -89,11 +89,8 @@ defineProps({
 }
 
 .card_label {
-	/* position: absolute;
-  top: calc(var(--padding) / 2);
-  right:  calc(var(--padding) / 2); */
-  font-family: "AlanSans", sans-serif;
-  font-weight: 700;
+	font-family: "AlanSans", sans-serif;
+	font-weight: 700;
 	margin: 0 auto -1.25rem;
 	padding: 0.25rem 0.5rem;
 	background-color: var(--col-bg-light);
@@ -104,13 +101,11 @@ defineProps({
 	letter-spacing: 0.05rem;
 	border-radius: 0.25rem;
 	z-index: 1;
-  transition:
-  transform 125ms ease-out;
+	transition: transform 125ms ease-out;
 }
 
-
-.card_wrapper:hover .card, .card_wrapper:hover .card_label {
-  transform: translateY(-0.25rem);
+.card_wrapper:hover .card,
+.card_wrapper:hover .card_label {
+	transform: translateY(-0.5rem);
 }
-
 </style>

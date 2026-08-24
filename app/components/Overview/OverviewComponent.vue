@@ -2,7 +2,7 @@
   <div class="overview">
     <section class="filters">
       I make:
-      <NuxtLink v-for="type in types" :key="type" :to="`/${type}`" class="filter_link">
+      <NuxtLink v-for="type in types" :key="type" :to="`/${type}s`" class="filter_link">
         {{ type }}s
       </NuxtLink>
       <span v-if="path!=='/'">|</span><NuxtLink  v-if="path!=='/'" to="/" class="filter_link">Show all</NuxtLink>
