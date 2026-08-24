@@ -5,20 +5,21 @@
       <div class="formfield radio" v-for="(type, index) in types">
         <input
           type="radio"
-          :id="`${formfieldData.id}-${index}`"
+          :id="`${id}-${index}`"
           :value="type"
           v-model="model"
           :disabled="formfieldData.disabledField"
           :autocomplete="formfieldData.autocomplete"
-          :name="`${formfieldData.id}`"
+          :name="`${id}`"
         />
-        <label :for="`${formfieldData.id}-${index}`" v-html="type"></label>
+        <label :for="`${id}-${index}`" v-html="type"></label>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
+const id = useId();
 const model = defineModel();
 const props = defineProps({
   formfieldData: {

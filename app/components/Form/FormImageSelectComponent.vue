@@ -5,14 +5,14 @@
       <div class="formfield checkbox imageRadio">
         <input
           type="radio"
-          :id="`${formfieldData.id}-none`"
+          :id="`${id}-none`"
           :value="false"
           v-model="model"
           :disabled="formfieldData.disabledField"
           :autocomplete="formfieldData.autocomplete"
-          :name="`${formfieldData.id}`"
+          :name="`${id}`"
         />
-        <label :for="`${formfieldData.id}-none`" class="formImagePreview"
+        <label :for="`${id}-none`" class="formImagePreview"
           >None</label
         >
       </div>
@@ -23,15 +23,15 @@
       >
         <input
           type="radio"
-          :id="`${formfieldData.id}-${image.id}`"
+          :id="`${id}-${image.id}`"
           :value="`${image.id}`"
           v-model="model"
           :disabled="formfieldData.disabledField"
           :autocomplete="formfieldData.autocomplete"
-          :name="`${formfieldData.id}`"
+          :name="`${id}`"
         />
         <label
-          :for="`${formfieldData.id}-${image.id}`"
+          :for="`${id}-${image.id}`"
           :style="{backgroundImage: `url(${image.imageURL})`}"
           :class="`formImagePreview ${image.imagePixel? 'pixel' : ''}`"
         ></label>
@@ -41,7 +41,7 @@
 </template>
 
 <script setup>
-
+const id = useId();
 const model = defineModel();
 const props = defineProps({
   formfieldData: {

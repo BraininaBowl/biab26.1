@@ -3,15 +3,15 @@
     <div class="formfield">
       <label
         class="hidden"
-        :for="formfieldData.id"
+        :for="id"
         v-if="formfieldData.labelHidden === true"
         >{{ formfieldData.label }} <span class="required" v-if="formfieldData.requiredField">*</span></label
       >
-      <label :for="formfieldData.id" v-else>{{ formfieldData.label }} <span class="required" v-if="formfieldData.requiredField">*</span></label>
+      <label :for="id" v-else>{{ formfieldData.label }} <span class="required" v-if="formfieldData.requiredField">*</span></label>
       <p v-if="formfieldData.help" class="help-text">{{ formfieldData.help }}</p>
       <textarea
         rows="3"
-        :id="formfieldData.id"
+        :id="id"
         :placeholder="formfieldData.placeholder"
         v-model="model"
         :required="formfieldData.requiredField"
@@ -22,6 +22,7 @@
   </template>
   
   <script setup>
+  const id = useId();
   const model = defineModel();
   defineProps({
     formfieldData: {

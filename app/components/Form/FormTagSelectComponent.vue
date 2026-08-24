@@ -5,20 +5,21 @@
       <div class="formfield checkbox" v-for="(tag, index) in tags">
         <input
           type="checkbox"
-          :id="`${formfieldData.id}-${index}`"
+          :id="`${id}-${index}`"
           :value="tag"
           v-model="model"
           :disabled="formfieldData.disabledField"
           :autocomplete="formfieldData.autocomplete"
-          :name="`${formfieldData.id}`"
+          :name="`${id}`"
         />
-        <label :for="`${formfieldData.id}-${index}`" v-html="tag"></label>
+        <label :for="`${id}-${index}`" v-html="tag"></label>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
+const id = useId();
 const model = defineModel();
 const props = defineProps({
   formfieldData: {

@@ -14,7 +14,7 @@
 				typeField: 'checkbox',
 				label: 'Hidden',
 				requiredField: false,
-				id: useId(),
+				 
 				placeholder: '',
 				disabledField: formData.trashed,
 			}"
@@ -25,7 +25,7 @@
 				typeField: 'checkbox',
 				label: 'Featured',
 				requiredField: false,
-				id: useId(),
+				 
 				placeholder: '',
 				disabledField: formData.trashed,
 			}"
@@ -34,7 +34,7 @@
 			v-model="formData.type"
 			:formfieldData="{
 				label: 'Item type',
-				id: useId(),
+				 
 				disabledField: formData.trashed,
 				itemDataType: 'type',
 			}"
@@ -45,7 +45,7 @@
 				typeField: 'text',
 				label: 'Title',
 				requiredField: true,
-				id: useId(),
+				 
 				placeholder: '',
 				disabledField: formData.trashed,
 			}"
@@ -54,7 +54,7 @@
 			v-model="formData.tag"
 			:formfieldData="{
 				label: 'Item tags',
-				id: useId(),
+				 
 				disabledField: formData.trashed,
 				itemDataType: 'tag',
 			}"
@@ -63,7 +63,7 @@
 			v-model="formData.imageId"
 			:formfieldData="{
 				label: 'Item image',
-				id: useId(),
+				 
 				disabledField: formData.trashed,
 			}"
 		/>
@@ -72,7 +72,7 @@
 			:formfieldData="{
 				label: 'Snippet',
 				requiredField: false,
-				id: useId(),
+				 
 				placeholder: '',
 				disabledField: formData.trashed,
 			}"
@@ -82,7 +82,7 @@
 			:formfieldData="{
 				label: 'Description',
 				requiredField: false,
-				id: useId(),
+				 
 				placeholder: '',
 				disabledField: formData.trashed,
 			}"
@@ -93,7 +93,7 @@
 				typeField: 'text',
 				label: 'Link Title',
 				requiredField: false,
-				id: useId(),
+				 
 				placeholder: '',
 				disabledField: formData.trashed,
 			}"
@@ -104,7 +104,7 @@
 				typeField: 'text',
 				label: 'Link URL',
 				requiredField: false,
-				id: useId(),
+				 
 				placeholder: '',
 				disabledField: formData.trashed,
 			}"
@@ -113,7 +113,7 @@
 			v-model="formData.parent"
 			:formfieldData="{
 				label: 'Parent',
-				id: useId(),
+				 
 				disabledField: formData.trashed,
 			}"
 		/>
@@ -123,7 +123,7 @@
         typeField: 'color',
         label: 'Color',
         requiredField: false,
-        id: useId(),
+         
         placeholder: '',
         disabledField: formData.trashed,
       }"
@@ -135,7 +135,7 @@
 				label: 'id',
 				placeholder: '',
 				requiredField: true,
-				id: useId(),
+				 
 			}"
 		/>
 		<FormInputComponent
@@ -145,7 +145,7 @@
 				label: 'Date',
 				placeholder: '',
 				requiredField: true,
-				id: useId(),
+				 
 			}"
 		/>
 

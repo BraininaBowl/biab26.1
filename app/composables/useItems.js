@@ -1,8 +1,6 @@
 export const useItems = () => {
   const { fetchImage } = useImages();
   const items = useState("items", () => []);
-  const featuredItems = useState("featuredItems", () => []);
-  // const item = useState("item", () => null);
   const tags = useState("tags", () => []);
   const types = useState("types", () => []);
   const itemStatus = useState("itemStatus", () => null);
@@ -68,11 +66,7 @@ export const useItems = () => {
     }
   }
 
-  async function fetchFeaturedItems() {
-    const filters = [
-      { attribute: "featured", values: [true] },
-      { attribute: "trashed", values: [false, undefined] },
-    ]
+  async function fetchStatelessItems(filters = [], parse = true) {
     try {
       const response = await $fetch(`/api/items/all`);
       let fetchedItems = response.data.items;
@@ -99,17 +93,26 @@ export const useItems = () => {
               item.imageFocus = imageData.imageFocus;  
             }
           }
+          if (parse) {
+            if (item.description) {
+              item.description = toHtml(item.description);
+            }
+            if (item.snippet) {
+              item.snippet = toHtml(item.snippet);
+            }
+          }
+
           return item;
         }),
       );
 
-      resolvedItems.sort((a, b) => new Date(a.date) - new Date(b.date));
-      featuredItems.value = resolvedItems;
+      resolvedItems.sort((a, b) => new Date(b.date) - new Date(a.date));
+      return resolvedItems;
     } catch (error) {
-      featuredItems.value = [];
     } finally {
     }
   }
+
 
 
   async function writeItem(dataObject) {
@@ -121,11 +124,9 @@ export const useItems = () => {
 
   return {
     fetchItems,
-    fetchFeaturedItems,
+    fetchStatelessItems,
     writeItem,
     items,
-    featuredItems,
-    // item,
     tags,
     types,
     itemStatus,

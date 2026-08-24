@@ -7,7 +7,7 @@
           typeField: 'text',
           label: 'New ' + tagType,
           requiredField: true,
-          id: useId(),
+          id: id,
           placeholder: '',
         }"
       />
@@ -19,6 +19,7 @@
 </template>
 
 <script setup>
+const id = useId();
 const { writeItemData, itemTypes } = useItemData();
 const props = defineProps({
   tagType: {

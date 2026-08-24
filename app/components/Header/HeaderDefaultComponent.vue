@@ -47,9 +47,9 @@
 <script setup>
 const headerStyle = useState("headerStyle");
 const { currentRoute } = useRouter();
-const { fetchFeaturedItems, featuredItems } = useItems();
+const { fetchStatelessItems } = useItems();
 
-await fetchFeaturedItems();
+const featuredItems = await fetchStatelessItems([{ attribute: "featured", values: [true] }], false);
 
 watch(
   currentRoute,

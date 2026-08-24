@@ -1,17 +1,17 @@
 <template>
 	<div class="formSection">
-		<label :for="`${formfieldData.id}`">Parent</label><br />
+		<label :for="`${id}`">Parent</label><br />
 
 		<select
 			name="parent"
-			:id="`${formfieldData.id}`"
+			:id="`${id}`"
 			v-model="model"
 			:disabled="formfieldData.disabledField"
 			:autocomplete="formfieldData.autocomplete"
 		>
 			<option :value="false">None</option>
 			<option
-				v-for="item in items"
+				v-for="item in parentItems"
 				:value="item.id"
 				v-html="`${item.id} - ${item.title} (${item.type})`"
 			></option>
@@ -20,6 +20,7 @@
 </template>
 
 <script setup>
+const id = useId();
 const model = defineModel();
 const props = defineProps({
 	formfieldData: {
@@ -29,8 +30,9 @@ const props = defineProps({
 });
 
 const formfieldData = props.formfieldData || {};
-const { fetchItems, items } = useItems();
-await fetchItems([{ attribute: "trashed", values: [false, undefined] }], false);
+const { fetchStatelessItems } = useItems();
+const parentItems = await fetchStatelessItems([{ attribute: "trashed", values: [false, undefined] }], false);
 </script>
 
 <style lang="css" scoped></style>
+	
