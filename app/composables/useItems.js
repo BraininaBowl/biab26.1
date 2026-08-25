@@ -24,6 +24,7 @@ export const useItems = () => {
           fetchedItems = fetchedItems.filter((el) =>
             filterItem.values.includes(el[filterItem.attribute]),
           );
+          
         } else {
           fetchedItems = fetchedItems.filter(
             (el) => filterItem.values == el[filterItem.attribute],

@@ -1,11 +1,4 @@
 export default defineEventHandler(async (event) => {
-  const { loggedIn } = await requireUserSession(event)
-  if (!loggedIn) {
-    throw createError({
-      statusCode: 401,
-      statusMessage: "Unauthorized",
-    })
-  } else {
 
   const storage = useStorage("imageStore");
   const maxFileSize = 3;
@@ -86,9 +79,4 @@ export default defineEventHandler(async (event) => {
 
   return results;
 
-  // const fileName = `${Date.now()}.${file.type}`;
-  // await storage.setItemRaw(`${fileName}`, file.data);
-
-  // return fileName;
-  }
 });

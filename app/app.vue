@@ -188,7 +188,7 @@ section {
   justify-content: flex-start;
   flex-wrap: wrap;
   gap: 1rem;
-  margin-bottom: var(--padding);
+  margin: 0;
   font-size: 1rem;
   width: 100%;
   font-weight: 700;
@@ -214,6 +214,14 @@ section {
   background-size: calc(var(--padding) * 1), var(--padding);
   background-position-x: calc(var(--padding) * -0.45);
   border-radius: 0.5rem;
+}
+
+.divider.compact {
+  height: 0.125rem;
+  background-repeat: repeat;
+  background-size: calc(var(--padding) * 0.5), var(--padding);
+  background-position-x: calc(var(--padding) * -0.15);
+  border-radius: 0.25rem;
 }
 
 /* Images */

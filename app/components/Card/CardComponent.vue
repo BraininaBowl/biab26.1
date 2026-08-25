@@ -2,7 +2,7 @@
 	<article :id="`card_${item.id}`" class="card_wrapper">
 		<div class="card_label">{{ item.type }}</div>
 		<NuxtLink
-			:to="`${item.type}s/${item.id}-${returnUri(item.title)}`"
+			:to="`/${item.type}s/${item.id}-${returnUri(item.title)}`"
 			:title="item.title"
 			v-if="item.imageURL"
 			:class="`card card_image clear ${item.imagePixel ? 'pixel' : ''}`"
@@ -14,7 +14,7 @@
 			></div>
 		</NuxtLink>
 		<NuxtLink
-			:to="`${item.type}s/${item.id}-${returnUri(item.title)}`"
+			:to="`/${item.type}s/${item.id}-${returnUri(item.title)}`"
 			:title="item.title"
 			class="card card_content clear"
 			:style="{

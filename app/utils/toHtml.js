@@ -3,7 +3,6 @@ import { cloneVNode } from "vue";
 export default function (string) {
   let boldOn = false;
   let italicOn = false;
-  let header1On = false;
   let header2On = false;
   let header3On = false;
   let header4On = false;
@@ -21,10 +20,6 @@ export default function (string) {
     if (italicOn) {
       toReturn += "</i> ";
       italicOn = false;
-    }
-    if (header1On) {
-      toReturn += "</h1> ";
-      header1On = false;
     }
     if (header2On) {
       toReturn += "</h2> ";
@@ -75,7 +70,7 @@ export default function (string) {
     }
 
     if (section == "/h") {
-      sections[index] = "<hr>";
+      sections[index] = "<div class='divider compact'></div>";
     }
 
 
@@ -111,26 +106,22 @@ export default function (string) {
 
 
     if (section == "#") {
-        sections[index] = closePrevious() + "<h1>";
-        header1On = true;
-    }
-    if (section == "##") {
         sections[index] = closePrevious() + "<h2>";
         header2On = true;
     }
-    if (section == "###") {
+    if (section == "##") {
         sections[index] = closePrevious() + "<h3>";
         header3On = true;
     }
-    if (section == "####") {
+    if (section == "###") {
         sections[index] = closePrevious() + "<h4>";
         header4On = true;
     }
-    if (section == "#####") {
+    if (section == "####") {
         sections[index] = closePrevious() + "<h5>";
         header5On = true;
     }
-    if (section == "######") {
+    if (section == "#####") {
         sections[index] = closePrevious() + "<h6>";
         header6On = true;
     }
