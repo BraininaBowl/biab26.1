@@ -1,4 +1,12 @@
 export default defineEventHandler(async (event) => {
+  const { loggedIn } = await requireUserSession(event)
+  if (!loggedIn) {
+    throw createError({
+      statusCode: 401,
+      statusMessage: "Unauthorized",
+    })
+  } else {
+
   const storage = useStorage("imageStore");
   const maxFileSize = 3;
   const allowedTypes = [
@@ -82,4 +90,5 @@ export default defineEventHandler(async (event) => {
   // await storage.setItemRaw(`${fileName}`, file.data);
 
   // return fileName;
+  }
 });

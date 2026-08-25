@@ -14,8 +14,8 @@
 
 <script setup>
 definePageMeta({
-	layout: "admin",
-});
+  layout: 'admin',
+})
 const { loggedIn, user, fetch: refreshSession } = useUserSession();
 const credentials = reactive({
 	email: "",
@@ -23,7 +23,7 @@ const credentials = reactive({
 });
 async function login() {
 	try {
-		await $fetch("/api/login", {
+		await $fetch("/api/login/login", {
 			method: "POST",
 			body: credentials,
 		});

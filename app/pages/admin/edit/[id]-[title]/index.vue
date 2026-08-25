@@ -10,8 +10,9 @@
 
 <script setup>
 definePageMeta({
-  layout: "admin",
-});
+  layout: 'admin',
+  middleware: 'authenticated',
+})
 
 const route = useRoute();
 const itemId = route.params.id;

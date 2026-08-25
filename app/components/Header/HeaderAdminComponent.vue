@@ -8,13 +8,21 @@
         ><NuxtLink to="/admin/add/image/">Add Image</NuxtLink>
       </section>
       <section>
+        <NuxtLink to="/" @click.prevent="logout" v-if="loggedIn">Logout</NuxtLink>
         <NuxtLink to="/">Exit</NuxtLink>
       </section>
     </nav>
   </header>
 </template>
 
-<script setup></script>
+<script setup>
+const { loggedIn, clear: clearSession } = useUserSession()
+
+async function logout () {
+  await clearSession()
+  await navigateTo('/')
+}
+</script>
 
 <style lang="css" scoped>
 header {

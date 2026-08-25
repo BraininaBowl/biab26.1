@@ -8,6 +8,7 @@
 const filters = [];
 definePageMeta({
   layout: 'admin',
+  middleware: 'authenticated',
 })
 </script>
 

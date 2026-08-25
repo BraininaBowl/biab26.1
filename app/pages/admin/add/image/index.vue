@@ -90,8 +90,9 @@
 
 <script setup>
 definePageMeta({
-  layout: "admin",
-});
+  layout: 'admin',
+  middleware: 'authenticated',
+})
 
 const props = defineProps({
   item: {

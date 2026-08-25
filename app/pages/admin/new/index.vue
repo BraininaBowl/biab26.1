@@ -11,6 +11,7 @@
 <script setup>
 definePageMeta({
   layout: 'admin',
+  middleware: 'authenticated',
 })
 
 const { items, writeItem } = useItems();
