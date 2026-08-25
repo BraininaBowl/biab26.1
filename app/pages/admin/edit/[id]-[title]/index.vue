@@ -21,7 +21,6 @@ if (itemId) {
   await fetchItems([
   { attribute: "id", values: itemId },
 ], false);
-console.log("id:", itemId, "Fetched items:", items.value);
 }
 
 onMounted(() => {});
