@@ -32,10 +32,10 @@
 				class="description"
 				v-html="item.description"
 			></section>
-			<section>
+			<section v-if="item.linkURL">
 				<NuxtLink
 					:to="item.linkURL"
-					v-html="item.linkTitle"
+					v-html="item.linkTitle? item.linkTitle : item.linkURL"
 					class="button"
 				></NuxtLink>
 			</section>
@@ -63,7 +63,7 @@ onMounted(() => {});
 	background-repeat: no-repeat;
 }
 
-H1:before {
+H1::before {
 	content: " ";
 	display: inline-block;
 	border-bottom: 0.9rem solid var(--col-fg);
@@ -93,7 +93,7 @@ article.content section {
 article.content section.description {
 	display: flex;
 	flex-direction: column;
-	gap: 0.5rem;
+	gap: 0.75rem;
 }
 
 article.content section.links {
