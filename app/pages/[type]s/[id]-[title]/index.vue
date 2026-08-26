@@ -11,23 +11,34 @@
 			<header>
 				<h1 v-if="item.title" v-html="item.title"></h1>
 			</header>
-      <section class="links">
-        <NuxtLink
-          v-if="item.type"
-          :to="`/${item.type}s`"
-          class="type-link clear" v-html="item.type"
-        ></NuxtLink>
-        <NuxtLink
-          v-if="item.tag && item.tag.length > 0" v-for="tag in item.tag" :key="tag"
-          :to="`/tag/${tag}`"
-          class="tag-link clear" v-html="tag"
-        ></NuxtLink>
-      </section>
+			<section class="links">
+				<NuxtLink
+					v-if="item.type"
+					:to="`/${item.type}s`"
+					class="type-link clear"
+					v-html="item.type"
+				></NuxtLink>
+				<NuxtLink
+					v-if="item.tag && item.tag.length > 0"
+					v-for="tag in item.tag"
+					:key="tag"
+					:to="`/tag/${tag}`"
+					class="tag-link clear"
+					v-html="tag"
+				></NuxtLink>
+			</section>
 			<section
 				v-if="item.description"
 				class="description"
 				v-html="item.description"
 			></section>
+			<section>
+				<NuxtLink
+					:to="item.linkURL"
+					v-html="item.linkTitle"
+					class="button"
+				></NuxtLink>
+			</section>
 		</article>
 	</main>
 </template>
@@ -69,48 +80,45 @@ article.content {
 	max-width: 1024px;
 	margin: 0 auto;
 	padding: var(--padding);
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
 }
 
 article.content section {
-  margin: 0 3rem;
-  width: calc(100% - 6rem);
-
+	margin: 0 3rem;
+	width: calc(100% - 6rem);
 }
 
 article.content section.description {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
 }
 
 article.content section.links {
-  display: flex;
-  flex-direction: row;
-  gap: 0.75rem;
+	display: flex;
+	flex-direction: row;
+	gap: 0.75rem;
 }
 
 article.content section.links a {
-  padding: 0.25rem 0.75rem;
-  border-radius: 2rem;
-  color: var(--col-bg);
-  background-color: var(--col-border);
-  text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 400;
-  transition: all 0.2s ease-in-out;
+	padding: 0.25rem 0.75rem;
+	border-radius: 2rem;
+	color: var(--col-bg);
+	background-color: var(--col-border);
+	text-decoration: none;
+	font-size: 0.9rem;
+	font-weight: 400;
+	transition: all 0.2s ease-in-out;
 }
 
 article.content section.links a.type-link {
-  background-color: var(--col-fg);
+	background-color: var(--col-fg);
 }
 
 article.content section.links a:hover {
-  background-color: var(--col-link);
-  color: var(--col-bg-light);
+	background-color: var(--col-link);
+	color: var(--col-bg-light);
 }
-
-
 </style>
