@@ -21,6 +21,11 @@
 
 	--padding: 1.5rem;
 	--bg-grid-size: 4rem;
+
+	--hover-shadow:
+		0 0 0 0.125rem var(--col-bg-light), 0 0 0 0.25rem var(--col-highlight),
+		inset 0 0 0 0.125rem var(--col-bg-light),
+		inset 0 0 0 0.25rem var(--col-link);
 }
 
 html * {
@@ -76,20 +81,20 @@ body {
 }
 
 .button {
-	background-color: var(--col-link);
-	color: var(--col-bg-light);
+	background-color: var(--col-bg-light);
+	color: var(--col-fg);
 	font-weight: 700;
 	font-size: 1.25rem;
 	padding: 0.5rem 1rem;
 	border-radius: 2rem;
-  text-decoration: none;
+	border: 0.075rem solid var(--col-border);
+	text-decoration: none;
+	transition: box-shadow 0.125s ease-out;
 }
 
 .button:hover {
-  background-color: var(--col-link-hover);
-  text-decoration: underline;
+	box-shadow: var(--hover-shadow);
 }
-
 
 h1 {
 	font-family: "AlanSans", sans-serif;
@@ -151,7 +156,7 @@ a.clear {
 	text-decoration: unset;
 }
 
-a:not(.clear)::before {
+a:not(.clear):not(.button)::before {
 	content: "";
 	display: inline-block;
 	position: absolute;
@@ -167,12 +172,12 @@ a:not(.clear)::before {
 	bottom: -0.125em;
 }
 
-a:not(.clear):hover {
+a:not(.clear):not(.button):hover {
 	color: var(--col-bg-light);
 	color: #fff;
 }
 
-a:not(.clear):hover::before {
+a:not(.clear):not(.button):hover::before {
 	width: calc(100% + 0.5em);
 	left: -0.25em;
 	opacity: 1;

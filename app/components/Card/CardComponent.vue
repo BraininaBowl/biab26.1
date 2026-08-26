@@ -63,7 +63,8 @@ defineProps({
 	border: 0.075rem solid var(--col-border);
 	transition:
 		box-shadow 125ms ease-out,
-		transform 125ms ease-out;
+		transform 125ms ease-out,
+		border-radius 125ms ease-out;
 }
 
 .card_content {
@@ -107,5 +108,10 @@ defineProps({
 .card_wrapper:hover .card,
 .card_wrapper:hover .card_label {
 	transform: translateY(-0.5rem);
+}
+
+.card_wrapper:hover .card {
+	box-shadow: var(--hover-shadow);
+	border-radius: 0.5rem;
 }
 </style>
