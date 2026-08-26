@@ -1,13 +1,27 @@
 <template>
 	<main class="item" v-for="item in items">
-		<div
+		<!-- <div
 			v-if="item.imageURL"
 			:alt="item.title"
 			:class="`page-image ${item.imagePixel ? 'pixel' : ''}`"
 			:style="`aspect-ratio: ${item.imageAspectRatio ? item.imageAspectRatio : 'auto'}; background-image: url('${item.imageURL}'); background-position: ${item.imageFocus ? item.imageFocus : 'center'};`"
-		></div>
-		<div v-else class="divider"></div>
+		></div> 
+		<div v-else class="divider"></div>-->
+
 		<article class="content">
+			<section
+				class="image"
+				:style="`aspect-ratio: ${item.imageAspectRatio ? item.imageAspectRatio * 1.125 : 'auto'};`"
+			>
+				<VisualCRTComponent
+					:item="{
+						imageURL: item.imageURL,
+						imagePixel: item.imagePixel,
+						glow: false,
+						monitor: true,
+					}"
+				/>
+			</section>
 			<header>
 				<h1 v-if="item.title" v-html="item.title"></h1>
 			</header>
@@ -35,7 +49,7 @@
 			<section v-if="item.linkURL">
 				<NuxtLink
 					:to="item.linkURL"
-					v-html="item.linkTitle? item.linkTitle : item.linkURL"
+					v-html="item.linkTitle ? item.linkTitle : item.linkURL"
 					class="button"
 				></NuxtLink>
 			</section>
@@ -55,13 +69,13 @@ fetchItems([
 onMounted(() => {});
 </script>
 <style lang="css" scoped>
-.page-image {
+/* .page-image {
 	width: 100%;
 	height: auto;
 	max-height: calc(100vh - (var(--padding) + 8ch));
 	background-size: cover;
 	background-repeat: no-repeat;
-}
+} */
 
 H1::before {
 	content: " ";
@@ -88,6 +102,14 @@ article.content {
 article.content section {
 	margin: 0 3rem;
 	width: calc(100% - 6rem);
+}
+
+article.content section.image {
+	position: relative;
+	width: 100%;
+	margin: 0 auto;
+	z-index: 1;
+	transform: scale(0.5);
 }
 
 article.content section.description {
