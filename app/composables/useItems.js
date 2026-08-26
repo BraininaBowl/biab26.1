@@ -19,18 +19,6 @@ export const useItems = () => {
 					item.tag.forEach((t) => tagsContainer.add(t));
 				}
 			});
-			// filters.forEach((filterItem) => {
-			//   if (typeof filterItem.values == "object") {
-			//     fetchedItems = fetchedItems.filter((el) =>
-			//       filterItem.values.includes(el[filterItem.attribute]),
-			//     );
-
-			//   } else {
-			//     fetchedItems = fetchedItems.filter(
-			//       (el) => filterItem.values == el[filterItem.attribute],
-			//     );
-			//   }
-			// });
 
 			filters.forEach((filterItem) => {
 				fetchedItems = fetchedItems.filter((el) => {
@@ -95,18 +83,6 @@ export const useItems = () => {
 		try {
 			const response = await $fetch(`/api/items/all`);
 			let fetchedItems = response.data.items;
-			// filters.forEach((filterItem) => {
-			//   if (typeof filterItem.values == "object") {
-			//     fetchedItems = fetchedItems.filter((el) =>
-			//       filterItem.values.includes(el[filterItem.attribute]),
-			//     );
-			//   } else {
-			//     fetchedItems = fetchedItems.filter(
-			//       (el) => filterItem.values == el[filterItem.attribute],
-			//     );
-			//   }
-			// });
-
 			filters.forEach((filterItem) => {
 				fetchedItems = fetchedItems.filter((el) => {
 					const filterVals = filterItem.values;
