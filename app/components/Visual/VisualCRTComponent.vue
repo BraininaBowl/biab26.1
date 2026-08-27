@@ -28,7 +28,7 @@
 				v-for="index in 9"
 				:class="`visual_slice visual_slice_monitor visual_slice_${index}`"
 				:style="{
-					transform: `scaleY(1.2) translateY(0) rotateY(${-27 + (index - 1) * 7}deg) translateZ(calc(92.4vw))`,
+					transform: `translateY(-10%) rotateY(${-27 + (index - 1) * 7}deg) translateZ(calc(92.4vw))`,
 				}"
 			></div>
 			<div
@@ -133,6 +133,28 @@ defineProps({
 .monitor .visual_slice_monitor {
 	background: linear-gradient(180deg, #ebdbb2 0%, #d5c4a1 100%);
 	box-shadow: unset;
+	height: 130%;
+}
+
+.monitor .visual_slice_monitor.visual_slice_8::after {
+	content: '';
+	width: 4rem;
+	height: 4rem;
+	border-radius: 50%;
+	background: radial-gradient(circle,#d5c4a1 20%, #bdae93 70%);
+	position: absolute;
+	bottom: 2.5rem;
+	right: 0;
+}
+
+.monitor .visual_slice_monitor.visual_slice_9::after {
+	content: '';
+	width: 2rem;
+	height: 1rem;
+	background: radial-gradient(circle,#f9f5d7 10%, #689d6a 30%, #bdae93 70%);
+	position: absolute;
+	bottom: 4rem;
+	left: 1rem;
 }
 
 .visual_slice.visual_slice_bottom,
