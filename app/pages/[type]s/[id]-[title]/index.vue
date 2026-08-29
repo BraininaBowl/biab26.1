@@ -164,7 +164,7 @@ article.content section.links a:hover {
 	box-shadow:
 		0 -3vmin 0 0 #d5c4a1,
 		0 -8vmin 24vmin 0 rgba(0, 0, 0, 0.5),
-		0 16vmin 8vmin 32vmin var(--col-bg-light);
+		0 8vmin 6vmin 16vmin var(--col-bg-light);
 }
 
 .visual_wrapper {
