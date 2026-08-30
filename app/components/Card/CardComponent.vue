@@ -112,6 +112,6 @@ defineProps({
 
 .card_wrapper:hover .card {
 	box-shadow: var(--hover-shadow);
-	border-radius: 0.5rem;
+	border-radius: 0.75rem;
 }
 </style>

@@ -8,16 +8,21 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Alan+Sans:wght@300..900&display=swap'); */
 
 :root {
-	--col-bg: #f9f5d7;
-	/* --col-bg-light: #fffdec; */
+	/* --col-bg: #f9f5d7;
 	--col-bg-light: #fefffe;
 	--col-fg: #282828;
-	/* --col-border: #7c6f64; */
 	--col-border: #a79f94;
-	--col-area-bg: #ebdbb2;
+	--col-area-bg: #ebdbb2;*/
+	--col-bg: #fefffe;
+	--col-bg-light: #fefffe;
+	--col-fg: #282828;
+	--col-border: #282828;
+	--col-area-bg: #fefffe;
 	--col-link: #458588;
 	--col-link-hover: #83a598;
 	--col-highlight: #fe8019;
+
+
 
 	--padding: 1.5rem;
 	--bg-grid-size: 4rem;
@@ -41,7 +46,7 @@ body {
 	font-size: 16px;
 	background-color: var(--col-bg-light);
 	color: var(--col-fg);
-	background-image:
+	/* background-image:
 		radial-gradient(
 			rgba(from var(--col-fg) r g b / 0) 25%,
 			rgba(from var(--col-fg) r g b / 0.15) 100%
@@ -60,8 +65,8 @@ body {
 		),
 		linear-gradient(
 			to right,
-			rgba(from var(--col-border) r g b / 0.25) 0px,
-			rgba(from var(--col-border) r g b / 0.25) 1px,
+			rgba(from var(--col-border) r g b / 0.125) 0px,
+			rgba(from var(--col-border) r g b / 0.125) 1px,
 			rgba(0, 0, 0, 0) 1px,
 			rgba(0, 0, 0, 0) var(--bg-grid-size)
 		);
@@ -77,7 +82,7 @@ body {
 		var(--bg-grid-size) var(--bg-grid-size),
 		var(--bg-grid-size) var(--bg-grid-size),
 		var(--bg-grid-size) var(--bg-grid-size);
-	background-attachment: fixed;
+	background-attachment: fixed; */
 }
 
 .button {

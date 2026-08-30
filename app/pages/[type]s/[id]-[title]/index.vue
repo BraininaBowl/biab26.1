@@ -1,7 +1,7 @@
 <template>
 	<main class="item" v-for="item in items">
 		<article class="content">
-			<section
+			<section v-if="item.imageURL"
 				class="image"
 				:style="`aspect-ratio: ${item.imageAspectRatio ? item.imageAspectRatio * 1.25 : 'auto'};`"
 			>
