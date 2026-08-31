@@ -115,9 +115,9 @@ article.content section {
 article.content section.image {
 	position: relative;
 	width: 100%;
-	margin: 0 auto -10%;
+	margin: -10% auto -15%;
 	z-index: 1;
-	transform: scale(0.5);
+	transform: scale(0.4);
 }
 
 article.content section.description {
@@ -135,21 +135,24 @@ article.content section.links {
 article.content section.links a {
 	padding: 0.25rem 0.75rem;
 	border-radius: 2rem;
-	color: var(--col-bg);
-	background-color: var(--col-border);
+	color: var(--col-fg);
+	background-color: var(--col-bg);
+	border: 1px solid var(--col-fg);
 	text-decoration: none;
 	font-size: 0.9rem;
 	font-weight: 400;
-	transition: all 0.2s ease-in-out;
+	transition: all 0.25s ease-in-out;
 }
 
 article.content section.links a.type-link {
+	color: var(--col-bg);
 	background-color: var(--col-fg);
 }
 
 article.content section.links a:hover {
 	background-color: var(--col-link);
 	color: var(--col-bg-light);
+	border: 1px solid var(--col-link);
 }
 
 .monitor .footer_bot {

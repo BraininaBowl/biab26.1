@@ -2,7 +2,7 @@
 	<header :class="headerStyle">
 		<NuxtLink class="clear" href="/">
 			<h4>
-				<span class="segment">Brain</span> <span class="segment">in a</span>
+				<span class="segment">Brain</span> <span class="segment">in&nbsp;a&nbsp;</span>
 				<span class="segment">Bowl</span>
 			</h4>
 		</NuxtLink>
