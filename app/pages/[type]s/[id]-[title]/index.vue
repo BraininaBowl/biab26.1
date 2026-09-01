@@ -1,10 +1,7 @@
 <template>
 	<main class="item" v-for="item in items">
 		<article class="content">
-			<section v-if="item.imageURL"
-				class="image"
-				:style="`aspect-ratio: ${item.imageAspectRatio ? item.imageAspectRatio * 1.25 : 'auto'};`"
-			>
+			<section v-if="item.imageURL" class="image">
 				<div
 					class="visual_wrapper monitor"
 					:key="item.id"
@@ -15,7 +12,7 @@
 							v-for="index in 9"
 							:class="`visual_slice visual_slice_monitor visual_slice_${index}`"
 							:style="{
-								transform: `translateY(-10%) rotateY(${-27 + (index - 1) * 7}deg) translateZ(92.4vmin)`,
+								transform: `translateY(-10%) rotateY(${-27 + (index - 1) * 7}deg) translateZ(92.4rem)`,
 							}"
 						></div>
 						<div
@@ -23,13 +20,14 @@
 							:class="`visual_slice visual_slice_main visual_slice_${index} crt  ${item.imagePixel ? 'pixel' : ''}`"
 							:style="{
 								backgroundPosition: `calc(${index - 1} * (100% / 6)) center`,
-								transform: `rotateY(${-21 + (index - 1) * 7}deg) translateZ(92.5vmin)`,
+								transform: `rotateY(${-21 + (index - 1) * 7}deg) translateZ(92.5rem)`,
 							}"
 						></div>
 					</div>
 					<div class="footer_bot"></div>
 				</div>
 			</section>
+			<section class="divider compact"></section>
 			<header>
 				<h1 v-if="item.title" v-html="item.title"></h1>
 			</header>
@@ -77,14 +75,6 @@ fetchItems([
 onMounted(() => {});
 </script>
 <style lang="css" scoped>
-/* .page-image {
-	width: 100%;
-	height: auto;
-	max-height: calc(100vh - (var(--padding) + 8ch));
-	background-size: cover;
-	background-repeat: no-repeat;
-} */
-
 H1::before {
 	content: " ";
 	display: inline-block;
@@ -94,8 +84,12 @@ H1::before {
 	width: 1rem;
 	border-radius: 0.125rem;
 	margin-right: 1rem;
-	transform: translateY(-0.25rem) rotate(-45deg);
+	margin-left: -3rem;
+	transform: translateY(-0.25rem) rotate(-45deg) ;
+		
 }
+
+H1 {padding-left: 3rem;}
 
 article.content {
 	width: 100%;
@@ -115,9 +109,10 @@ article.content section {
 article.content section.image {
 	position: relative;
 	width: 100%;
-	margin: -10% auto -15%;
+	height: 50rem;
+	margin: -15% auto -20%;
 	z-index: 1;
-	transform: scale(0.4);
+	transform: scale(0.3);
 }
 
 article.content section.description {
@@ -156,18 +151,19 @@ article.content section.links a:hover {
 }
 
 .monitor .footer_bot {
-	width: 40%;
-	height: 40%;
+	width: 50rem;
+	height: 24rem;
 	position: absolute;
 	left: 50%;
 	top: 0;
-	transform: translateX(-50%) translateY(260%) translateZ(-20vmin)
-		rotateX(-90deg);
-	background: linear-gradient(180deg, #bdae93 0%, #d5c4a1 100%);
+	border-radius: 5rem;
+	transform: rotateY(-10.1deg) translateX(-70%) translateY(53rem)
+		translateZ(-20rem) rotateX(-90deg);
+	background: linear-gradient(-20deg, #bdae93 20%, #d5c4a1 150%);
 	box-shadow:
-		0 -3vmin 0 0 #d5c4a1,
-		0 -8vmin 24vmin 0 rgba(0, 0, 0, 0.5),
-		0 8vmin 6vmin 16vmin var(--col-bg-light);
+		0 -3rem 0 0 #d5c4a1,
+		0 4rem 32rem 0 rgba(0, 0, 0, 0.75),
+		0 8rem 6rem 16rem var(--col-bg-light);
 }
 
 .visual_wrapper {
@@ -175,13 +171,12 @@ article.content section.links a:hover {
 	width: 100%;
 	height: 100%;
 	position: relative;
-	perspective: 500px;
-	perspective-origin: center;
+	perspective-origin: 50% 40%;
 	transform-style: preserve-3d;
 }
 
 .visual_wrapper.monitor {
-	perspective: 1000px;
+	perspective: 2000px;
 }
 
 .visual_wrapper * {
@@ -193,13 +188,13 @@ article.content section.links a:hover {
 	width: 100%;
 	height: 100%;
 	position: relative;
-	transform: rotateY(-0.1deg) translateZ(-98vmin)
-		translateX(calc(50% - (80vmin / 14)));
+	transform: rotateY(-10.1deg) translateZ(-98rem)
+		translateX(calc(30% - (80rem / 14)));
 }
 
 .visual_slice {
 	display: block;
-	width: calc((80vmin / 7) + 0.5px);
+	width: calc((80rem / 7) + 0.5px);
 	height: 100%;
 	overflow: hidden;
 	background-image: var(--background-image);
@@ -210,26 +205,26 @@ article.content section.links a:hover {
 	position: absolute;
 	left: 0;
 	box-shadow:
-		inset 0px 25px 15px -20px rgba(0, 0, 0, 1),
-		inset 0px -25px 15px -20px rgba(0, 0, 0, 1);
+		inset 0px 25px 15px -20px rgba(0, 0, 0, 0.5),
+		inset 0px -25px 15px -20px rgba(0, 0, 0, 0.5);
 }
 
 .monitor .visual_slice {
 	box-shadow:
-		inset 0px 25px 15px -20px rgba(0, 0, 0, 1),
-		inset 0px -25px 15px -20px rgba(0, 0, 0, 1);
+		inset 0px 25px 15px -20px rgba(0, 0, 0, 0.5),
+		inset 0px -25px 15px -20px rgba(0, 0, 0, 0.5);
 }
 .monitor .visual_slice_1 {
 	box-shadow:
-		inset 0px 25px 15px -20px rgba(0, 0, 0, 1),
-		inset 0px -25px 15px -20px rgba(0, 0, 0, 1),
-		-2vmin 0 0 0 #a89984;
+		inset 0px 25px 15px -20px rgba(0, 0, 0, 0.5),
+		inset 0px -25px 15px -20px rgba(0, 0, 0, 0.5),
+		-2rem 0 0 0 #a89984;
 }
 .monitor .visual_slice_7 {
 	box-shadow:
-		inset 0px 25px 15px -20px rgba(0, 0, 0, 1),
-		inset 0px -25px 15px -20px rgba(0, 0, 0, 1),
-		2vmin 0 0 0 #ebdbb2;
+		inset 0px 25px 15px -20px rgba(0, 0, 0, 0.5),
+		inset 0px -25px 15px -20px rgba(0, 0, 0, 0.5),
+		2rem 0 0 0 #ebdbb2;
 }
 
 .monitor .visual_slice_monitor {
@@ -240,49 +235,31 @@ article.content section.links a:hover {
 
 .monitor .visual_slice_monitor.visual_slice_8::after {
 	content: "";
-	width: 5vmin;
-	height: 5vmin;
+	width: 5rem;
+	height: 5rem;
 	border-radius: 50%;
 	background: radial-gradient(circle, #ebdbb2 20%, #d5c4a1 50%, #bdae93 70%);
 	position: absolute;
-	bottom: 2.25vmin;
+	bottom: 2rem;
 	right: 0;
 }
 
 .monitor .visual_slice_monitor.visual_slice_9::after {
 	content: "";
-	width: 2vmin;
-	height: 2vmin;
-	background: radial-gradient(circle, #ffffff 10%, #f9f5d7 30%, #bdae93 70%);
+	width: 2rem;
+	height: 1rem;
+	background: radial-gradient(circle, #f9f5d7 10%, #ebdbb2 30%, #bdae93 70%);
 	position: absolute;
-	bottom: 3.5vmin;
-	left: 1vmin;
+	bottom: 3.75rem;
+	left: 1rem;
 }
 
-.visual_slice.visual_slice_bottom,
-.visual_slice.visual_slice_top {
-	opacity: 0.2;
+.monitor .visual_slice_monitor.visual_slice_1 {
+	border-radius: 3rem 0 0 3rem;
 }
 
-.visual_slice_top {
-	background-image:
-		linear-gradient(
-			0deg,
-			rgba(0, 0, 0, 1) 0%,
-			rgba(0, 0, 0, 1) 86%,
-			rgba(0, 0, 0, 0) 100%
-		),
-		var(--background-image);
-}
-.visual_slice_bottom {
-	background-image:
-		linear-gradient(
-			180deg,
-			rgba(0, 0, 0, 1) 0%,
-			rgba(0, 0, 0, 1) 86%,
-			rgba(0, 0, 0, 0) 100%
-		),
-		var(--background-image);
+.monitor .visual_slice_monitor.visual_slice_9 {
+	border-radius: 0 3rem 3rem 0;
 }
 
 /* Scanlines */

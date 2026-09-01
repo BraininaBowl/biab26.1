@@ -2,7 +2,7 @@
 	<header :class="headerStyle">
 		<NuxtLink class="clear" href="/">
 			<h4>
-				<span class="segment">Brain</span> <span class="segment">in&nbsp;a&nbsp;</span>
+				<span class="segment">Brain&nbsp;</span> <span class="segment">in&nbsp;a&nbsp;</span>
 				<span class="segment">Bowl</span>
 			</h4>
 		</NuxtLink>
@@ -234,10 +234,10 @@ header.compact h4 .segment {
 	display: flex;
 	align-items: row;
 }
-header.compact h4 .segment::after {
+/* header.compact h4 .segment::after {
 	content: "\00a0";
 	display: block;
-}
+} */
 header.compact .visual_container {
 	/* display: none; */
 	width: 0;
