@@ -17,7 +17,6 @@
 				typeField: 'checkbox',
 				label: 'Hidden',
 				requiredField: false,
-
 				placeholder: '',
 				disabledField: formData.trashed,
 			}"
@@ -28,7 +27,6 @@
 				typeField: 'checkbox',
 				label: 'Featured',
 				requiredField: false,
-
 				placeholder: '',
 				disabledField: formData.trashed,
 			}"
@@ -41,7 +39,7 @@
 				itemDataType: 'type',
 			}"
 		/>
-		<FormTypeSelectComponent
+		<FormPageTypeSelectComponent
 			v-model="formData.pageType"
 			:formfieldData="{
 				label: 'Page type',
@@ -55,7 +53,6 @@
 				typeField: 'text',
 				label: 'Title',
 				requiredField: true,
-
 				placeholder: '',
 				disabledField: formData.trashed,
 			}"
@@ -64,7 +61,6 @@
 			v-model="formData.tag"
 			:formfieldData="{
 				label: 'Item tags',
-
 				disabledField: formData.trashed,
 				itemDataType: 'tag',
 			}"
@@ -73,7 +69,6 @@
 			v-model="formData.imageId"
 			:formfieldData="{
 				label: 'Item image',
-
 				disabledField: formData.trashed,
 			}"
 		/>
@@ -82,7 +77,6 @@
 			:formfieldData="{
 				label: 'Snippet',
 				requiredField: false,
-
 				placeholder: '',
 				disabledField: formData.trashed,
 			}"
@@ -92,7 +86,6 @@
 			:formfieldData="{
 				label: 'Description',
 				requiredField: false,
-
 				placeholder: '',
 				disabledField: formData.trashed,
 			}"
@@ -103,7 +96,6 @@
 				typeField: 'text',
 				label: 'Link Title',
 				requiredField: false,
-
 				placeholder: '',
 				disabledField: formData.trashed,
 			}"
@@ -114,7 +106,6 @@
 				typeField: 'text',
 				label: 'Link URL',
 				requiredField: false,
-
 				placeholder: '',
 				disabledField: formData.trashed,
 			}"
@@ -123,7 +114,6 @@
 			v-model="formData.parent"
 			:formfieldData="{
 				label: 'Parent',
-
 				disabledField: formData.trashed,
 			}"
 		/>
@@ -133,7 +123,6 @@
         typeField: 'color',
         label: 'Color',
         requiredField: false,
-         
         placeholder: '',
         disabledField: formData.trashed,
       }"
@@ -171,8 +160,6 @@ const props = defineProps({
 		required: false,
 	},
 });
-
-const types = new Object();
 const item = props.item || {};
 
 const { writeItem } = useItems();

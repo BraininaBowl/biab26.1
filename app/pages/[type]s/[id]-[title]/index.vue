@@ -1,7 +1,7 @@
 <template>
 	<main class="item" v-for="item in items">
 		<article class="content">
-			<section v-if="item.imageURL" class="image">
+			<section v-if="item.imageURL && item.pageType === 'monitor'" class="image monitor">
 				<div
 					class="visual_wrapper monitor"
 					:key="item.id"
@@ -27,6 +27,12 @@
 					<div class="footer_bot"></div>
 				</div>
 			</section>
+			<section v-else-if="item.imageURL && item.pageType === 'playdate'" class="image playdate">
+				<div class="visual_wrapper playdate" >
+					<img :src="item.imageURL" alt="" />
+				</div>
+			</section>
+
 			<section class="divider compact"></section>
 			<header>
 				<h1 v-if="item.title" v-html="item.title"></h1>
@@ -85,10 +91,12 @@ H1::before {
 	border-radius: 0.125rem;
 	margin-right: 1rem;
 	margin-left: -3rem;
-	transform: translateY(-0.25rem) rotate(-45deg) ;
+	transform: translateY(-0.25rem) rotate(-45deg);
 }
 
-H1 {padding-left: 3rem;}
+H1 {
+	padding-left: 3rem;
+}
 
 article.content {
 	width: 100%;
@@ -108,11 +116,15 @@ article.content section {
 article.content section.image {
 	position: relative;
 	width: 100%;
-	height: 50rem;
-	margin: -15% auto -20%;
 	z-index: 1;
-	transform: scale(0.3);
 }
+
+article.content section.image.monitor {
+	transform: scale(0.3);
+	margin: -15% auto -20%;
+	height: 50rem;
+}
+
 
 article.content section.description {
 	display: flex;

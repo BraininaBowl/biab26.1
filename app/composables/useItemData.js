@@ -8,7 +8,7 @@ export const useItemData = () => {
       typeResponse = await $fetch(`/api/itemData/${typeType}`);
       if (typeResponse.data && typeResponse.data.content) {
         typeResponse.data.content.sort((a, b) => a - b);
-        return typeResponse;
+        return typeResponse.data.content;
       }
     } catch (error) {
       types.value = [];

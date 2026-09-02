@@ -1,8 +1,8 @@
 <template>
 	<div class="formSection">
 		<p v-html="formfieldData.label"></p>
-		<div class="formTagsContainer" v-if="types.length > 0">
-			<div class="formfield radio" v-for="(type, index) in types">
+		<div class="formTagsContainer" v-if="pageTypes.length > 0">
+			<div class="formfield radio" v-for="(type, index) in pageTypes">
 				<input
 					type="radio"
 					:id="`${id}-${index}`"
@@ -29,7 +29,7 @@ const props = defineProps({
 });
 const formfieldData = props.formfieldData || {};
 const { fetchTypes } = useItemData();
-const types = await fetchTypes("type");
+const pageTypes = await fetchTypes("pageType");
 </script>
 
 <style lang="css" scoped></style>
