@@ -1,20 +1,18 @@
 export const useItemData = () => {
-  const types = useState("types", () => []);
   const tags = useState("tags", () => []);
   const itemStatus = useState("itemStatus", () => null);
 
-  async function fetchTypes() {
+  async function fetchTypes(typeType) {
     let typeResponse = [];
     try {
       typeResponse = await $fetch(`/api/itemData/type`);
+      if (typeResponse.data && typeResponse.data.content) {
+        typeResponse.data.content.sort((a, b) => a - b);
+        return typeResponse;
+      }
     } catch (error) {
       types.value = [];
     } finally {
-      if (typeResponse.data && typeResponse.data.content) {
-        typeResponse.data.content.sort((a, b) => a - b);
-        types.value = typeResponse.data.content;
-        itemStatus.value = typeResponse.itemStatus;
-      }
     }
   }
 
@@ -52,7 +50,6 @@ export const useItemData = () => {
     fetchTags,
     writeItemData,
     removeItemData,
-    types,
     tags,
     itemStatus,
   };

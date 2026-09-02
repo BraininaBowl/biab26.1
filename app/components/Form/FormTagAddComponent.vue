@@ -5,7 +5,7 @@
         v-model="formData.value"
         :formfieldData="{
           typeField: 'text',
-          label: 'New ' + tagType,
+          label: 'New ' + tagLabel,
           requiredField: true,
           id: id,
           placeholder: '',
@@ -22,13 +22,14 @@
 const id = useId();
 const { writeItemData, itemTypes } = useItemData();
 const props = defineProps({
-  tagType: {
-    type: String,
+  tagData: {
+    type: Object,
     required: false,
   },
 });
 
-const tagType = props.tagType || "";
+const tagType = props.tagData.tagType || "";
+const tagLabel = props.tagData.tagLabel || tagType;
 
 function handleSubmit() {
   const status = writeItemData(tagType, formData.value);

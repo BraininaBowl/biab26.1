@@ -86,7 +86,6 @@ H1::before {
 	margin-right: 1rem;
 	margin-left: -3rem;
 	transform: translateY(-0.25rem) rotate(-45deg) ;
-		
 }
 
 H1 {padding-left: 3rem;}

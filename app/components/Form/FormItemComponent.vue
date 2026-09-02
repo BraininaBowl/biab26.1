@@ -5,8 +5,11 @@
 			<a @click="trashItem()" v-else>Trash item</a>
 		</div>
 	</div>
-	<FormTagAddComponent tagType="type" />
-	<FormTagAddComponent tagType="tag" />
+	<FormTagAddComponent :tagData="{ tagType: 'type', tagLabel: 'item type' }" />
+	<FormTagAddComponent :tagData="{ tagType: 'tag' }" />
+	<FormTagAddComponent
+		:tagData="{ tagType: 'pageType', tagLabel: 'page type' }"
+	/>
 	<form @submit.prevent="writeSubmit">
 		<FormInputComponent
 			v-model="formData.hidden"
@@ -14,7 +17,7 @@
 				typeField: 'checkbox',
 				label: 'Hidden',
 				requiredField: false,
-				 
+
 				placeholder: '',
 				disabledField: formData.trashed,
 			}"
@@ -25,7 +28,7 @@
 				typeField: 'checkbox',
 				label: 'Featured',
 				requiredField: false,
-				 
+
 				placeholder: '',
 				disabledField: formData.trashed,
 			}"
@@ -34,9 +37,16 @@
 			v-model="formData.type"
 			:formfieldData="{
 				label: 'Item type',
-				 
 				disabledField: formData.trashed,
 				itemDataType: 'type',
+			}"
+		/>
+		<FormTypeSelectComponent
+			v-model="formData.pageType"
+			:formfieldData="{
+				label: 'Page type',
+				disabledField: formData.trashed,
+				itemDataType: 'pageType',
 			}"
 		/>
 		<FormInputComponent
@@ -45,7 +55,7 @@
 				typeField: 'text',
 				label: 'Title',
 				requiredField: true,
-				 
+
 				placeholder: '',
 				disabledField: formData.trashed,
 			}"
@@ -54,7 +64,7 @@
 			v-model="formData.tag"
 			:formfieldData="{
 				label: 'Item tags',
-				 
+
 				disabledField: formData.trashed,
 				itemDataType: 'tag',
 			}"
@@ -63,7 +73,7 @@
 			v-model="formData.imageId"
 			:formfieldData="{
 				label: 'Item image',
-				 
+
 				disabledField: formData.trashed,
 			}"
 		/>
@@ -72,7 +82,7 @@
 			:formfieldData="{
 				label: 'Snippet',
 				requiredField: false,
-				 
+
 				placeholder: '',
 				disabledField: formData.trashed,
 			}"
@@ -82,7 +92,7 @@
 			:formfieldData="{
 				label: 'Description',
 				requiredField: false,
-				 
+
 				placeholder: '',
 				disabledField: formData.trashed,
 			}"
@@ -93,7 +103,7 @@
 				typeField: 'text',
 				label: 'Link Title',
 				requiredField: false,
-				 
+
 				placeholder: '',
 				disabledField: formData.trashed,
 			}"
@@ -104,7 +114,7 @@
 				typeField: 'text',
 				label: 'Link URL',
 				requiredField: false,
-				 
+
 				placeholder: '',
 				disabledField: formData.trashed,
 			}"
@@ -113,7 +123,7 @@
 			v-model="formData.parent"
 			:formfieldData="{
 				label: 'Parent',
-				 
+
 				disabledField: formData.trashed,
 			}"
 		/>
@@ -135,7 +145,6 @@
 				label: 'id',
 				placeholder: '',
 				requiredField: true,
-				 
 			}"
 		/>
 		<FormInputComponent
@@ -145,7 +154,6 @@
 				label: 'Date',
 				placeholder: '',
 				requiredField: true,
-				 
 			}"
 		/>
 
@@ -225,6 +233,7 @@ const formData = ref({
 	featured: item.featured,
 	imageId: item.imageId ? item.imageId : null,
 	type: item.type ? item.type : "",
+	pageType: item.pageType ? item.pageType : "",
 	tag: item.tag ? item.tag : [],
 	// color: item.color ? item.color : "#fffdec",
 	linkTitle: item.linkTitle ? item.linkTitle : "",

@@ -29,8 +29,8 @@ const props = defineProps({
 });
 
 const formfieldData = props.formfieldData || {};
-const { fetchTypes, types } = useItemData();
-await fetchTypes();
+const { fetchTypes } = useItemData();
+const types = await fetchTypes(formfieldData.itemDataType);
 </script>
 
 <style lang="css" scoped></style>
