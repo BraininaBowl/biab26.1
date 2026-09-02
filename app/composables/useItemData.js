@@ -5,7 +5,7 @@ export const useItemData = () => {
   async function fetchTypes(typeType) {
     let typeResponse = [];
     try {
-      typeResponse = await $fetch(`/api/itemData/type`);
+      typeResponse = await $fetch(`/api/itemData/${typeType}`);
       if (typeResponse.data && typeResponse.data.content) {
         typeResponse.data.content.sort((a, b) => a - b);
         return typeResponse;

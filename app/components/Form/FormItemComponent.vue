@@ -172,6 +172,7 @@ const props = defineProps({
 	},
 });
 
+const types = new Object();
 const item = props.item || {};
 
 const { writeItem } = useItems();
