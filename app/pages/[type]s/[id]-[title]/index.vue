@@ -1,7 +1,7 @@
 <template>
 	<main class="item" v-for="item in items">
 		<article class="content">
-			<section v-if="item.imageURL && item.pageType === 'monitor'" class="image monitor">
+			<section v-if="item.imageURL && item.pageType === 'pc'" class="image monitor">
 				<div
 					class="visual_wrapper monitor"
 					:key="item.id"
