@@ -42,12 +42,12 @@
 					<div class="playdate_body">
 						<div class="playdate_front">
 							<div class="playdate_screen"></div>
-							<div class="playdate_screw"></div>
-							<div class="playdate_screw"></div>
-							<div class="playdate_screw"></div>
+							<div class="playdate_screw playdate_screw_1"></div>
+							<div class="playdate_screw playdate_screw_2"></div>
+							<div class="playdate_screw playdate_screw_3"></div>
 							<div class="playdate_grill"></div>
-							<div class="playdate_button_a"></div>
-							<div class="playdate_button_b"></div>
+							<div class="playdate_button playdate_button_a">A</div>
+							<div class="playdate_button playdate_button_b">B</div>
 							<div class="playdate_button_menu"></div>
 						</div>
 					</div>
@@ -130,12 +130,15 @@ H1 {
 .playdate .playdate_screen {
 	width: 400px;
 	height: 240px;
+	top: 10px;
+	left:10px;
 	background-color: var(--col-fg);
 	background-image: var(--background-image);
 	background-position: center;
 	background-repeat: no-repeat;
-	position: relative;
+	position: absolute;
 	border: 10px solid var(--col-fg);
+	border-radius: 10px;
 }
 
 .playdate .playdate_screen::before {
@@ -147,6 +150,7 @@ H1 {
 	top: 0;
 	z-index: 1;
 	background-color: var(--col-fg);
+	background: linear-gradient(110deg, var(--col-fg) -10%, rgba(from var(--col-bg) r g b / 0.15) 30%, var(--col-fg) 100%);
 	mix-blend-mode: lighten;
 }
 
@@ -160,6 +164,50 @@ H1 {
 	z-index: 2;
 	background-color: var(--col-bg);
 	mix-blend-mode: darken;
+}
+
+.playdate .playdate_button {
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	border-radius: 50%;
+	box-shadow: 4px 4px 8px 0 rgba(from var(--col-fg) r g b / 0.25), 1px 1px 1px 0 rgba(from var(--col-fg) r g b / 0.25), inset 10px 10px 10px rgba(from var(--col-bg) r g b / 0.15), inset -5px -5px 10px rgba(from var(--col-fg) r g b / 0.25);
+	color: var(--col-bg);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.playdate .playdate_button_a {
+	bottom: 40px;
+	right: 40px;
+}
+
+.playdate .playdate_button_b {
+	bottom: 40px;
+	right: 120px;
+}
+
+.playdate .playdate_screw {
+	width: 14px;
+	height: 14px;
+	border-radius: 50%;
+	position: absolute;
+	background-color: var(--col-bg);
+	box-shadow: inset 1px 1px 1px 0 var(--col-fg);
+}
+
+.playdate .playdate_screw_1 {
+	top: 4px;
+	right: 4px;
+}
+.playdate .playdate_screw_2 {
+	bottom: 10px;
+	left: 10px;
+}
+.playdate .playdate_screw_3 {
+	bottom: 10px;
+	right: 10px;
 }
 
 article.content {
