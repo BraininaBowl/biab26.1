@@ -120,18 +120,18 @@ H1 {
 }
 
 .playdate .playdate_front {
-	border-radius: 6px;
+	border-radius: 14px;
 	background-color: #fabd2f;
-	width: 460px;
-	height: 460px;
+	width: 440px;
+	height: 440px;
 	box-shadow: 10px 0 0 0 #d79921;
 }
 
 .playdate .playdate_screen {
 	width: 400px;
 	height: 240px;
-	top: 10px;
-	left:10px;
+	top: 4px;
+	left: 4px;
 	background-color: var(--col-fg);
 	background-image: var(--background-image);
 	background-position: center;
@@ -143,20 +143,25 @@ H1 {
 
 .playdate .playdate_screen::before {
 	content: "";
-	width:100%;
+	width: 100%;
 	height: 100%;
 	position: absolute;
 	left: 0;
 	top: 0;
 	z-index: 1;
 	background-color: var(--col-fg);
-	background: linear-gradient(110deg, var(--col-fg) -10%, rgba(from var(--col-bg) r g b / 0.15) 30%, var(--col-fg) 100%);
+	background: linear-gradient(
+		110deg,
+		var(--col-fg) -10%,
+		rgba(from var(--col-bg) r g b / 0.15) 30%,
+		var(--col-fg) 100%
+	);
 	mix-blend-mode: lighten;
 }
 
 .playdate .playdate_screen::after {
 	content: "";
-	width:100%;
+	width: 100%;
 	height: 100%;
 	position: absolute;
 	left: 0;
@@ -171,7 +176,13 @@ H1 {
 	height: 40px;
 	position: absolute;
 	border-radius: 50%;
-	box-shadow: 4px 4px 8px 0 rgba(from var(--col-fg) r g b / 0.25), 1px 1px 1px 0 rgba(from var(--col-fg) r g b / 0.25), inset 10px 10px 10px rgba(from var(--col-bg) r g b / 0.15), inset -5px -5px 10px rgba(from var(--col-fg) r g b / 0.25);
+	box-shadow:
+		4px 4px 8px 0 rgba(from var(--col-fg) r g b / 0.25),
+		1px 1px 1px 0 rgba(from var(--col-fg) r g b / 0.25),
+		inset 10px 10px 10px rgba(from var(--col-bg) r g b / 0.15),
+		inset -5px -5px 10px rgba(from var(--col-fg) r g b / 0.25),
+		-1px -1px 3px rgba(from var(--col-fg) r g b / 0.25),
+		2px 0 0 0 #d79921;
 	color: var(--col-bg);
 	display: flex;
 	justify-content: center;
@@ -188,13 +199,61 @@ H1 {
 	right: 120px;
 }
 
+.playdate .playdate_button_menu {
+	position: absolute;
+	width: 24px;
+	height: 24px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	top: 32px;
+	right: 4px;
+	background-color: #fabd2f;
+	border-radius: 50%;
+	box-shadow:
+		4px 4px 8px 0 rgba(from var(--col-fg) r g b / 0.25),
+		1px 1px 1px 0 rgba(from var(--col-fg) r g b / 0.25),
+		inset 10px 10px 10px rgba(from var(--col-bg) r g b / 0.15),
+		inset -5px -5px 10px rgba(from var(--col-fg) r g b / 0.25),
+		-1px -1px 3px rgba(from var(--col-fg) r g b / 0.25),
+		2px 0 0 0 #d79921;
+}
+
+.playdate .playdate_button_menu::before {
+	content: "";
+	width: 50%;
+	height: 50%;
+	display: block;
+	border-radius: 50%;
+	background-color: var(--col-bg);
+	opacity: 0.75;
+}
+
 .playdate .playdate_screw {
-	width: 14px;
-	height: 14px;
+	width: 24px;
+	height: 24px;
 	border-radius: 50%;
 	position: absolute;
-	background-color: var(--col-bg);
-	box-shadow: inset 1px 1px 1px 0 var(--col-fg);
+	background: linear-gradient(
+		110deg,
+		var(--col-fg) -30%,
+		var(--col-bg) 50%,
+		var(--col-fg) 130%
+	);
+	box-shadow: inset 0 0 1px 1px rgba(from var(--col-fg) r g b / 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.playdate .playdate_screw::before {
+	content: "";
+	display: block;
+	border-radius: 50%;
+	width: 40%;
+	height: 40%;
+	z-index: 1;
+	background-color: var(--col-fg);
 }
 
 .playdate .playdate_screw_1 {
@@ -202,12 +261,12 @@ H1 {
 	right: 4px;
 }
 .playdate .playdate_screw_2 {
-	bottom: 10px;
-	left: 10px;
+	bottom: 4px;
+	left: 4px;
 }
 .playdate .playdate_screw_3 {
-	bottom: 10px;
-	right: 10px;
+	bottom: 4px;
+	right: 4px;
 }
 
 article.content {
