@@ -1,7 +1,10 @@
 <template>
 	<main class="item" v-for="item in items">
 		<article class="content">
-			<section v-if="item.imageURL && item.pageType === 'pc'" class="image monitor">
+			<section
+				v-if="item.imageURL && item.pageType === 'pc'"
+				class="image monitor"
+			>
 				<div
 					class="visual_wrapper monitor"
 					:key="item.id"
@@ -27,9 +30,27 @@
 					<div class="footer_bot"></div>
 				</div>
 			</section>
-			<section v-else-if="item.imageURL && item.pageType === 'playdate'" class="image playdate">
-				<div class="visual_wrapper playdate" >
-					<img :src="item.imageURL" alt="" />
+			<section
+				v-else-if="item.imageURL && item.pageType === 'playdate'"
+				class="image playdate"
+			>
+				<div
+					class="visual_wrapper playdate"
+					:key="item.id"
+					:style="`--background-image: url('${item.imageURL}')`"
+				>
+					<div class="playdate_body">
+						<div class="playdate_front">
+							<div class="playdate_screen"></div>
+							<div class="playdate_screw"></div>
+							<div class="playdate_screw"></div>
+							<div class="playdate_screw"></div>
+							<div class="playdate_grill"></div>
+							<div class="playdate_button_a"></div>
+							<div class="playdate_button_b"></div>
+							<div class="playdate_button_menu"></div>
+						</div>
+					</div>
 				</div>
 			</section>
 
@@ -98,6 +119,49 @@ H1 {
 	padding-left: 3rem;
 }
 
+.playdate .playdate_front {
+	border-radius: 6px;
+	background-color: #fabd2f;
+	width: 460px;
+	height: 460px;
+	box-shadow: 10px 0 0 0 #d79921;
+}
+
+.playdate .playdate_screen {
+	width: 400px;
+	height: 240px;
+	background-color: var(--col-fg);
+	background-image: var(--background-image);
+	background-position: center;
+	background-repeat: no-repeat;
+	position: relative;
+	border: 10px solid var(--col-fg);
+}
+
+.playdate .playdate_screen::before {
+	content: "";
+	width:100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 1;
+	background-color: var(--col-fg);
+	mix-blend-mode: lighten;
+}
+
+.playdate .playdate_screen::after {
+	content: "";
+	width:100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 2;
+	background-color: var(--col-bg);
+	mix-blend-mode: darken;
+}
+
 article.content {
 	width: 100%;
 	max-width: 1024px;
@@ -124,7 +188,6 @@ article.content section.image.monitor {
 	margin: -15% auto -20%;
 	height: 50rem;
 }
-
 
 article.content section.description {
 	display: flex;
@@ -194,7 +257,7 @@ article.content section.links a:hover {
 	transform-style: preserve-3d;
 }
 
-.visual_item {
+.monitor .visual_item {
 	display: block;
 	width: 100%;
 	height: 100%;
@@ -203,7 +266,7 @@ article.content section.links a:hover {
 		translateX(calc(30% - (80rem / 14)));
 }
 
-.visual_slice {
+.monitor .visual_slice {
 	display: block;
 	width: calc((80rem / 7) + 0.5px);
 	height: 100%;
