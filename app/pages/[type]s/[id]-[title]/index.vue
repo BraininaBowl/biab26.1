@@ -59,7 +59,9 @@
 					</div>
 				</div>
 			</section>
-
+			<section v-else-if="item.imageURL" class="image visual">
+				<div :style="`background-image: url('${item.imageURL}')`" :alt="item.title" :class="`misc_image ${item.imagePixel ? 'pixel' : ''}`" />
+			</section>
 			<section class="divider compact"></section>
 			<header>
 				<h1 v-if="item.title" v-html="item.title"></h1>
@@ -125,8 +127,15 @@ H1 {
 	padding-left: 3rem;
 }
 
+.visual .misc_image {
+	height: 80vh;
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
 .visual_wrapper.playdate {
-	perspective: 2000px;
+	perspective: 1000px;
 	width: 440px;
 	height: 420px;
 	margin: 4rem auto 0;
@@ -355,7 +364,7 @@ H1 {
 		var(--col-bg) 50%,
 		var(--col-fg) 130%
 	);
-	box-shadow: inset 0 0 1px 1px rgba(from var(--col-fg) r g b / 0.5);
+	box-shadow: inset 0 0 1px 1px rgba(from var(--col-fg) r g b / 0.25);
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -396,12 +405,12 @@ article.content {
 
 article.content section {
 	margin: 0 3rem;
-	width: calc(100% - 6rem);
+	width: calc(100% - 6rem - (var(--padding) * 2));
 }
 
 article.content section.image {
 	position: relative;
-	width: 100%;
+	/* width: 100%; */
 	z-index: 1;
 }
 

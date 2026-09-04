@@ -84,9 +84,32 @@ defineProps({
 	flex-direction: column;
 	width: 100%;
 	height: 100%;
-	background-color: var(--col-bg-light);
 	align-items: flex-start;
 	position: relative;
+}
+
+.card_image_inner::before {
+	content: "";
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 1;
+	background-color: var(--col-fg);
+	mix-blend-mode: lighten;
+}
+
+.card_image_inner::after {
+	content: "";
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 2;
+	background-color: var(--col-bg);
+	mix-blend-mode: darken;
 }
 
 .card_label {

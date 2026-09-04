@@ -126,7 +126,7 @@ header.extended .visual_wrapper {
 	height: 100%;
 	overflow: hidden;
 	position: relative;
-	perspective: 500px;
+	perspective: 2000px;
 	perspective-origin: center;
 	transform-style: preserve-3d;
 	mix-blend-mode: lighten;
@@ -142,7 +142,7 @@ header.extended .visual_item {
 	width: 100%;
 	height: 100%;
 	position: relative;
-	transform: rotateY(-0.1deg) translateZ(-98vw)
+	transform: scale(0.8) rotateY(-0.1deg) translateZ(-98vw)
 		translateX(calc(50% - (80vw / 14)));
 }
 
