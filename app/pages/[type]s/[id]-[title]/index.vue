@@ -40,15 +40,21 @@
 					:style="`--background-image: url('${item.imageURL}')`"
 				>
 					<div class="playdate_body">
+						<div class="playdate_crank"></div>
 						<div class="playdate_front">
 							<div class="playdate_screen"></div>
 							<div class="playdate_screw playdate_screw_1"></div>
 							<div class="playdate_screw playdate_screw_2"></div>
 							<div class="playdate_screw playdate_screw_3"></div>
 							<div class="playdate_grill"></div>
-							<div class="playdate_button playdate_button_a">A</div>
-							<div class="playdate_button playdate_button_b">B</div>
+							<div class="playdate_button playdate_button_a">
+								<div class="playdate_button_inner">A</div>
+							</div>
+							<div class="playdate_button playdate_button_b">
+								<div class="playdate_button_inner">B</div>
+							</div>
 							<div class="playdate_button_menu"></div>
+							<div class="playdate_dpad"></div>
 						</div>
 					</div>
 				</div>
@@ -119,12 +125,63 @@ H1 {
 	padding-left: 3rem;
 }
 
+.visual_wrapper.playdate {
+	perspective: 2000px;
+	width: 440px;
+	height: 420px;
+	margin: 4rem auto 0;
+}
+
+.playdate .playdate_body {
+	width: 440px;
+	height: 420px;
+	position: relative;
+	transform: rotateY(-20deg) rotateX(15deg) translateX(-5rem) scale(0.8);
+	box-shadow: 2rem 3rem 4rem 0 rgba(from var(--col-fg) r g b / 0.2);
+}
+
 .playdate .playdate_front {
 	border-radius: 14px;
 	background-color: #fabd2f;
 	width: 440px;
-	height: 440px;
-	box-shadow: 10px 0 0 0 #d79921;
+	height: 420px;
+	box-shadow:
+		20px 8px 0 0 #d79921,
+		15px 6px 0 0 #d79921,
+		10px 4px 0 0 #d79921,
+		5px 2px 0 0 #d79921;
+}
+
+.playdate .playdate_crank {
+	width: 30px;
+	border-radius: 0 15px 15px 0;
+	height: 120px;
+	position: absolute;
+	top: 50%;
+	right: 0px;
+	background: linear-gradient(110deg, var(--col-bg) -100%, var(--col-fg) 300%);
+	box-shadow:
+		8px 4px 0 0 rgba(from var(--col-fg) r g b / 0.75),
+		8px 4px 0 0 var(--col-bg),
+		6px 3px 0 0 rgba(from var(--col-fg) r g b / 0.75),
+		6px 3px 0 0 var(--col-bg),
+		4px 2px 0 0 rgba(from var(--col-fg) r g b / 0.75),
+		4px 2px 0 0 var(--col-bg),
+		-2px 0 2px 0 rgba(from var(--col-fg) r g b / 0.5);
+	transform: translateZ(1px) translateX(34px);
+}
+
+.playdate .playdate_crank::before {
+	content: "";
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	position: absolute;
+	left: 4px;
+	top: 5px;
+	z-index: 1;
+	background-color: #fabd2f;
+	box-shadow: inset 1px 1px 2px 0 rgba(from var(--col-fg) r g b / 0.75);
 }
 
 .playdate .playdate_screen {
@@ -171,32 +228,88 @@ H1 {
 	mix-blend-mode: darken;
 }
 
+.playdate .playdate_dpad {
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	bottom: 40px;
+	left: 50px;
+	transform: translateZ(5px);
+	filter: drop-shadow(3px 3px 2px rgba(from var(--col-fg) r g b / 0.25));
+}
+
+.playdate .playdate_dpad::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 36px;
+	width: 28px;
+	height: 100px;
+	background-color: #fabd2f;
+	border-radius: 15px;
+	z-index: 1;
+	box-shadow:
+		inset 8px 4px 4px -1px rgba(from var(--col-bg) r g b / 0.25),
+		5px 0 0 0 #d79921;
+}
+
+.playdate .playdate_dpad::after {
+	content: "";
+	position: absolute;
+	top: 36px;
+	left: 0;
+	width: 100px;
+	height: 28px;
+	background-color: #fabd2f;
+	border-radius: 15px;
+	z-index: 2;
+	box-shadow:
+		inset 3px 0 1px -1px rgba(from var(--col-bg) r g b / 0.25),
+		5px 0 0 0 #d79921;
+}
+
 .playdate .playdate_button {
-	width: 40px;
-	height: 40px;
+	width: 50px;
+	height: 50px;
 	position: absolute;
 	border-radius: 50%;
 	box-shadow:
 		4px 4px 8px 0 rgba(from var(--col-fg) r g b / 0.25),
 		1px 1px 1px 0 rgba(from var(--col-fg) r g b / 0.25),
-		inset 10px 10px 10px rgba(from var(--col-bg) r g b / 0.15),
-		inset -5px -5px 10px rgba(from var(--col-fg) r g b / 0.25),
+		inset 2px 2px 10px rgba(from var(--col-bg) r g b / 0.25),
+		inset -4px -4px 2px rgba(from var(--col-fg) r g b / 0.25),
 		-1px -1px 3px rgba(from var(--col-fg) r g b / 0.25),
 		2px 0 0 0 #d79921;
 	color: var(--col-bg);
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	transform: translateZ(5px);
+}
+
+.playdate .playdate_button_inner {
+	font-size: 1.1rem;
+	font-weight: 400;
+	width: 50%;
+	height: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	border-radius: 50%;
+	background-color: rgba(from var(--col-bg) r g b / 0.8);
+	color: #fabd2f;
+	transform: translateZ(5px);
 }
 
 .playdate .playdate_button_a {
-	bottom: 40px;
-	right: 40px;
+	bottom: 90px;
+	right: 50px;
 }
 
 .playdate .playdate_button_b {
-	bottom: 40px;
-	right: 120px;
+	bottom: 90px;
+	right: 130px;
 }
 
 .playdate .playdate_button_menu {
@@ -213,10 +326,11 @@ H1 {
 	box-shadow:
 		4px 4px 8px 0 rgba(from var(--col-fg) r g b / 0.25),
 		1px 1px 1px 0 rgba(from var(--col-fg) r g b / 0.25),
-		inset 10px 10px 10px rgba(from var(--col-bg) r g b / 0.15),
-		inset -5px -5px 10px rgba(from var(--col-fg) r g b / 0.25),
+		inset 2px 2px 10px rgba(from var(--col-bg) r g b / 0.5),
+		inset -2px -2px 2px rgba(from var(--col-fg) r g b / 0.25),
 		-1px -1px 3px rgba(from var(--col-fg) r g b / 0.25),
 		2px 0 0 0 #d79921;
+	transform: translateZ(5px);
 }
 
 .playdate .playdate_button_menu::before {
@@ -227,6 +341,7 @@ H1 {
 	border-radius: 50%;
 	background-color: var(--col-bg);
 	opacity: 0.75;
+	transform: translateZ(5px);
 }
 
 .playdate .playdate_screw {
