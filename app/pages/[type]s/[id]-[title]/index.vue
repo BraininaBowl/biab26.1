@@ -145,7 +145,7 @@ H1 {
 	width: 440px;
 	height: 420px;
 	position: relative;
-	transform: rotateY(-20deg) rotateX(15deg) translateX(-5rem) scale(0.8);
+	transform: rotateY(-20deg) rotateX(15deg) translateX(-2rem) scale(0.8);
 	box-shadow: 2rem 3rem 4rem 0 rgba(from var(--col-fg) r g b / 0.2);
 }
 
@@ -163,7 +163,7 @@ H1 {
 
 .playdate .playdate_crank {
 	width: 30px;
-	border-radius: 0 15px 15px 0;
+	border-radius: 4px 15px 15px 4px;
 	height: 120px;
 	position: absolute;
 	top: 50%;
@@ -182,12 +182,12 @@ H1 {
 
 .playdate .playdate_crank::before {
 	content: "";
-	width: 20px;
-	height: 20px;
+	width: 14px;
+	height: 14px;
 	border-radius: 50%;
 	position: absolute;
-	left: 4px;
-	top: 5px;
+	left: 7px;
+	top: 8px;
 	z-index: 1;
 	background-color: #fabd2f;
 	box-shadow: inset 1px 1px 2px 0 rgba(from var(--col-fg) r g b / 0.75);
@@ -216,12 +216,12 @@ H1 {
 	top: 0;
 	z-index: 1;
 	background-color: var(--col-fg);
-	background: linear-gradient(
+	/* background: linear-gradient(
 		110deg,
 		var(--col-fg) -10%,
 		rgba(from var(--col-bg) r g b / 0.15) 30%,
 		var(--col-fg) 100%
-	);
+	); */
 	mix-blend-mode: lighten;
 }
 
