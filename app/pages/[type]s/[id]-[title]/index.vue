@@ -60,7 +60,11 @@
 				</div>
 			</section>
 			<section v-else-if="item.imageURL" class="image visual">
-				<div :style="`background-image: url('${item.imageURL}')`" :alt="item.title" :class="`misc_image ${item.imagePixel ? 'pixel' : ''}`" />
+				<div
+					:style="`background-image: url('${item.imageURL}')`"
+					:alt="item.title"
+					:class="`misc_image ${item.imagePixel ? 'pixel' : ''}`"
+				/>
 			</section>
 			<section class="divider compact"></section>
 			<header>
@@ -94,6 +98,11 @@
 					class="button"
 				></NuxtLink>
 			</section>
+			<section v-if="childItems.length">
+				<OverviewChildrenComponent
+					:childItems="childItems"
+				></OverviewChildrenComponent>
+			</section>
 		</article>
 	</main>
 </template>
@@ -101,10 +110,16 @@
 <script setup>
 const route = useRoute();
 const itemId = route.params.id;
-const { items, fetchItems } = useItems();
-fetchItems([
+const { fetchItems, fetchStatelessItems, items } = useItems();
+await fetchItems([
 	{ attribute: "id", values: itemId },
 	{ attribute: "trashed", values: [false, undefined] },
+]);
+
+const childItems = await fetchStatelessItems([
+	{ attribute: "trashed", values: [false, undefined] },
+	{ attribute: "hidden", values: [false, undefined] },
+	{ attribute: "parent", values: itemId },
 ]);
 
 onMounted(() => {});

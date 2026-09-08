@@ -1,22 +1,19 @@
-<template></template>
+<template>
+	<div class="childItemContainer">
+		<NuxtLink v-for="childItem in childItems" :v-html="`${childItem.type}: ${childItem.title}`"></NuxtLink>
+
+	</div>
+</template>
 
 <script setup>
-const { fetchStatelessItems } = useItems();
 const props = defineProps({
-	id: {
-		type: string,
+	childItems: {
+		type: Object,
 		required: true,
 	},
 });
 
-const id = props.id || [];
-const filters = [
-	{ attribute: "trashed", values: [false, undefined] },
-	{ attribute: "hidden", values: [false, undefined] },
-	{ attribute: "parent", values: [id] },
-];
-const childItems = await fetchStatelessItems(filters);
-console.log("childItems", childItems)
+const childItems = props.childItems || [];
 </script>
 
 <style type="css" scoped></style>
