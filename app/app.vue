@@ -22,8 +22,6 @@
 	--col-link-hover: #83a598;
 	--col-highlight: #fe8019;
 
-
-
 	--padding: 1.5rem;
 	--bg-grid-size: 4rem;
 
@@ -262,6 +260,7 @@ section {
 form {
 	display: flex;
 	flex-direction: column;
+	gap: 1rem;
 	margin-bottom: 1rem;
 	/* max-width: 80ch; */
 	background-color: var(--col-bg-light);
@@ -271,6 +270,7 @@ form {
 	margin: 2rem auto;
 }
 
+
 .formfield.hidden {
 	display: none;
 }
@@ -278,7 +278,6 @@ form {
 .formfield {
 	display: flex;
 	flex-direction: column;
-	margin-bottom: 1rem;
 	gap: 0.5rem;
 }
 

@@ -1,119 +1,123 @@
 <template>
-	<main class="item" v-for="item in items">
-		<article class="content">
-			<section
-				v-if="item.imageURL && item.pageType === 'pc'"
-				class="image monitor"
-			>
-				<div
-					class="visual_wrapper monitor"
-					:key="item.id"
-					:style="`--background-image: url('${item.imageURL}')`"
+	<div>
+		<main class="item" v-for="item in items" :key="item.id">
+			<article class="content">
+				<section
+					v-if="item.imageURL && item.pageType === 'pc'"
+					class="image monitor"
 				>
-					<div class="visual_item">
-						<div
-							v-for="index in 9"
-							:class="`visual_slice visual_slice_monitor visual_slice_${index}`"
-							:style="{
-								transform: `translateY(-10%) rotateY(${-27 + (index - 1) * 7}deg) translateZ(92.4rem)`,
-							}"
-						></div>
-						<div
-							v-for="index in 7"
-							:class="`visual_slice visual_slice_main visual_slice_${index} crt  ${item.imagePixel ? 'pixel' : ''}`"
-							:style="{
-								backgroundPosition: `calc(${index - 1} * (100% / 6)) center`,
-								transform: `rotateY(${-21 + (index - 1) * 7}deg) translateZ(92.5rem)`,
-							}"
-						></div>
+					<div
+						class="visual_wrapper monitor"
+						:key="item.id"
+						:style="`--background-image: url('${item.imageURL}')`"
+					>
+						<div class="visual_item">
+							<div
+								v-for="index in 9"
+								:class="`visual_slice visual_slice_monitor visual_slice_${index}`"
+								:style="{
+									transform: `translateY(-10%) rotateY(${-27 + (index - 1) * 7}deg) translateZ(92.4rem)`,
+								}"
+							></div>
+							<div
+								v-for="index in 7"
+								:class="`visual_slice visual_slice_main visual_slice_${index} crt  ${item.imagePixel ? 'pixel' : ''}`"
+								:style="{
+									backgroundPosition: `calc(${index - 1} * (100% / 6)) center`,
+									transform: `rotateY(${-21 + (index - 1) * 7}deg) translateZ(92.5rem)`,
+								}"
+							></div>
+						</div>
+						<div class="footer_bot"></div>
 					</div>
-					<div class="footer_bot"></div>
-				</div>
-			</section>
-			<section
-				v-else-if="item.imageURL && item.pageType === 'playdate'"
-				class="image playdate"
-			>
-				<div
-					class="visual_wrapper playdate"
-					:key="item.id"
-					:style="`--background-image: url('${item.imageURL}')`"
+				</section>
+				<section
+					v-else-if="item.imageURL && item.pageType === 'playdate'"
+					class="image playdate"
 				>
-					<div class="playdate_body">
-						<div class="playdate_crank"></div>
-						<div class="playdate_front">
-							<div class="playdate_screen"></div>
-							<div class="playdate_screw playdate_screw_1"></div>
-							<div class="playdate_screw playdate_screw_2"></div>
-							<div class="playdate_screw playdate_screw_3"></div>
-							<div class="playdate_grill"></div>
-							<div class="playdate_button playdate_button_a">
-								<div class="playdate_button_inner">A</div>
+					<div
+						class="visual_wrapper playdate"
+						:key="item.id"
+						:style="`--background-image: url('${item.imageURL}')`"
+					>
+						<div class="playdate_body">
+							<div class="playdate_crank"></div>
+							<div class="playdate_front">
+								<div class="playdate_screen"></div>
+								<div class="playdate_screw playdate_screw_1"></div>
+								<div class="playdate_screw playdate_screw_2"></div>
+								<div class="playdate_screw playdate_screw_3"></div>
+								<div class="playdate_grill"></div>
+								<div class="playdate_button playdate_button_a">
+									<div class="playdate_button_inner">A</div>
+								</div>
+								<div class="playdate_button playdate_button_b">
+									<div class="playdate_button_inner">B</div>
+								</div>
+								<div class="playdate_button_menu"></div>
+								<div class="playdate_dpad"></div>
 							</div>
-							<div class="playdate_button playdate_button_b">
-								<div class="playdate_button_inner">B</div>
-							</div>
-							<div class="playdate_button_menu"></div>
-							<div class="playdate_dpad"></div>
 						</div>
 					</div>
-				</div>
-			</section>
-			<section v-else-if="item.imageURL" class="image visual">
-				<div
-					:style="`background-image: url('${item.imageURL}')`"
-					:alt="item.title"
-					:class="`misc_image ${item.imagePixel ? 'pixel' : ''}`"
-				/>
-			</section>
-			<section class="divider compact"></section>
-			<header>
-				<h1 v-if="item.title" v-html="item.title"></h1>
-			</header>
-			<section class="links">
-				<NuxtLink
-					v-if="item.type"
-					:to="`/${item.type}s`"
-					class="type-link clear"
-					v-html="item.type"
-				></NuxtLink>
-				<NuxtLink
-					v-if="item.tag && item.tag.length > 0"
-					v-for="tag in item.tag"
-					:key="tag"
-					:to="`/tag/${tag}`"
-					class="tag-link clear"
-					v-html="tag"
-				></NuxtLink>
-			</section>
-			<section
-				v-if="item.description"
-				class="description"
-				v-html="item.description"
-			></section>
-			<section v-if="item.linkURL">
-				<NuxtLink
-					:to="item.linkURL"
-					v-html="item.linkTitle ? item.linkTitle : item.linkURL"
-					class="button"
-				></NuxtLink>
-			</section>
-			<section v-if="childItems.length">
-				<OverviewChildrenComponent
-					:childItems="childItems"
-				></OverviewChildrenComponent>
-			</section>
-		</article>
-	</main>
+				</section>
+				<section v-else-if="item.imageURL" class="image visual">
+					<div
+						:style="`background-image: url('${item.imageURL}')`"
+						:alt="item.title"
+						:class="`misc_image ${item.imagePixel ? 'pixel' : ''}`"
+					></div>
+				</section>
+				<section class="divider compact"></section>
+				<header>
+					<h1 v-if="item.title" v-html="item.title"></h1>
+				</header>
+				<section class="links">
+					<NuxtLink
+						v-if="item.type"
+						:to="`/${item.type}s`"
+						class="type-link clear"
+						v-html="item.type"
+					></NuxtLink>
+					<NuxtLink
+						v-for="tag in item.tag"
+						:key="tag"
+						:to="`/tag/${tag}`"
+						class="tag-link clear"
+						v-html="tag"
+					></NuxtLink>
+				</section>
+				<section
+					v-if="item.description"
+					class="description"
+					v-html="item.description"
+				></section>
+				<section v-if="item.linkURL">
+					<NuxtLink
+						:to="item.linkURL"
+						v-html="item.linkTitle ? item.linkTitle : item.linkURL"
+						class="button"
+					></NuxtLink>
+				</section>
+				<section v-if="childItems.length">
+					<OverviewChildrenComponent
+						:childItems="childItems"
+						:key="childItems.length"
+					></OverviewChildrenComponent>
+				</section>
+			</article>
+		</main>
+	</div>
 </template>
 
 <script setup>
 const route = useRoute();
 const itemId = route.params.id;
 const { fetchItems, fetchStatelessItems, items } = useItems();
-await fetchItems([
+
+fetchItems([
 	{ attribute: "id", values: itemId },
 	{ attribute: "trashed", values: [false, undefined] },
+	{ attribute: "hidden", values: [false, undefined] }, 
 ]);
 
 const childItems = await fetchStatelessItems([

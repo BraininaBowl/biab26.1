@@ -130,7 +130,7 @@ defineProps({
 
 .card_wrapper:hover .card,
 .card_wrapper:hover .card_label {
-	transform: translateY(-0.5rem);
+	transform: translateY(-0.25rem);
 }
 
 .card_wrapper:hover .card {

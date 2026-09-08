@@ -27,8 +27,14 @@ export const useItems = () => {
 
 					const isFilterArray = Array.isArray(filterVals);
 					const isAttrArray = Array.isArray(itemAttr);
-
-					if (isFilterArray && isAttrArray) {
+					if (filterVals.includes("any")) {
+						return (
+							itemAttr == "" ||
+							itemAttr == null ||
+							itemAttr == undefined ||
+							itemAttr == false
+						);
+					} else if (isFilterArray && isAttrArray) {
 						// Both are arrays: Match if there is ANY overlap
 						return itemAttr.some((val) => filterVals.includes(val));
 					} else if (isFilterArray) {

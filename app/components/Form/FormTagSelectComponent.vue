@@ -33,4 +33,6 @@ const { fetchTags, tags } = useItemData();
 await fetchTags();
 </script>
 
-<style lang="css" scoped></style>
+<style lang="css" scoped>
+
+</style>
