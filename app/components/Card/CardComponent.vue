@@ -22,6 +22,7 @@
 			}"
 			v-else
 		>
+			<h5 v-if="item.parentTitle">{{ item.parentTitle }}:</h5>
 			<h3>
 				{{ item.title }}
 			</h3>

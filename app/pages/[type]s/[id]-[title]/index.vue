@@ -1,6 +1,7 @@
 <template>
 	<div>
-		<main class="item" v-for="item in items" :key="item.id">
+		<!-- <main class="item" v-for="item in items" :key="item.id"> -->
+		<main class="item" :key="item.id">
 			<article class="content">
 				<section
 					v-if="item.imageURL && item.pageType === 'pc'"
@@ -114,17 +115,28 @@ const route = useRoute();
 const itemId = route.params.id;
 const { fetchItems, fetchStatelessItems, items } = useItems();
 
-fetchItems([
+await fetchItems([
 	{ attribute: "id", values: itemId },
 	{ attribute: "trashed", values: [false, undefined] },
 	{ attribute: "hidden", values: [false, undefined] }, 
 ]);
 
-const childItems = await fetchStatelessItems([
+const item = items.value[0] || {};
+
+let childItems = await fetchStatelessItems([
 	{ attribute: "trashed", values: [false, undefined] },
 	{ attribute: "hidden", values: [false, undefined] },
 	{ attribute: "parent", values: itemId },
 ]);
+
+if (item.parent) {
+	const parentItem = [{
+		id: item.parent,
+		title: item.parentTitle,
+		type: item.parentType,
+	}];
+	childItems = parentItem.concat(childItems);
+}
 
 onMounted(() => {});
 </script>
