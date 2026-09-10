@@ -7,9 +7,8 @@
 				:key="type"
 				:to="`/${type}s`"
 				class="filter_link"
-			>
-				{{ type }}s
-			</NuxtLink>
+				v-html="`${type}s`"
+			></NuxtLink>
 			<span v-if="path !== '/'">|</span
 			><NuxtLink v-if="path !== '/'" to="/" class="filter_link"
 				>Show all</NuxtLink
