@@ -118,7 +118,7 @@ const { fetchItems, fetchStatelessItems, items } = useItems();
 await fetchItems([
 	{ attribute: "id", values: itemId },
 	{ attribute: "trashed", values: [false, undefined] },
-	{ attribute: "hidden", values: [false, undefined] }, 
+	{ attribute: "hidden", values: [false, undefined] },
 ]);
 
 const item = items.value[0] || {};
@@ -130,11 +130,13 @@ let childItems = await fetchStatelessItems([
 ]);
 
 if (item.parent) {
-	const parentItem = [{
-		id: item.parent,
-		title: item.parentTitle,
-		type: item.parentType,
-	}];
+	const parentItem = [
+		{
+			id: item.parent,
+			title: item.parentTitle,
+			type: item.parentType,
+		},
+	];
 	childItems = parentItem.concat(childItems);
 }
 
@@ -167,7 +169,7 @@ H1 {
 
 .visual_wrapper.playdate {
 	perspective: 1000px;
-	width: 440px;
+	width: 1px;
 	height: 420px;
 	margin: 4rem auto 0;
 }
@@ -176,7 +178,7 @@ H1 {
 	width: 440px;
 	height: 420px;
 	position: relative;
-	transform: rotateY(-20deg) rotateX(15deg) translateX(-2rem) scale(0.8);
+	transform: rotateY(-20deg) rotateX(15deg) scale(0.75) translateX(-50%);
 	box-shadow: 2rem 3rem 4rem 0 rgba(from var(--col-fg) r g b / 0.2);
 }
 
@@ -426,7 +428,7 @@ H1 {
 
 article.content {
 	width: 100%;
-	max-width: 1024px;
+	max-width: min(1024px, calc(100vw- 6rem - (var(--padding) * 2)));
 	margin: 0 auto;
 	padding: var(--padding);
 	display: flex;
@@ -437,6 +439,7 @@ article.content {
 article.content section {
 	margin: 0 3rem;
 	width: calc(100% - 6rem - (var(--padding) * 2));
+	max-width: calc(100vw- 6rem - (var(--padding) * 2));
 }
 
 article.content section.image {
