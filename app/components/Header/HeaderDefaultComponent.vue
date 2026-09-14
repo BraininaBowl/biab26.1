@@ -7,11 +7,10 @@
 			</h4>
 		</NuxtLink>
 		<div class="visual_container">
-			<div
+			<div 
 				:class="`visual_wrapper`"
-				v-for="item in featuredItems"
-				:key="item.id"
-				:style="`--background-image: url('${item.imageURL}')`"
+				:key="featuredItem.id"
+				:style="`--background-image: url('${featuredItem.imageURL}')`"
 			>
 				<div class="visual_item">
 					<div
@@ -32,7 +31,7 @@
 					></div>
 					<div
 						v-for="index in 7"
-						:class="`visual_slice visual_slice_main visual_slice_${index} crt  ${item.imagePixel ? 'pixel' : ''}`"
+						:class="`visual_slice visual_slice_main visual_slice_${index} crt  ${featuredItem.imagePixel ? 'pixel' : ''}`"
 						:style="{
 							backgroundPosition: `calc(${index - 1} * (100% / 6)) center`,
 							transform: `rotateY(${-21 + (index - 1) * 7}deg) translateZ(92.5vw)`,
@@ -50,9 +49,11 @@ const { currentRoute } = useRouter();
 const { fetchStatelessItems } = useItems();
 
 const featuredItems = await fetchStatelessItems(
-	[{ attribute: "featured", values: [true] }],
+	[{ attribute: "featured", values: [true] }, { attribute: "trashed", values: [false, undefined] }],
 	false,
 );
+
+const featuredItem = featuredItems[Math.floor(Math.random() * featuredItems.length)];
 
 watch(
 	currentRoute,
@@ -66,7 +67,8 @@ watch(
 	{ deep: true, immediate: true },
 );
 
-onMounted(() => {});
+onMounted(() => {
+});
 </script>
 
 <style lang="css" scoped>

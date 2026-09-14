@@ -88,6 +88,7 @@
 				requiredField: false,
 				placeholder: '',
 				disabledField: formData.trashed,
+				imagePopup: true,
 			}"
 		/>
 		<FormInputComponent

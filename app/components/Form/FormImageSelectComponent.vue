@@ -1,6 +1,6 @@
 <template>
   <div class="formSection">
-    <p v-html="formfieldData.label"></p>
+    <p v-if="formfieldData.label" v-html="formfieldData.label"></p>
     <div class="formImagesContainer">
       <div class="formfield checkbox imageRadio">
         <input
