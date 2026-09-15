@@ -1,10 +1,5 @@
-export default function (string) {
+export default async function (string) {
 	const { fetchImage } = useImages();
-
-	async function getImageURL(id) {
-		const imageData = await fetchImage(id);
-		return imageData;
-	}
 
 	let boldOn = false;
 	let italicOn = false;
@@ -69,19 +64,19 @@ export default function (string) {
 	) {
 		sections.unshift("#p");
 	}
+
 	sections.forEach(async (section, index) => {
 		if (section.startsWith("http://") || section.startsWith("https://")) {
 			sections[index] =
 				`<a href="${section}" target="_blank" rel="noopener noreferrer">${section}</a>`;
 		}
 
-    if (imageOn) {
+		if (imageOn) {
 			imageOn = false;
-			let image = await getImageURL(section);
-			console.log("Image " + image.imageURL);
-			sections[index] = "<img src='" + image.imageURL + "' />"
+			let imageData = await fetchImage(section);
+			console.log("Image ", imageData.imageURL);
+			sections[index] = "<img src='" + imageData.imageURL + "' />";
 		}
-
 		if (section == "/n") {
 			sections[index] = "<br>";
 		}
@@ -150,6 +145,7 @@ export default function (string) {
 			paragOn = true;
 		}
 	});
+
 	sections.push("" + closePrevious());
 	return sections.join(" ");
 }
