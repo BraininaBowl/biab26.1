@@ -50,10 +50,10 @@ export const useItems = () => {
 		}
 		if (parse) {
 			if (item.description) {
-				item.description = toHtml(item.description);
+				item.description = await toHtml(item.description);
 			}
 			if (item.snippet) {
-				item.snippet = toHtml(item.snippet);
+				item.snippet = await toHtml(item.snippet);
 			}
 		}
 
@@ -103,6 +103,18 @@ export const useItems = () => {
 		}
 	}
 
+	async function fetchRandomFeaturedItem() {
+		const featuredItems = await fetchStatelessItems(
+			[
+				{ attribute: "featured", values: [true] },
+				{ attribute: "trashed", values: [false, undefined] },
+			],
+			false,
+		);
+		const randomItemIndex = Math.floor(Math.random() * featuredItems.length);
+		return featuredItems[randomItemIndex];
+	}
+
 	async function fetchStatelessItems(filters = [], parse = true) {
 		try {
 			const response = await $fetch(`/api/items/all`);
@@ -130,6 +142,7 @@ export const useItems = () => {
 	return {
 		fetchItems,
 		fetchStatelessItems,
+		fetchRandomFeaturedItem,
 		writeItem,
 		items,
 		tags,

@@ -1,6 +1,5 @@
 <template>
 	<div>
-		<!-- <main class="item" v-for="item in items" :key="item.id"> -->
 		<main class="item" :key="item.id">
 			<article class="content">
 				<section

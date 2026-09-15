@@ -9,7 +9,7 @@
 		<div class="visual_container">
 			<div 
 				:class="`visual_wrapper`"
-				:key="featuredItem.id"
+				:key="`featuredItem.id`"
 				:style="`--background-image: url('${featuredItem.imageURL}')`"
 			>
 				<div class="visual_item">
@@ -46,14 +46,8 @@
 <script setup>
 const headerStyle = useState("headerStyle");
 const { currentRoute } = useRouter();
-const { fetchStatelessItems } = useItems();
-
-const featuredItems = await fetchStatelessItems(
-	[{ attribute: "featured", values: [true] }, { attribute: "trashed", values: [false, undefined] }],
-	false,
-);
-
-const featuredItem = featuredItems[Math.floor(Math.random() * featuredItems.length)];
+const { fetchRandomFeaturedItem } = useItems();
+const featuredItem = await fetchRandomFeaturedItem();
 
 watch(
 	currentRoute,

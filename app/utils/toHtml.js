@@ -57,7 +57,7 @@ export default async function (string) {
 		return toReturn;
 	}
 
-	const sections = string.split(/\s+/);
+	let sections = string.split(/\s+/);
 	if (
 		["#", "##", "###", "####", "#####", "######", "#p"].includes(sections[0]) ==
 		false
@@ -65,7 +65,8 @@ export default async function (string) {
 		sections.unshift("#p");
 	}
 
-	sections.forEach(async (section, index) => {
+	for (let index = 0; index < sections.length; index++ ) {
+		let section = sections[index];
 		if (section.startsWith("http://") || section.startsWith("https://")) {
 			sections[index] =
 				`<a href="${section}" target="_blank" rel="noopener noreferrer">${section}</a>`;
@@ -74,7 +75,6 @@ export default async function (string) {
 		if (imageOn) {
 			imageOn = false;
 			let imageData = await fetchImage(section);
-			console.log("Image ", imageData.imageURL);
 			sections[index] = "<img src='" + imageData.imageURL + "' />";
 		}
 		if (section == "/n") {
@@ -144,7 +144,7 @@ export default async function (string) {
 			sections[index] = closePrevious() + "<p>";
 			paragOn = true;
 		}
-	});
+	}
 
 	sections.push("" + closePrevious());
 	return sections.join(" ");
