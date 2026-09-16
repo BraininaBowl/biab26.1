@@ -75,7 +75,13 @@ export default async function (string) {
 		if (imageOn) {
 			imageOn = false;
 			let imageData = await fetchImage(section);
-			sections[index] = "<img src='" + imageData.imageURL + "' />";
+			console.log("imageData", imageData)
+			let placeholder = "<img src='" + imageData.imageURL + "' class='image "
+			if (imageData.imagePixel) {
+				placeholder += "pixel"
+			}
+			placeholder += "' />";
+			sections[index] = placeholder;
 		}
 		if (section == "/n") {
 			sections[index] = "<br>";
