@@ -459,6 +459,12 @@ article.content section.description {
 	gap: 0.75rem;
 }
 
+section.description img.image {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+
 article.content section.links {
 	display: flex;
 	flex-direction: row;

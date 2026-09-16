@@ -122,7 +122,7 @@ export default async function (string) {
 		}
 
 		if (section == "#img") {
-			sections[index] = "";
+			sections[index] = closePrevious() + "";
 			imageOn = true;
 		}
 

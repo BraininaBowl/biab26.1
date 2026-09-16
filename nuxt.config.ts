@@ -13,6 +13,13 @@ export default defineNuxtConfig({
       weights: [500, 700, 800, 900],
     },
   },
+  vite: {
+    build: {
+      modulePreload: {
+        polyfill: false,
+      },
+    },
+  },
   nitro: {
     preset: "bun",
     storage: {
