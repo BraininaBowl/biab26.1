@@ -26,3 +26,4 @@ logs
 # Local data
 #server/data/items/*
 #!server/data/items/.gitkeep
+server/api/login/login.post.js
