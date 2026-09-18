@@ -193,6 +193,10 @@ a:not(.clear):not(.button):hover::before {
 	min-height: 100vh;
 }
 
+.NuxtPage {
+	flex-grow: 2;
+}
+
 main {
 	padding: 0 var(--padding) var(--padding);
 	flex-grow: 100;
@@ -203,6 +207,7 @@ main {
 
 section {
 	margin: 0 0 4rem;
+	max-width: 1024px;
 }
 
 .filters {
@@ -220,6 +225,7 @@ section {
 	padding-bottom: 0.5rem;
 	border-top: 1px solid var(--col-border);
 	padding-top: 0.5rem;
+	max-width: 100%;
 }
 
 .divider {

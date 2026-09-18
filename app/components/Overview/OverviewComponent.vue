@@ -82,4 +82,9 @@ onUnmounted(() => {});
 .card_wrapper {
 	opacity: 0;
 }
+
+section {
+	margin: 0 auto;
+	width: 100%;
+}
 </style>

@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<main class="item" :key="item.id">
+		<main :class="`item type_${item.pageType}`" :key="item.id">
 			<article class="content">
 				<section
 					v-if="item.imageURL && item.pageType === 'pc'"
@@ -60,17 +60,37 @@
 						</div>
 					</div>
 				</section>
-				<section v-else-if="item.imageURL" class="image visual">
+				<section v-else-if="item.imageURL && item.pageType=='image'" class="image visual">
 					<div
-						:style="`background-image: url('${item.imageURL}')`"
+						:style="`background-image: url('${item.imageURL}'); aspect-ratio: ${item.imageAspectRatio ? item.imageAspectRatio : 'auto'};`"
 						:alt="item.title"
 						:class="`misc_image ${item.imagePixel ? 'pixel' : ''}`"
 					></div>
 				</section>
-				<section class="divider compact"></section>
+				<section
+					class="divider compact"
+					v-if="item.pageType != 'image'"
+				></section>
 				<header>
-					<h1 v-if="item.title" v-html="item.title"></h1>
+					<h1
+						v-if="item.title && item.pageType != 'image'"
+						v-html="item.title"
+						:class="item.pageType"
+					></h1>
 				</header>
+				<section
+					v-if="item.pageType == 'image'"
+					class="description description_image"
+					v-html="
+						'<p><b>' +
+						item.title +
+						'</b></p>' +
+						item.description +
+						'<p><b>Date:</b> ' +
+						new Date(item.date).toLocaleDateString() +
+						'</p>'
+					"
+				></section>
 				<section class="links">
 					<NuxtLink
 						v-if="item.type"
@@ -87,7 +107,7 @@
 					></NuxtLink>
 				</section>
 				<section
-					v-if="item.description"
+					v-if="item.description && item.pageType != 'image'"
 					class="description"
 					v-html="item.description"
 				></section>
@@ -98,7 +118,6 @@
 						class="button"
 					></NuxtLink>
 				</section>
-				<section class="divider compact" v-if="childItems.length"></section>
 				<section v-if="childItems.length">
 					<OverviewChildrenComponent
 						:childItems="childItems"
@@ -144,7 +163,7 @@ if (item.parent) {
 onMounted(() => {});
 </script>
 <style lang="css" scoped>
-H1::before {
+H1:not(.image)::before {
 	content: " ";
 	display: inline-block;
 	border-bottom: 0.9rem solid var(--col-fg);
@@ -157,12 +176,18 @@ H1::before {
 	transform: translateY(-0.25rem) rotate(-45deg);
 }
 
-H1 {
+h1 {
 	padding-left: 3rem;
 }
 
+main.item.type_image article.content {
+	gap: 0;
+}
+
+
 .visual .misc_image {
-	height: 80vh;
+	max-height: 80vh;
+	max-width: 96vw;
 	background-size: contain;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -429,7 +454,8 @@ H1 {
 
 article.content {
 	width: 100%;
-	max-width: min(1024px, calc(100vw- 6rem - (var(--padding) * 2)));
+	/* max-width: min(1024px, calc(100vw- 6rem - (var(--padding) * 2))); */
+	max-width: 1024px;
 	margin: 0 auto;
 	padding: var(--padding);
 	display: flex;
@@ -439,8 +465,13 @@ article.content {
 
 article.content section {
 	margin: 0 3rem;
-	width: calc(100% - 6rem - (var(--padding) * 2));
-	max-width: calc(100vw- 6rem - (var(--padding) * 2));
+	/* width: 100%; */
+	/* max-width: calc(100vw- 6rem - (var(--padding) * 2)); */
+}
+
+article.content section.divider {
+	max-width: 880px;
+	width: unset;
 }
 
 article.content section.image {
@@ -458,6 +489,14 @@ article.content section.image.monitor {
 article.content section.description {
 	display: flex;
 	flex-direction: column;
+	gap: 0.75rem;
+}
+
+article.content section.description_image {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-start;
 	gap: 0.75rem;
 }
 

@@ -1,8 +1,8 @@
-<template>
+<template class="PageOuter">
   <!-- <HeaderDefaultComponent :key="route.path" /> -->
-  <HeaderDefaultComponent :key="staticKey"/>
-  <NuxtPage />
-  <FooterDefaultComponent />
+  <HeaderDefaultComponent :key="staticKey" class="HeaderComponent"/>
+  <NuxtPage class="NuxtPage" />
+  <FooterDefaultComponent class="FooterComponent" />
 </template>
 
 <script setup>
