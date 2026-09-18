@@ -64,6 +64,7 @@ export const useItems = () => {
 			if (parentItems) {
 				item.parentTitle = parentItems[0] ? parentItems[0].title : null;
 				item.parentType = parentItems[0] ? parentItems[0].type : null;
+				item.parentDate = parentItems[0] ? parentItems[0].date : null;
 			}
 		}
 		return item;

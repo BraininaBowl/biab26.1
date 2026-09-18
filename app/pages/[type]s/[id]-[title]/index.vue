@@ -135,6 +135,7 @@ if (item.parent) {
 			id: item.parent,
 			title: item.parentTitle,
 			type: item.parentType,
+			date: item.parentDate,
 		},
 	];
 	childItems = parentItem.concat(childItems);

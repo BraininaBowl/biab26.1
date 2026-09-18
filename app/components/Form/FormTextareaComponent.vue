@@ -43,10 +43,8 @@ const props = defineProps({
 onMounted(() => {
 	if (props.formfieldData.imagePopup) {
 		const textarea = document.querySelector(".formSection_" + id + " textarea");
-
 		nuxtApp.hook("app:image:selected", (selectedImage) => {
-			console.log("Image selected:", selectedImage);
-      const currentCursor = textarea.selectionStart;
+			const currentCursor = textarea.selectionStart;
 			const currentContent = textarea.value;
 			textarea.value =
 				currentContent.slice(0, currentCursor) +

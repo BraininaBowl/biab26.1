@@ -65,7 +65,7 @@ export default async function (string) {
 		sections.unshift("#p");
 	}
 
-	for (let index = 0; index < sections.length; index++ ) {
+	for (let index = 0; index < sections.length; index++) {
 		let section = sections[index];
 		if (section.startsWith("http://") || section.startsWith("https://")) {
 			sections[index] =
@@ -75,10 +75,9 @@ export default async function (string) {
 		if (imageOn) {
 			imageOn = false;
 			let imageData = await fetchImage(section);
-			console.log("imageData", imageData)
-			let placeholder = "<img src='" + imageData.imageURL + "' class='image "
+			let placeholder = "<img src='" + imageData.imageURL + "' class='image ";
 			if (imageData.imagePixel) {
-				placeholder += "pixel"
+				placeholder += "pixel";
 			}
 			placeholder += "' />";
 			sections[index] = placeholder;
