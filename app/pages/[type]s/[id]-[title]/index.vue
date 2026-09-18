@@ -98,6 +98,7 @@
 						class="button"
 					></NuxtLink>
 				</section>
+				<section class="divider compact" v-if="childItems.length"></section>
 				<section v-if="childItems.length">
 					<OverviewChildrenComponent
 						:childItems="childItems"

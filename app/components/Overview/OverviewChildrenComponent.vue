@@ -4,7 +4,6 @@
 		<div class="childItem" v-for="childItem in childItems" :key="childItem.id">
 			<NuxtLink
 				v-html="`${childItem.type}: ${childItem.title}`"
-				class="childItemLink clear"
 				:to="`/${childItem.type}s/${childItem.id}-${childItem.title}`"
 			></NuxtLink>
 			<span
@@ -46,8 +45,8 @@ const childItems = props.childItems;
 	padding: 0.5rem 0;
 }
 
-.childItem .childItemLink {
-	text-decoration: underline;
+.childItem:first-of-type {
+	border-top: 1px dashed var(--col-fg);
 }
 
 .childItem .date {
