@@ -60,7 +60,10 @@
 						</div>
 					</div>
 				</section>
-				<section v-else-if="item.imageURL && item.pageType=='image'" class="image visual">
+				<section
+					v-else-if="item.imageURL && item.pageType == 'image'"
+					class="image visual"
+				>
 					<div
 						:style="`background-image: url('${item.imageURL}'); aspect-ratio: ${item.imageAspectRatio ? item.imageAspectRatio : 'auto'};`"
 						:alt="item.title"
@@ -118,10 +121,10 @@
 						class="button"
 					></NuxtLink>
 				</section>
-				<section v-if="childItems.length">
+				<section v-if="relatedItems.length">
 					<OverviewChildrenComponent
-						:childItems="childItems"
-						:key="childItems.length"
+						:relatedItems="relatedItems"
+						:key="relatedItems.length"
 					></OverviewChildrenComponent>
 				</section>
 			</article>
@@ -134,31 +137,38 @@ const route = useRoute();
 const itemId = route.params.id;
 const { fetchItems, fetchStatelessItems, items } = useItems();
 
-await fetchItems([
-	{ attribute: "id", values: itemId },
-	{ attribute: "trashed", values: [false, undefined] },
-	{ attribute: "hidden", values: [false, undefined] },
-]);
+const { data } = await useAsyncData(`index-page-${itemId}`, async () => {
+	await fetchItems([
+		{ attribute: "id", values: itemId },
+		{ attribute: "trashed", values: [false, undefined] },
+		{ attribute: "hidden", values: [false, undefined] },
+	]);
 
-const item = items.value[0] || {};
+	const item = items.value[0] || {};
 
-let childItems = await fetchStatelessItems([
-	{ attribute: "trashed", values: [false, undefined] },
-	{ attribute: "hidden", values: [false, undefined] },
-	{ attribute: "parent", values: itemId },
-]);
+	let relatedItems = await fetchStatelessItems([
+		{ attribute: "trashed", values: [false, undefined] },
+		{ attribute: "hidden", values: [false, undefined] },
+		{ attribute: "parent", values: itemId },
+	]);
 
-if (item.parent) {
-	const parentItem = [
-		{
-			id: item.parent,
-			title: item.parentTitle,
-			type: item.parentType,
-			date: item.parentDate,
-		},
-	];
-	childItems = parentItem.concat(childItems);
-}
+	if (item.parent) {
+		const parentItem = [
+			{
+				id: item.parent,
+				title: item.parentTitle,
+				type: item.parentType,
+				date: item.parentDate,
+			},
+		];
+		relatedItems = parentItem.concat(relatedItems);
+	}
+
+	return { item, relatedItems };
+});
+
+const item = computed(() => data.value?.item || {});
+const relatedItems = computed(() => data.value?.relatedItems || []);
 
 onMounted(() => {});
 </script>
@@ -183,7 +193,6 @@ h1 {
 main.item.type_image article.content {
 	gap: 0;
 }
-
 
 .visual .misc_image {
 	max-height: 80vh;

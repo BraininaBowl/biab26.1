@@ -1,31 +1,34 @@
 <template>
-	<div class="childItemContainer">
+	<div class="childItemContainer" v-if="relatedItems && relatedItems.length">
 		<h2>Related:</h2>
-		<div class="childItem" v-for="childItem in childItems" :key="childItem.id">
+		<div
+			class="childItem"
+			v-for="relatedItem in relatedItems"
+			:key="relatedItem.id"
+		>
 			<NuxtLink
-				v-html="`${childItem.type}: ${childItem.title}`"
-				:to="`/${childItem.type}s/${childItem.id}-${childItem.title}`"
+				v-html="`${relatedItem.type}: ${relatedItem.title}`"
+				:to="`/${relatedItem.type}s/${relatedItem.id}-${relatedItem.title}`"
 			></NuxtLink>
 			<span
 				class="date"
-				v-html="new Date(childItem.date).toLocaleDateString()"
+				v-html="new Date(relatedItem.date).toLocaleDateString()"
 			></span>
 		</div>
 	</div>
 </template>
 
 <script setup>
-const props = defineProps({
-	childItems: {
-		type: Object,
+defineProps({
+	relatedItems: {
+		type: Array,
 		required: true,
+		default: () => [],
 	},
 });
-
-const childItems = props.childItems;
 </script>
 
-<style type="css" scoped>
+<style scoped>
 .childItemContainer {
 	display: flex;
 	flex-direction: column;

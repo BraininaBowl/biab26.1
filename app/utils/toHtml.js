@@ -1,5 +1,5 @@
-export default async function (string) {
-	const { fetchImage } = useImages();
+export default async function (string, fetchImage) {
+	if (!string || typeof string !== "string") return "";
 
 	let boldOn = false;
 	let italicOn = false;
@@ -59,8 +59,9 @@ export default async function (string) {
 
 	let sections = string.split(/\s+/);
 	if (
-		["#", "##", "###", "####", "#####", "######", "#p"].includes(sections[0]) ==
-		false
+		["#", "##", "###", "####", "#####", "######", "#p"].includes(
+			sections[0],
+		) === false
 	) {
 		sections.unshift("#p");
 	}
@@ -74,23 +75,29 @@ export default async function (string) {
 
 		if (imageOn) {
 			imageOn = false;
-			let imageData = await fetchImage(section);
-			let placeholder = "<img src='" + imageData.imageURL + "' class='image ";
-			if (imageData.imagePixel) {
-				placeholder += "pixel";
+			// Use the fetchImage function passed from the caller
+			let imageData =
+				typeof fetchImage === "function" ? await fetchImage(section) : null;
+			if (imageData) {
+				let placeholder = "<img src='" + imageData.imageURL + "' class='image ";
+				if (imageData.imagePixel) {
+					placeholder += "pixel";
+				}
+				placeholder += "' />";
+				sections[index] = placeholder;
+			} else {
+				sections[index] = "";
 			}
-			placeholder += "' />";
-			sections[index] = placeholder;
 		}
-		if (section == "/n") {
+		if (section === "/n") {
 			sections[index] = "<br>";
 		}
 
-		if (section == "/h") {
+		if (section === "/h") {
 			sections[index] = "<div class='divider compact'></div>";
 		}
 
-		if (section == "*") {
+		if (section === "*") {
 			if (italicOn) {
 				sections[index] = "</i>";
 				italicOn = false;
@@ -99,7 +106,7 @@ export default async function (string) {
 				italicOn = true;
 			}
 		}
-		if (section == "**") {
+		if (section === "**") {
 			if (boldOn) {
 				sections[index] = "</b>";
 				boldOn = false;
@@ -108,44 +115,44 @@ export default async function (string) {
 				boldOn = true;
 			}
 		}
-		if (section == "[") {
+		if (section === "[") {
 			sections[index] = "<a href='";
 			linkOn = true;
 		}
-		if (section == "]{") {
+		if (section === "]{") {
 			sections[index] = "' target='_blank' rel='noopener noreferrer'>";
 		}
-		if (section == "}") {
+		if (section === "}") {
 			sections[index] = "</a>";
 			linkOn = false;
 		}
 
-		if (section == "#img") {
+		if (section === "#img") {
 			sections[index] = closePrevious() + "";
 			imageOn = true;
 		}
 
-		if (section == "#") {
+		if (section === "#") {
 			sections[index] = closePrevious() + "<h2>";
 			header2On = true;
 		}
-		if (section == "##") {
+		if (section === "##") {
 			sections[index] = closePrevious() + "<h3>";
 			header3On = true;
 		}
-		if (section == "###") {
+		if (section === "###") {
 			sections[index] = closePrevious() + "<h4>";
 			header4On = true;
 		}
-		if (section == "####") {
+		if (section === "####") {
 			sections[index] = closePrevious() + "<h5>";
 			header5On = true;
 		}
-		if (section == "#####") {
+		if (section === "#####") {
 			sections[index] = closePrevious() + "<h6>";
 			header6On = true;
 		}
-		if (section == "#p") {
+		if (section === "#p") {
 			sections[index] = closePrevious() + "<p>";
 			paragOn = true;
 		}

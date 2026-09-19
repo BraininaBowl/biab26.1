@@ -13,7 +13,8 @@ export const useItems = () => {
 
 				const isFilterArray = Array.isArray(filterVals);
 				const isAttrArray = Array.isArray(itemAttr);
-				if (filterVals.includes("any")) {
+
+				if (isFilterArray && filterVals.includes("any")) {
 					return (
 						itemAttr == "" ||
 						itemAttr == null ||
@@ -21,17 +22,15 @@ export const useItems = () => {
 						itemAttr == false
 					);
 				} else if (isFilterArray && isAttrArray) {
-					// Both are arrays: Match if there is ANY overlap
-					return itemAttr.some((val) => filterVals.includes(val));
+					return itemAttr.some((val) =>
+						filterVals.some((fVal) => String(fVal) === String(val)),
+					);
 				} else if (isFilterArray) {
-					// Filter is array, attribute is string/number: Match if array contains attribute
-					return filterVals.includes(itemAttr);
+					return filterVals.some((fVal) => String(fVal) === String(itemAttr));
 				} else if (isAttrArray) {
-					// Filter is string/number, attribute is array: Match if attribute array contains filter
-					return itemAttr.includes(filterVals);
+					return itemAttr.some((val) => String(val) === String(filterVals));
 				} else {
-					// Neither are arrays: Exact match
-					return filterVals == itemAttr;
+					return String(filterVals) === String(itemAttr);
 				}
 			});
 		});
@@ -50,21 +49,22 @@ export const useItems = () => {
 		}
 		if (parse) {
 			if (item.description) {
-				item.description = await toHtml(item.description);
+				item.description = await toHtml(item.description, fetchImage);
 			}
 			if (item.snippet) {
-				item.snippet = await toHtml(item.snippet);
+				item.description = await toHtml(item.description, fetchImage);
 			}
 		}
 
 		if (item.parent) {
-			const parentItems = await fetchStatelessItems([
-				{ attribute: "id", values: [item.parent] },
-			]);
-			if (parentItems) {
-				item.parentTitle = parentItems[0] ? parentItems[0].title : null;
-				item.parentType = parentItems[0] ? parentItems[0].type : null;
-				item.parentDate = parentItems[0] ? parentItems[0].date : null;
+			const parentItems = await fetchStatelessItems(
+				[{ attribute: "id", values: [item.parent] }],
+				false,
+			);
+			if (parentItems && parentItems.length > 0) {
+				item.parentTitle = parentItems[0].title;
+				item.parentType = parentItems[0].type;
+				item.parentDate = parentItems[0].date;
 			}
 		}
 		return item;

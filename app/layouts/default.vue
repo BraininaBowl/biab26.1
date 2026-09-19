@@ -1,5 +1,4 @@
 <template class="PageOuter">
-  <!-- <HeaderDefaultComponent :key="route.path" /> -->
   <HeaderDefaultComponent :key="staticKey" class="HeaderComponent"/>
   <NuxtPage class="NuxtPage" />
   <FooterDefaultComponent class="FooterComponent" />
