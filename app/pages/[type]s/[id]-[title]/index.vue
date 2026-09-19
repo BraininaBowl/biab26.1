@@ -135,21 +135,19 @@
 <script setup>
 const route = useRoute();
 const itemId = route.params.id;
-const { fetchItems, fetchStatelessItems, items } = useItems();
+const { fetchStatelessItems, items } = useItems();
 
 const { data } = await useAsyncData(`index-page-${itemId}`, async () => {
-	await fetchItems([
+	const item = getFilteredItems(items.value, [
 		{ attribute: "id", values: itemId },
-		{ attribute: "trashed", values: [false, undefined] },
-		{ attribute: "hidden", values: [false, undefined] },
-	]);
+	])[0];
 
-	const item = items.value[0] || {};
+	console.log("item", item);
 
 	let relatedItems = await fetchStatelessItems([
 		{ attribute: "trashed", values: [false, undefined] },
 		{ attribute: "hidden", values: [false, undefined] },
-		{ attribute: "parent", values: itemId },
+		{ attribute: "parent", values: item.id },
 	]);
 
 	if (item.parent) {

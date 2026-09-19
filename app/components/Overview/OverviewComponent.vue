@@ -19,13 +19,13 @@
 		<h1 v-else-if="tag" v-html="`${tag}`"></h1>
 
 		<section class="card_container">
-			<CardComponent v-for="item in items" :key="item.id" :item="item" />
+			<CardComponent v-for="item in currentItems" :key="item.id" :item="item" />
 		</section>
 	</div>
 </template>
 
 <script setup>
-const { items, fetchItems, types } = useItems();
+const { items, types } = useItems();
 const path = useRoute().path;
 const props = defineProps({
 	filters: {
@@ -38,7 +38,7 @@ const filters = props.filters || [];
 const title = filters.find((filter) => filter.attribute === "type")?.values[0];
 const tag = filters.find((filter) => filter.attribute === "tag")?.values[0];
 
-await fetchItems(filters, true);
+const currentItems = getFilteredItems(items, props.filters)
 
 function resizeItems() {
 	if (document) {
@@ -57,7 +57,6 @@ function resizeItems() {
 }
 
 onMounted(() => {
-	// Wait for Vue DOM update before calculating height offsets
 	nextTick(() => {
 		resizeItems();
 	});
