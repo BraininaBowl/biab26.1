@@ -38,7 +38,7 @@ const filters = props.filters || [];
 const title = filters.find((filter) => filter.attribute === "type")?.values[0];
 const tag = filters.find((filter) => filter.attribute === "tag")?.values[0];
 
-fetchItems(filters, true).then(resizeItems);
+await fetchItems(filters, true);
 
 function resizeItems() {
 	if (document) {
@@ -57,9 +57,16 @@ function resizeItems() {
 }
 
 onMounted(() => {
+	// Wait for Vue DOM update before calculating height offsets
+	nextTick(() => {
+		resizeItems();
+	});
 	window.addEventListener("resize", resizeItems);
 });
-onUnmounted(() => {});
+
+onUnmounted(() => {
+	window.removeEventListener("resize", resizeItems);
+});
 </script>
 
 <style lang="css" scoped>
